@@ -1,0 +1,16 @@
+name: Validate Ledger
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Run validator
+        run: python scripts/validate_chain.py
