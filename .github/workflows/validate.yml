@@ -1,47 +1,11 @@
-name: Validate Ledger
+name: Disabled Legacy Workflow
 
 on:
-  push:
-    branches: [ "main" ]
-
-permissions:
-  contents: write
+  workflow_dispatch:
 
 jobs:
-  validate:
+  noop:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Install requests
-        run: pip install requests
-
-      - name: Run validator
-        run: python scripts/validate_chain.py
-
-      - name: Pin ledger to IPFS
-        id: pin
-        env:
-          PINATA_JWT: ${{ secrets.PINATA_JWT }}
-        run: |
-          CID=$(python scripts/pin_to_ipfs.py | grep CID | awk '{print $2}')
-          echo "cid=$CID" >> $GITHUB_OUTPUT
-
-      - name: Save CID to site
-        run: |
-          echo "{\"cid\":\"${{ steps.pin.outputs.cid }}\"}" > site/latest.json
-
-      - name: Commit CID
-        run: |
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
-          git add site/latest.json
-          git diff --cached --quiet || git commit -m "update CID"
-          git push
+      - name: Legacy workflow disabled
+        run: echo "validate.yml disabled on purpose"
