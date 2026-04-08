@@ -1,244 +1,100 @@
-Full directory:
-
-mn-ago-entropy-ledger/
-├── .github/
-│   └── workflows/
-│       └── pin.yml
-├── ledger/
-│   └── ledger.jsonl
-├── scripts/
-│   ├── clock.py
-│   ├── diff.py
-│   ├── pin_to_ipfs.py
-│   ├── save_cid.py
-│   └── validate_chain.py
-├── site/
-│   ├── clock.json
-│   ├── diff.json
-│   ├── index.html
-│   └── latest.json
-├── README.md
-└── index.html
-
-Replace this file only:
-
-index.html
-
-with this full replacement:
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MN AGO Entropy Ledger</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 24px;
-      background: #f5f5f5;
-      color: #111;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MN AGO Entropy Ledger</title>
 
-    h1 {
-      margin: 0 0 12px 0;
-      font-size: 48px;
-      line-height: 1.05;
-      word-break: break-word;
-    }
+<style>
+body { font-family: Arial; padding:20px; background:#f5f5f5; }
+.card { background:#fff; padding:16px; border-radius:10px; margin:16px 0; }
+.big { font-size:42px; font-weight:bold; }
+a { word-break: break-all; }
 
-    p {
-      margin: 0 0 20px 0;
-      font-size: 18px;
-      color: #444;
-    }
-
-    .card {
-      background: white;
-      border: 1px solid #ddd;
-      border-radius: 12px;
-      padding: 20px;
-      margin: 20px 0;
-      overflow: hidden;
-    }
-
-    .label {
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
-
-    .big {
-      font-size: 48px;
-      font-weight: 700;
-    }
-
-    .cid-link {
-      word-break: break-all;
-    }
-
-    .muted {
-      color: #666;
-    }
-
-    .error {
-      color: #b00020;
-      font-weight: 700;
-    }
-
-    .changes-list {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .change-item {
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      padding: 14px;
-      background: #fafafa;
-    }
-
-    .change-row {
-      margin-bottom: 10px;
-      word-break: break-word;
-    }
-
-    .change-row:last-child {
-      margin-bottom: 0;
-    }
-
-    .change-key {
-      font-size: 13px;
-      font-weight: 700;
-      color: #666;
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
-      margin-bottom: 4px;
-    }
-
-    .change-value {
-      font-size: 16px;
-      color: #111;
-      line-height: 1.4;
-      word-break: break-word;
-    }
-
-    a {
-      color: #0b57d0;
-      word-break: break-all;
-    }
-
-    @media (min-width: 768px) {
-      body {
-        max-width: 960px;
-        margin: 0 auto;
-      }
-
-      h1 {
-        font-size: 56px;
-      }
-
-      .changes-list {
-        gap: 18px;
-      }
-
-      .change-item {
-        padding: 18px;
-      }
-    }
-  </style>
+.change {
+  border:1px solid #ddd;
+  border-radius:10px;
+  padding:12px;
+  margin-bottom:12px;
+  background:#fafafa;
+}
+.label { font-size:12px; color:#666; font-weight:bold; }
+.value { font-size:15px; margin-bottom:8px; word-break:break-word; }
+</style>
 </head>
+
 <body>
-  <h1>MN AGO Entropy Ledger v1</h1>
-  <p>Public accountability layer — timestamp, hash, compare</p>
 
-  <div class="card">
-    <div class="label">Explainability Index</div>
-    <div id="score" class="big">0.00</div>
-  </div>
+<h1>MN AGO Entropy Ledger v1</h1>
+<p>Public accountability layer — timestamp, hash, compare</p>
 
-  <div class="card">
-    <div class="label">Latest IPFS CID</div>
-    <div id="cid" class="muted">Loading...</div>
-  </div>
+<div class="card">
+<div>Explainability Index</div>
+<div id="score" class="big">0.00</div>
+</div>
 
-  <div class="card">
-    <div class="label">Recent Changes</div>
-    <div id="rows" class="changes-list"></div>
-  </div>
+<div class="card">
+<div>Latest IPFS CID</div>
+<div id="cid">Loading...</div>
+</div>
 
-  <script>
-    async function loadSite() {
-      const scoreEl = document.getElementById("score");
-      const cidEl = document.getElementById("cid");
-      const rowsEl = document.getElementById("rows");
+<div class="card">
+<div>Recent Changes</div>
+<div id="rows"></div>
+</div>
 
-      try {
-        const diffRes = await fetch("./site/diff.json", { cache: "no-store" });
-        if (!diffRes.ok) {
-          throw new Error("diff.json not found");
-        }
+<script>
+async function run() {
+  try {
 
-        const diffObj = await diffRes.json();
-        const rows = Array.isArray(diffObj.data) ? diffObj.data : [];
+    const diff = await fetch("./site/diff.json?x=" + Date.now());
+    const data = await diff.json();
+    const rows = data.data || [];
 
-        scoreEl.textContent = (rows.length / 4).toFixed(2);
+    document.getElementById("score").innerText = (rows.length / 4).toFixed(2);
 
-        rowsEl.innerHTML = "";
+    const container = document.getElementById("rows");
+    container.innerHTML = "";
 
-        for (const row of rows) {
-          const url = row.source_url || row.url || "";
-          const state = row.state || "";
-          const time = row.time || "";
+    rows.forEach(r => {
+      const url = r.source_url || r.url || "";
 
-          const item = document.createElement("div");
-          item.className = "change-item";
-          item.innerHTML = `
-            <div class="change-row">
-              <div class="change-key">Time</div>
-              <div class="change-value">${time}</div>
-            </div>
-            <div class="change-row">
-              <div class="change-key">Page</div>
-              <div class="change-value">${url}</div>
-            </div>
-            <div class="change-row">
-              <div class="change-key">State</div>
-              <div class="change-value">${state}</div>
-            </div>
-            <div class="change-row">
-              <div class="change-key">Link</div>
-              <div class="change-value">
-                <a href="${url || "#"}" target="_blank" rel="noopener noreferrer">open</a>
-              </div>
-            </div>
-          `;
-          rowsEl.appendChild(item);
-        }
+      const div = document.createElement("div");
+      div.className = "change";
 
-        const latestRes = await fetch("./site/latest.json", { cache: "no-store" });
-        if (!latestRes.ok) {
-          throw new Error("latest.json not found");
-        }
+      div.innerHTML = `
+        <div class="label">Time</div>
+        <div class="value">${r.time || ""}</div>
 
-        const latestObj = await latestRes.json();
-        const cid = latestObj.cid || "";
+        <div class="label">Page</div>
+        <div class="value">${url}</div>
 
-        if (cid) {
-          cidEl.innerHTML = `<a class="cid-link" href="https://ipfs.io/ipfs/${cid}" target="_blank" rel="noopener noreferrer">${cid}</a>`;
-        } else {
-          cidEl.textContent = "No CID found";
-        }
-      } catch (err) {
-        scoreEl.textContent = "0.00";
-        cidEl.innerHTML = `<span class="error">Failed to load site data</span>`;
-        rowsEl.innerHTML = `<div class="error">Failed to load recent changes</div>`;
-      }
-    }
+        <div class="label">State</div>
+        <div class="value">${r.state || ""}</div>
 
-    loadSite();
-  </script>
+        <div class="label">Link</div>
+        <div class="value">
+          <a href="${url}" target="_blank">open</a>
+        </div>
+      `;
+
+      container.appendChild(div);
+    });
+
+    const latest = await fetch("./site/latest.json?x=" + Date.now());
+    const latestData = await latest.json();
+    const cid = latestData.cid || "";
+
+    document.getElementById("cid").innerHTML =
+      `<a href="https://ipfs.io/ipfs/${cid}" target="_blank">${cid}</a>`;
+
+  } catch (e) {
+    document.getElementById("cid").innerText = "FAILED";
+  }
+}
+
+run();
+</script>
+
 </body>
 </html>
