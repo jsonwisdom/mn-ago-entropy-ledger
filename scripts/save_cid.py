@@ -1,14 +1,19 @@
 import json
 import os
 
-cid = os.environ.get("CID")
+CID = os.environ.get("CID", "").strip()
 
-if not cid:
-    raise ValueError("CID not provided")
+if not CID:
+    raise ValueError("Missing CID environment variable")
 
-os.makedirs("site", exist_ok=True)
+if CID.lower() == "dummy":
+    raise ValueError("Refusing to write dummy CID")
+
+output = {
+    "cid": CID
+}
 
 with open("site/latest.json", "w", encoding="utf-8") as f:
-    json.dump({"cid": cid}, f)
+    json.dump(output, f, indent=2)
 
-print(f"Saved CID: {cid}")
+print(f"Wrote CID: {CID}")
