@@ -12,5 +12,18 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install requests
+        run: pip install requests
+
       - name: Run validator
         run: python scripts/validate_chain.py
+
+      - name: Pin ledger to IPFS
+        env:
+          PINATA_JWT: ${{ secrets.PINATA_JWT }}
+        run: python scripts/pin_to_ipfs.py
