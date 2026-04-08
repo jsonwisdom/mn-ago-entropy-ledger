@@ -1,4 +1,4 @@
-name: pipeline
+name: build
 
 on:
   push:
@@ -38,21 +38,27 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "actions@github.com"
-          git add .
-          git commit -m "auto update" || echo "no changes"
+          git add ledger/ ledger.jsonl site/diff.json site/clock.json || true
+          git commit -m "auto update ledger" || echo "no changes"
           git push
 
       - name: Pin to IPFS
+        env:
+          PINATA_JWT: ${{ secrets.PINATA_JWT }}
         run: python scripts/pin_to_ipfs.py
 
       - name: Write CID
-        run: python scripts/save_cid.py
+        env:
+          CID: ${{ steps.pin.outputs.cid }}
+        run: python scripts/save_cid.py || echo "skip cid write"
 
       - name: Update site/latest.json
-        run: echo "updated"
+        run: echo "site latest handled"
 
       - name: Commit site update
         run: |
-          git add .
-          git commit -m "update site" || echo "no changes"
+          git config user.name "github-actions[bot]"
+          git config user.email "actions@github.com"
+          git add site/latest.json
+          git commit -m "update site cid" || echo "no changes"
           git push
