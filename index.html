@@ -16,6 +16,7 @@
       margin: 0 0 12px 0;
       font-size: 48px;
       line-height: 1.05;
+      word-break: break-word;
     }
     p {
       margin: 0 0 20px 0;
@@ -28,6 +29,7 @@
       border-radius: 12px;
       padding: 20px;
       margin: 20px 0;
+      overflow: hidden;
     }
     .label {
       font-size: 18px;
@@ -38,8 +40,16 @@
       font-size: 48px;
       font-weight: 700;
     }
+    .cid-link {
+      word-break: break-all;
+    }
+    .table-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
     table {
       width: 100%;
+      min-width: 760px;
       border-collapse: collapse;
       font-size: 16px;
     }
@@ -78,17 +88,19 @@
 
   <div class="card">
     <div class="label">Recent Changes</div>
-    <table>
-      <thead>
-        <tr>
-          <th>Time</th>
-          <th>Page</th>
-          <th>State</th>
-          <th>Link</th>
-        </tr>
-      </thead>
-      <tbody id="rows"></tbody>
-    </table>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Page</th>
+            <th>State</th>
+            <th>Link</th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
   </div>
 
   <script>
@@ -99,7 +111,9 @@
 
       try {
         const diffRes = await fetch("./site/diff.json", { cache: "no-store" });
-        if (!diffRes.ok) throw new Error("diff.json not found");
+        if (!diffRes.ok) {
+          throw new Error("diff.json not found");
+        }
         const diffObj = await diffRes.json();
         const rows = Array.isArray(diffObj.data) ? diffObj.data : [];
 
@@ -112,18 +126,20 @@
             <td>${row.time || ""}</td>
             <td>${row.source_url || ""}</td>
             <td>${row.state || ""}</td>
-            <td><a href="${row.source_url || "#"}" target="_blank">open</a></td>
+            <td><a href="${row.source_url || "#"}" target="_blank" rel="noopener noreferrer">open</a></td>
           `;
           rowsEl.appendChild(tr);
         }
 
         const latestRes = await fetch("./site/latest.json", { cache: "no-store" });
-        if (!latestRes.ok) throw new Error("latest.json not found");
+        if (!latestRes.ok) {
+          throw new Error("latest.json not found");
+        }
         const latestObj = await latestRes.json();
         const cid = latestObj.cid || "";
 
         if (cid) {
-          cidEl.innerHTML = `<a href="https://ipfs.io/ipfs/${cid}" target="_blank">${cid}</a>`;
+          cidEl.innerHTML = `<a class="cid-link" href="https://ipfs.io/ipfs/${cid}" target="_blank" rel="noopener noreferrer">${cid}</a>`;
         } else {
           cidEl.textContent = "No CID found";
         }
