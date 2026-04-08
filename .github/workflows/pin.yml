@@ -2,7 +2,8 @@ name: pipeline
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   run:
@@ -20,12 +21,16 @@ jobs:
       - run: python scripts/validate_chain.py
 
       - name: pin to ipfs
+        id: pin
         env:
           PINATA_JWT: ${{ secrets.PINATA_JWT }}
-        run: python scripts/pin_to_ipfs.py
+        run: |
+          CID=$(python scripts/pin_to_ipfs.py | awk '/CID:/ {print $2}')
+          echo "cid=$CID" >> "$GITHUB_OUTPUT"
 
       - name: write cid
-        run: python scripts/save_cid.py
+        run: |
+          echo "{\"cid\":\"${{ steps.pin.outputs.cid }}\"}" > site/latest.json
 
       - name: clock
         run: python scripts/clock.py
@@ -34,6 +39,6 @@ jobs:
         run: |
           git config user.name "bot"
           git config user.email "bot@local"
-          git add site/
+          git add site/latest.json site/clock.json
           git commit -m "update site" || echo "no changes"
           git push
