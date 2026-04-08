@@ -19,12 +19,13 @@
     fetch('latest.json')
       .then(r => r.json())
       .then(d => {
-        const url = `https://ipfs.io/ipfs/${d.cid}`;
+        const cid = d.cid;
+        const url = "https://ipfs.io/ipfs/" + cid;
         document.getElementById('cid').innerHTML =
-          `<a href="${url}" target="_blank">${d.cid}</a>`;
+          '<a href="' + url + '" target="_blank">' + cid + '</a>';
       })
       .catch(() => {
-        document.getElementById('cid').innerText = 'CID not available yet';
+        document.getElementById('cid').innerText = 'CID unavailable';
       });
 
     fetch('../ledger/ledger.jsonl')
@@ -33,19 +34,27 @@
         const lines = t.trim().split('\n').filter(Boolean);
         const formatted = lines.map(l => {
           const obj = JSON.parse(l);
+          const receipt = obj.receipt_id || 'No receipt_id';
+          const type = obj.type || '';
+          const sourceUrl = obj.source_url || '';
+          const seen = obj.first_seen_utc || '';
+
           return `
             <div style="margin-bottom:15px;padding:10px;border:1px solid #ccc;">
-              <strong>${obj.receipt_id || 'No receipt_id'}</strong><br>
-              Type: ${obj.type || ''}<br>
-              URL: <a href="${obj.source_url || '#'}" target="_blank">${obj.source_url || ''}</a><br>
-              Seen: ${obj.first_seen_utc || ''}<br>
+              <strong>${receipt}</strong><br>
+              Type: ${type}<br>
+              URL: <a href="${sourceUrl}" target="_blank">${sourceUrl}</a><br>
+              Seen: ${seen}
             </div>
           `;
         }).join('');
-        document.getElementById('data').innerHTML = formatted || 'No ledger data found';
+
+        document.getElementById('data').innerHTML =
+          formatted || 'No ledger data found';
       })
       .catch(() => {
-        document.getElementById('data').innerText = 'Could not load ledger data';
+        document.getElementById('data').innerText =
+          'Could not load ledger data';
       });
   </script>
 </body>
