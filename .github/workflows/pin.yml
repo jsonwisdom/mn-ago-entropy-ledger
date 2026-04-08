@@ -29,8 +29,9 @@ jobs:
           echo "cid=$CID" >> "$GITHUB_OUTPUT"
 
       - name: write cid
-        run: |
-          echo "{\"cid\":\"${{ steps.pin.outputs.cid }}\"}" > site/latest.json
+        env:
+          CID: ${{ steps.pin.outputs.cid }}
+        run: python scripts/save_cid.py
 
       - name: clock
         run: python scripts/clock.py
