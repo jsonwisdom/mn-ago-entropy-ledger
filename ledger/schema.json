@@ -1,0 +1,11 @@
+{
+  "type": "object",
+  "required": [
+    "receipt_id",
+    "type",
+    "source_url",
+    "first_seen_utc",
+    "source_hash_sha256",
+    "chain_hash"
+  ]
+}
