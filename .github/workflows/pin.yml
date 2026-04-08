@@ -1,50 +1,59 @@
-name: pipeline
+name: Validate Ledger
 
 on:
   push:
-    branches:
-      - main
-
-permissions:
-  contents: write
+    paths:
+      - 'ledger/ledger.jsonl'
+      - 'scripts/**'
+  schedule:
+    - cron: '0 14 * * *'  # daily 14:00 UTC
+  workflow_dispatch:
 
 jobs:
-  run:
+  build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          persist-credentials: true
-
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - run: pip install requests
-
-      - run: python scripts/validate_chain.py
-
-      - name: pin to ipfs
-        id: pin
+          python-version: '3.11'
+      
+      - name: Install deps
+        run: pip install requests beautifulsoup4 lxml
+      
+      - name: Run diff detection
+        run: python scripts/diff.py
+      
+      - name: Validate chain
+        run: python scripts/validate_chain.py
+      
+      - name: Update response clock
+        run: python scripts/clock.py
+      
+      - name: Commit ledger updates
+        run: |
+          git config user.name "ledger-bot"
+          git config user.email "bot@jsonwisdom.github.io"
+          git add ledger/ledger.jsonl ledger/snapshots/
+          git diff --quiet && git diff --staged --quiet || git commit -m "auto: diff+clock update"
+          git push
+      
+      - name: Pin to Pinata
         env:
           PINATA_JWT: ${{ secrets.PINATA_JWT }}
-        run: |
-          CID=$(python scripts/pin_to_ipfs.py | awk '/CID:/ {print $2}')
-          echo "cid=$CID" >> "$GITHUB_OUTPUT"
-
-      - name: write cid
-        env:
-          CID: ${{ steps.pin.outputs.cid }}
+        run: python scripts/pin_to_ipfs.py
+      
+      - name: Write CID
         run: python scripts/save_cid.py
-
-      - name: clock
-        run: python scripts/clock.py
-
-      - name: commit
+      
+      - name: Update site/latest.json
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add site/latest.json site/clock.json
-          git commit -m "update site" || echo "no changes"
+          echo "{\"cid\":\"$(cat .cid)\",\"updated_utc\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\"}" > site/latest.json
+      
+      - name: Commit site update
+        run: |
+          git add site/latest.json .cid
+          git diff --quiet && git diff --staged --quiet || git commit -m "site: update latest CID"
           git push
