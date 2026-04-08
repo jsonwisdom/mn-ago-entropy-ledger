@@ -35,4 +35,104 @@
       margin-bottom: 12px;
     }
     .big {
-      font
+      font-size: 48px;
+      font-weight: 700;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 16px;
+    }
+    th, td {
+      padding: 10px 8px;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+      vertical-align: top;
+    }
+    a {
+      color: #0b57d0;
+      word-break: break-all;
+    }
+    .muted {
+      color: #666;
+    }
+    .error {
+      color: #b00020;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <h1>MN AGO Entropy Ledger v1</h1>
+  <p>Public accountability layer — timestamp, hash, compare</p>
+
+  <div class="card">
+    <div class="label">Explainability Index</div>
+    <div id="score" class="big">0.00</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Latest IPFS CID</div>
+    <div id="cid" class="muted">Loading...</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Recent Changes</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Time</th>
+          <th>Page</th>
+          <th>State</th>
+          <th>Link</th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+
+  <script>
+    async function loadSite() {
+      const scoreEl = document.getElementById("score");
+      const cidEl = document.getElementById("cid");
+      const rowsEl = document.getElementById("rows");
+
+      try {
+        const diffRes = await fetch("./diff.json", { cache: "no-store" });
+        const diffObj = await diffRes.json();
+        const rows = Array.isArray(diffObj.data) ? diffObj.data : [];
+
+        scoreEl.textContent = (rows.length / 4).toFixed(2);
+
+        rowsEl.innerHTML = "";
+        for (const row of rows) {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td>${row.time || ""}</td>
+            <td>${row.source_url || ""}</td>
+            <td>${row.state || ""}</td>
+            <td><a href="${row.source_url || "#"}" target="_blank">open</a></td>
+          `;
+          rowsEl.appendChild(tr);
+        }
+
+        const latestRes = await fetch("./latest.json", { cache: "no-store" });
+        const latestObj = await latestRes.json();
+        const cid = latestObj.cid || "";
+
+        if (cid) {
+          cidEl.innerHTML = `<a href="https://ipfs.io/ipfs/${cid}" target="_blank">${cid}</a>`;
+        } else {
+          cidEl.textContent = "No CID found";
+        }
+      } catch (err) {
+        scoreEl.textContent = "0.00";
+        cidEl.innerHTML = `<span class="error">Failed to load site data</span>`;
+        rowsEl.innerHTML = "";
+      }
+    }
+
+    loadSite();
+  </script>
+</body>
+</html>
