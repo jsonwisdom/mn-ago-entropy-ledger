@@ -1,54 +1,39 @@
-name: Validate + Pin + Clock
+name: pipeline
 
 on:
   push:
-    branches: [ "main" ]
-  workflow_dispatch:
-
-permissions:
-  contents: write
+    branches: [ main ]
 
 jobs:
   run:
-    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
-        with:
-          persist-credentials: true
+      - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - name: Install deps
-        run: pip install requests
+      - run: pip install requests
 
-      - name: Run validator
-        run: python scripts/validate_chain.py
+      - run: python scripts/validate_chain.py
 
-      - name: Pin ledger to IPFS
-        id: pin
+      - name: pin to ipfs
         env:
           PINATA_JWT: ${{ secrets.PINATA_JWT }}
-        run: |
-          CID=$(python scripts/pin_to_ipfs.py | awk '/CID:/ {print $2}')
-          echo "cid=$CID" >> "$GITHUB_OUTPUT"
+        run: python scripts/pin_to_ipfs.py
 
-      - name: Save CID to site
-        run: |
-          echo "{\"cid\":\"${{ steps.pin.outputs.cid }}\"}" > site/latest.json
+      - name: write cid
+        run: python scripts/save_cid.py
 
-      - name: Run clock
+      - name: clock
         run: python scripts/clock.py
 
-      - name: Commit site updates
+      - name: commit
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add site/latest.json site/clock.json
-          git diff --cached --quiet || git commit -m "update site data"
+          git config user.name "bot"
+          git config user.email "bot@local"
+          git add site/
+          git commit -m "update site" || echo "no changes"
           git push
