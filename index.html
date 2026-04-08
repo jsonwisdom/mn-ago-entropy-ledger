@@ -98,7 +98,8 @@
       const rowsEl = document.getElementById("rows");
 
       try {
-        const diffRes = await fetch("./diff.json", { cache: "no-store" });
+        const diffRes = await fetch("./site/diff.json", { cache: "no-store" });
+        if (!diffRes.ok) throw new Error("diff.json not found");
         const diffObj = await diffRes.json();
         const rows = Array.isArray(diffObj.data) ? diffObj.data : [];
 
@@ -116,7 +117,8 @@
           rowsEl.appendChild(tr);
         }
 
-        const latestRes = await fetch("./latest.json", { cache: "no-store" });
+        const latestRes = await fetch("./site/latest.json", { cache: "no-store" });
+        if (!latestRes.ok) throw new Error("latest.json not found");
         const latestObj = await latestRes.json();
         const cid = latestObj.cid || "";
 
