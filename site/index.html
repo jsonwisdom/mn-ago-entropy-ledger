@@ -1,72 +1,60 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
   <title>MN AGO Entropy Ledger</title>
-  <style>
-    body { font-family: sans-serif; padding: 20px; }
-    .card { border: 1px solid #ddd; padding: 15px; margin-bottom: 20px; border-radius: 10px; }
-    table { width: 100%; border-collapse: collapse; }
-    th, td { padding: 8px; border-bottom: 1px solid #ccc; text-align: left; }
-  </style>
 </head>
 <body>
 
 <h1>MN AGO Entropy Ledger v1</h1>
 <p>Public accountability layer — timestamp, hash, compare</p>
 
-<div class="card">
-  <h2>Explainability Index</h2>
-  <div id="index">Loading...</div>
-</div>
+<h2>Explainability Index</h2>
+<div id="score">0.00</div>
 
-<div class="card">
-  <h2>Latest IPFS CID</h2>
-  <div id="cid">Loading...</div>
-</div>
+<h2>Latest IPFS CID</h2>
+<div id="cid"></div>
 
-<div class="card">
-  <h2>Recent Changes</h2>
-  <table id="table">
-    <thead>
-      <tr><th>Time</th><th>Page</th><th>State</th><th>Link</th></tr>
-    </thead>
-    <tbody></tbody>
-  </table>
-</div>
+<h2>Recent Changes</h2>
+<table border="1">
+  <thead>
+    <tr>
+      <th>Time</th>
+      <th>Page</th>
+      <th>State</th>
+      <th>Link</th>
+    </tr>
+  </thead>
+  <tbody id="rows"></tbody>
+</table>
 
 <script>
 async function load() {
-  try {
-    const diff = await fetch('./diff.json').then(r => r.json());
-    const latest = await fetch('./latest.json').then(r => r.json());
+  // load CID
+  const latest = await fetch("site/latest.json").then(r => r.json());
+  document.getElementById("cid").innerHTML =
+    `<a href="https://ipfs.io/ipfs/${latest.cid}" target="_blank">${latest.cid}</a>`;
 
-    // Explainability
-    document.getElementById('index').innerText =
-      diff.length > 0 ? "1.00 (" + diff.length + " signals)" : "0.00";
+  // load diff
+  const diff = await fetch("site/diff.json").then(r => r.json());
 
-    // CID
-    document.getElementById('cid').innerHTML =
-      latest.cid ? `<a href="https://ipfs.io/ipfs/${latest.cid}">${latest.cid}</a>` : "None";
+  const rows = diff.data || [];   // 🔥 FIX
 
-    // Table
-    const tbody = document.querySelector('#table tbody');
-    tbody.innerHTML = "";
+  const tbody = document.getElementById("rows");
 
-    diff.forEach(row => {
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td>${row.time}</td>
-        <td>${row.page}</td>
-        <td>${row.state}</td>
-        <td><a href="${row.link}" target="_blank">open</a></td>
-      `;
-      tbody.appendChild(tr);
-    });
+  rows.forEach(r => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${r.time || ""}</td>
+      <td>${r.source_url}</td>
+      <td>${r.state}</td>
+      <td><a href="${r.source_url}" target="_blank">open</a></td>
+    `;
+    tbody.appendChild(tr);
+  });
 
-  } catch (e) {
-    console.error(e);
-  }
+  // explainability
+  const score = rows.length / 4;
+  document.getElementById("score").innerText = score.toFixed(2);
 }
 
 load();
