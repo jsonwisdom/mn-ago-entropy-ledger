@@ -10,10 +10,9 @@ TARGETS = [
     {"id": "press", "url": "https://www.ag.state.mn.us/Office/PressRelease/"},
 ]
 
-LEDGER_PATH = "ledger/ledger.jsonl"
 DIFF_PATH = "site/diff.json"
 
-def sha256(x: str) -> str:
+def sha256(x):
     return hashlib.sha256(x.encode()).hexdigest()
 
 def fetch(url):
@@ -22,40 +21,22 @@ def fetch(url):
     except:
         return ""
 
-def load_ledger():
-    try:
-        with open(LEDGER_PATH) as f:
-            return [json.loads(l) for l in f if l.strip()]
-    except:
-        return []
-
 def main():
-    ledger = load_ledger()
-
     diff_rows = []
 
-    # detect prior diff/baseline receipts
-    has_any = any(
-        r.get("type") in ["DIFF_RECEIPT", "BASELINE_RECEIPT"]
-        for r in ledger
-    )
+    # 🚨 ALWAYS SEED (no conditions, no ledger dependency)
+    for t in TARGETS:
+        body = fetch(t["url"])
+        h = sha256(body)
 
-    # 🚨 FORCE BASELINE IF EMPTY
-    if not has_any:
-        for t in TARGETS:
-            body = fetch(t["url"])
-            h = sha256(body)
-
-            diff_rows.append({
-                "receipt_id": f"BASELINE-{t['id']}",
-                "source_url": t["url"],
-                "prev_source_hash": None,
-                "source_hash_sha256": h,
-                "state": "seeded",
-                "time": datetime.utcnow().isoformat() + "Z"
-            })
-
-    # (future diff logic can extend here — but baseline is guaranteed)
+        diff_rows.append({
+            "receipt_id": f"BASELINE-{t['id']}",
+            "source_url": t["url"],
+            "prev_source_hash": None,
+            "source_hash_sha256": h,
+            "state": "seeded",
+            "time": datetime.utcnow().isoformat() + "Z"
+        })
 
     with open(DIFF_PATH, "w") as f:
         json.dump({
