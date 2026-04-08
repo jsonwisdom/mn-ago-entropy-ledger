@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MN AGO Entropy Ledger</title>
+</head>
+<body>
+  <h1>MN AGO Entropy Ledger</h1>
+  <p>Status: LIVE</p>
+  <p>Validation: Automated via GitHub Actions</p>
+
+  <h2>Ledger Data</h2>
+  <pre id="data"></pre>
+
+  <script>
+    fetch('../ledger/ledger.jsonl')
+      .then(r => r.text())
+      .then(t => document.getElementById('data').innerText = t);
+  </script>
+</body>
+</html>
