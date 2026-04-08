@@ -1,20 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>MN AGO Entropy Ledger</title>
-</head>
-<body>
-  <h1>MN AGO Entropy Ledger</h1>
-  <p>Status: LIVE</p>
-  <p>Validation: Automated via GitHub Actions</p>
-
-  <h2>Ledger Data</h2>
-  <pre id="data"></pre>
-
-  <script>
-    fetch('../ledger/ledger.jsonl')
-      .then(r => r.text())
-      .then(t => document.getElementById('data').innerText = t);
-  </script>
-</body>
-</html>
+<script>
+fetch('../ledger/ledger.jsonl')
+  .then(r => r.text())
+  .then(t => {
+    const lines = t.trim().split('\n');
+    const formatted = lines.map(l => {
+      const obj = JSON.parse(l);
+      return `
+        <div style="margin-bottom:15px;padding:10px;border:1px solid #ccc;">
+          <strong>${obj.receipt_id}</strong><br>
+          Type: ${obj.type}<br>
+          URL: <a href="${obj.source_url}" target="_blank">${obj.source_url}</a><br>
+          Seen: ${obj.first_seen_utc}
+        </div>
+      `;
+    }).join('');
+    document.getElementById('data').innerHTML = formatted;
+  });
+</script>
