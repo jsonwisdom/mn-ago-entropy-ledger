@@ -1,6 +1,1 @@
-{
-  "status": "running",
-  "days_open": 0,
-  "days_remaining": 10,
-  "days_overdue": 0
-}
+{"receipt_id": "REC-2026-0002", "days_open": 1, "deadline_days": 10, "days_remaining": 9, "days_overdue": 0, "status": "on_time", "last_updated": "2026-04-08T18:26:58.113401+00:00"}
