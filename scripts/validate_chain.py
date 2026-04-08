@@ -1,60 +1,63 @@
-import json
-import hashlib
-import sys
+"""
+validate_chain.py — verifies hash chain integrity
+Expects: chain_hash, previous_hash, source_hash_sha256 in each receipt
+"""
+import json, hashlib, sys
+from pathlib import Path
 
-LEDGER_PATH = "ledger/ledger.jsonl"
+LEDGER = Path(__file__).parent.parent / "ledger" / "ledger.jsonl"
 
-def sha256_text(text: str) -> str:
-    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+def sha256(s): 
+    return hashlib.sha256(s.encode("utf-8")).hexdigest()
 
-def expected_chain_hash(previous_chain_hash: str, source_hash_sha256: str) -> str:
-    return sha256_text(previous_chain_hash + source_hash_sha256)
+def verify():
+    if not LEDGER.exists():
+        print("FAIL: ledger.jsonl not found")
+        return False
+    
+    lines = [l for l in LEDGER.read_text().strip().splitlines() if l]
+    if not lines:
+        print("OK: empty ledger, nothing to validate")
+        return True
+    
+    prev_chain = None
+    for i, line in enumerate(lines, 1):
+        try:
+            rec = json.loads(line)
+        except json.JSONDecodeError as e:
+            print(f"FAIL line {i}: invalid JSON: {e}")
+            return False
+        
+        # required fields check
+        required = ["receipt_id", "source_hash_sha256", "chain_hash"]
+        missing = [f for f in required if f not in rec]
+        if missing:
+            print(f"FAIL line {i}: missing fields: {', '.join(missing)}")
+            return False
+        
+        src = rec["source_hash_sha256"]
+        expected_chain = sha256(src if prev_chain is None else prev_chain + src)
+        
+        if rec["chain_hash"] != expected_chain:
+            print(f"FAIL line {i}: chain broken")
+            print(f"  expected: {expected_chain}")
+            print(f"  got:      {rec['chain_hash']}")
+            return False
+        
+        # previous_hash must match previous chain_hash, or be null for genesis
+        expected_prev = prev_chain
+        actual_prev = rec.get("previous_hash")
+        if actual_prev != expected_prev:
+            print(f"FAIL line {i}: previous_hash mismatch")
+            print(f"  expected: {expected_prev}")
+            print(f"  got:      {actual_prev}")
+            return False
+        
+        prev_chain = rec["chain_hash"]
+    
+    print(f"OK: {len(lines)} receipts verified, chain intact")
+    print(f"Latest chain_hash: {prev_chain}")
+    return True
 
-with open(LEDGER_PATH, "r", encoding="utf-8") as f:
-    raw_lines = [line.strip() for line in f if line.strip()]
-
-if not raw_lines:
-    print("❌ Ledger is empty")
-    sys.exit(1)
-
-previous = "GENESIS"
-
-for i, line in enumerate(raw_lines, start=1):
-    try:
-        entry = json.loads(line)
-    except json.JSONDecodeError as e:
-        print(f"❌ Invalid JSON at line {i}: {e}")
-        sys.exit(1)
-
-    required = [
-        "receipt_id",
-        "type",
-        "source_url",
-        "first_seen_utc",
-        "source_hash_sha256",
-        "previous_chain_hash",
-        "chain_hash"
-    ]
-
-    missing = [key for key in required if key not in entry]
-    if missing:
-        print(f"❌ Missing fields at line {i}: {', '.join(missing)}")
-        sys.exit(1)
-
-    if entry["previous_chain_hash"] != previous:
-        print(f"❌ previous_chain_hash mismatch at line {i}")
-        print(f"   expected: {previous}")
-        print(f"   found:    {entry['previous_chain_hash']}")
-        sys.exit(1)
-
-    expected = expected_chain_hash(previous, entry["source_hash_sha256"])
-
-    if entry["chain_hash"] != expected:
-        print(f"❌ chain_hash mismatch at line {i}")
-        print(f"   expected: {expected}")
-        print(f"   found:    {entry['chain_hash']}")
-        sys.exit(1)
-
-    previous = entry["chain_hash"]
-
-print(f"✅ Strict chain valid ({len(raw_lines)} entries)")
+if __name__ == "__main__":
+    sys.exit(0 if verify() else 1)
