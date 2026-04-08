@@ -1,0 +1,9 @@
+      - name: Run clock
+        run: python scripts/clock.py
+              - name: Commit clock update
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+          git add site/clock.json
+          git commit -m "update clock" || echo "no changes"
+          git push
