@@ -1,100 +1,361 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MN AGO Entropy Ledger</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MN AGO Entropy Ledger</title>
+  <style>
+    :root {
+      --bg: #f8f9fa;
+      --card: #ffffff;
+      --text: #111111;
+      --accent: #0b57d0;
+      --muted: #666666;
+    }
 
-<style>
-body { font-family: Arial; padding:20px; background:#f5f5f5; }
-.card { background:#fff; padding:16px; border-radius:10px; margin:16px 0; }
-.big { font-size:42px; font-weight:bold; }
-a { word-break: break-all; }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0a0a0a;
+        --card: #1a1a1a;
+        --text: #f0f0f0;
+        --accent: #4da3ff;
+        --muted: #aaaaaa;
+      }
+    }
 
-.change {
-  border:1px solid #ddd;
-  border-radius:10px;
-  padding:12px;
-  margin-bottom:12px;
-  background:#fafafa;
-}
-.label { font-size:12px; color:#666; font-weight:bold; }
-.value { font-size:15px; margin-bottom:8px; word-break:break-word; }
-</style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      margin: 0;
+      padding: 24px 16px;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100dvh;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    h1 {
+      font-size: 2.75rem;
+      font-weight: 800;
+      margin: 0 0 8px 0;
+      background: linear-gradient(90deg, #0b57d0, #00b4d8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.05;
+    }
+
+    .tagline {
+      font-size: 1.15rem;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid #e0e0e0;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .card {
+        border-color: #333;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      }
+    }
+
+    .label {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .big {
+      font-size: 2.8rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .cid-link {
+      word-break: break-all;
+      font-family: monospace;
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    .changes-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .change-item {
+      display: block;
+      background: var(--card);
+      border: 1px solid #e0e0e0;
+      border-radius: 16px;
+      padding: 20px;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .change-item:hover {
+      border-color: var(--accent);
+      box-shadow: 0 8px 25px rgba(11, 87, 208, 0.12);
+      transform: translateY(-3px);
+    }
+
+    .change-item:active {
+      transform: scale(0.985);
+    }
+
+    /* Colored left border by state */
+    .change-item.state-seeded   { border-left: 6px solid #2e7d32; }
+    .change-item.state-changed  { border-left: 6px solid #f57c00; }
+    .change-item.state-new      { border-left: 6px solid #1976d2; }
+    .change-item.state-removed,
+    .change-item.state-error    { border-left: 6px solid #d32f2f; }
+    .change-item.state-default  { border-left: 6px solid #757575; }
+
+    .change-row {
+      margin-bottom: 14px;
+    }
+
+    .change-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .change-key {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-bottom: 4px;
+    }
+
+    .change-value {
+      font-size: 1.05rem;
+      line-height: 1.45;
+      word-break: break-all;
+      overflow-wrap: anywhere;
+    }
+
+    .state-pill {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    .pill-seeded   { background: #e8f5e9; color: #1b5e20; }
+    .pill-changed  { background: #fff3e0; color: #e65100; }
+    .pill-new      { background: #e3f2fd; color: #0d47a1; }
+    .pill-removed,
+    .pill-error    { background: #ffebee; color: #c62828; }
+    .pill-default  { background: #eeeeee; color: #444; }
+
+    @media (prefers-color-scheme: dark) {
+      .pill-seeded   { background: #1b5e20; color: #c8e6c9; }
+      .pill-changed  { background: #5d4037; color: #ffcc80; }
+      .pill-new      { background: #0d47a1; color: #bbdefb; }
+      .pill-removed,
+      .pill-error    { background: #b71c1c; color: #ffcdd2; }
+      .pill-default  { background: #424242; color: #e0e0e0; }
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 48px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    @media (min-width: 768px) {
+      body {
+        padding: 40px 24px;
+        max-width: 980px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        font-size: 3.2rem;
+      }
+
+      .metrics {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+
+      .change-item {
+        padding: 24px;
+      }
+    }
+  </style>
 </head>
-
 <body>
+  <header>
+    <h1>MN AGO Entropy Ledger</h1>
+    <p class="tagline">Live public accountability • Timestamped • IPFS-anchored • Verifiable</p>
+  </header>
 
-<h1>MN AGO Entropy Ledger v1</h1>
-<p>Public accountability layer — timestamp, hash, compare</p>
+  <div class="metrics">
+    <div class="card">
+      <div class="label">Explainability Index</div>
+      <div id="score" class="big">0.00</div>
+    </div>
 
-<div class="card">
-<div>Explainability Index</div>
-<div id="score" class="big">0.00</div>
-</div>
+    <div class="card">
+      <div class="label">Latest IPFS CID</div>
+      <div id="cid" class="cid-link">Loading...</div>
+    </div>
 
-<div class="card">
-<div>Latest IPFS CID</div>
-<div id="cid">Loading...</div>
-</div>
+    <div class="card">
+      <div class="label">Changes Tracked</div>
+      <div id="change-count" class="big">0</div>
+    </div>
+  </div>
 
-<div class="card">
-<div>Recent Changes</div>
-<div id="rows"></div>
-</div>
+  <div class="card">
+    <div class="label">Recent Changes</div>
+    <div id="rows" class="changes-list"></div>
+  </div>
 
-<script>
-async function run() {
-  try {
+  <div class="footer">
+    Built for transparency • Data anchored on IPFS • Updated in real time
+  </div>
 
-    const diff = await fetch("./site/diff.json?x=" + Date.now());
-    const data = await diff.json();
-    const rows = data.data || [];
+  <script>
+    function stateClass(state) {
+      const value = String(state || "").toLowerCase().trim();
+      if (value === "seeded") return "seeded";
+      if (value === "changed") return "changed";
+      if (value === "new") return "new";
+      if (value === "removed") return "removed";
+      if (value === "error") return "error";
+      return "default";
+    }
 
-    document.getElementById("score").innerText = (rows.length / 4).toFixed(2);
+    async function loadSite() {
+      const scoreEl = document.getElementById("score");
+      const cidEl = document.getElementById("cid");
+      const rowsEl = document.getElementById("rows");
+      const countEl = document.getElementById("change-count");
 
-    const container = document.getElementById("rows");
-    container.innerHTML = "";
+      try {
+        const diffRes = await fetch("./site/diff.json", { cache: "no-store" });
+        if (!diffRes.ok) throw new Error("diff.json missing");
 
-    rows.forEach(r => {
-      const url = r.source_url || r.url || "";
+        const diffObj = await diffRes.json();
+        let rows = Array.isArray(diffObj.data) ? diffObj.data : [];
 
-      const div = document.createElement("div");
-      div.className = "change";
+        // Sort newest first
+        rows.sort((a, b) => new Date(b.time || 0) - new Date(a.time || 0));
 
-      div.innerHTML = `
-        <div class="label">Time</div>
-        <div class="value">${r.time || ""}</div>
+        const changeCount = rows.length;
+        scoreEl.textContent = (changeCount / 4).toFixed(2);
+        countEl.textContent = changeCount;
 
-        <div class="label">Page</div>
-        <div class="value">${url}</div>
+        rowsEl.innerHTML = "";
 
-        <div class="label">State</div>
-        <div class="value">${r.state || ""}</div>
+        for (const row of rows) {
+          const url = row.source_url || row.url || "#";
+          const state = row.state || "unknown";
+          const time = row.time || "—";
+          const sClass = stateClass(state);
 
-        <div class="label">Link</div>
-        <div class="value">
-          <a href="${url}" target="_blank">open</a>
-        </div>
-      `;
+          const item = document.createElement("a");
+          item.className = `change-item state-${sClass}`;
+          item.href = url;
+          item.target = "_blank";
+          item.rel = "noopener noreferrer";
 
-      container.appendChild(div);
-    });
+          item.innerHTML = `
+            <div class="change-row">
+              <div class="change-key">Timestamp</div>
+              <div class="change-value">${time}</div>
+            </div>
+            <div class="change-row">
+              <div class="change-key">Page</div>
+              <div class="change-value">${url}</div>
+            </div>
+            <div class="change-row">
+              <div class="change-key">Status</div>
+              <div class="change-value">
+                <span class="state-pill pill-${sClass}">${state.toUpperCase()}</span>
+              </div>
+            </div>
+            <div class="change-row">
+              <div class="change-key">Action</div>
+              <div class="change-value" style="color: var(--accent); font-weight: 600;">
+                → Open page
+              </div>
+            </div>
+          `;
 
-    const latest = await fetch("./site/latest.json?x=" + Date.now());
-    const latestData = await latest.json();
-    const cid = latestData.cid || "";
+          rowsEl.appendChild(item);
+        }
 
-    document.getElementById("cid").innerHTML =
-      `<a href="https://ipfs.io/ipfs/${cid}" target="_blank">${cid}</a>`;
+        // Load latest CID
+        const latestRes = await fetch("./site/latest.json", { cache: "no-store" });
+        if (latestRes.ok) {
+          const latestObj = await latestRes.json();
+          const cid = latestObj.cid || "";
+          if (cid) {
+            cidEl.innerHTML = `
+              <a href="https://ipfs.io/ipfs/${cid}" 
+                 target="_blank" 
+                 rel="noopener noreferrer" 
+                 class="cid-link" 
+                 style="color: var(--accent);">
+                ${cid}
+              </a>`;
+          } else {
+            cidEl.textContent = "No CID yet";
+          }
+        }
 
-  } catch (e) {
-    document.getElementById("cid").innerText = "FAILED";
-  }
-}
+      } catch (err) {
+        console.error(err);
+        scoreEl.textContent = "—";
+        countEl.textContent = "0";
+        cidEl.innerHTML = `<span style="color:#d32f2f;">Failed to load data</span>`;
+        rowsEl.innerHTML = `<div style="color:#d32f2f; padding:20px; text-align:center;">Could not load recent changes.<br>Please check your connection.</div>`;
+      }
+    }
 
-run();
-</script>
-
+    // Auto-refresh every 30 seconds
+    loadSite();
+    setInterval(loadSite, 30000);
+  </script>
 </body>
 </html>
