@@ -2,20 +2,27 @@ name: Validate + Pin + Clock
 
 on:
   push:
-    branches: [ main ]
+    branches: [ "main" ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   run:
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          persist-credentials: true
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: "3.11"
 
       - name: Install deps
         run: pip install requests
@@ -24,20 +31,24 @@ jobs:
         run: python scripts/validate_chain.py
 
       - name: Pin ledger to IPFS
+        id: pin
         env:
           PINATA_JWT: ${{ secrets.PINATA_JWT }}
-        run: python scripts/pin_to_ipfs.py
+        run: |
+          CID=$(python scripts/pin_to_ipfs.py | awk '/CID:/ {print $2}')
+          echo "cid=$CID" >> "$GITHUB_OUTPUT"
 
       - name: Save CID to site
-        run: python scripts/save_cid.py
+        run: |
+          echo "{\"cid\":\"${{ steps.pin.outputs.cid }}\"}" > site/latest.json
 
       - name: Run clock
         run: python scripts/clock.py
 
-      - name: Commit updates
+      - name: Commit site updates
         run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "actions@github.com"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add site/latest.json site/clock.json
-          git commit -m "update cid + clock" || echo "no changes"
+          git diff --cached --quiet || git commit -m "update site data"
           git push
