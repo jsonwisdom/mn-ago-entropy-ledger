@@ -5,12 +5,17 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
   run:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
 
       - uses: actions/setup-python@v5
         with:
@@ -38,8 +43,8 @@ jobs:
 
       - name: commit
         run: |
-          git config user.name "bot"
-          git config user.email "bot@local"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add site/latest.json site/clock.json
           git commit -m "update site" || echo "no changes"
           git push
