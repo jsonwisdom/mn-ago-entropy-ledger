@@ -52,20 +52,23 @@ def main():
         content = fetch(url)
         source_hash = sha256(content)
 
-        receipt = {
-            "id": f"REC-{len(ledger)+1:04d}",
-            "type": "BASELINE_RECEIPT" if not ledger else "DIFF_RECEIPT",
-            "url": url,
-            "timestamp": now,
-            "source_hash": source_hash,
-            "previous_hash": last_hash
-        }
+        receipt_id = f"REC-{len(ledger)+1:04d}"
 
         chain_input = (last_hash or "") + source_hash
         chain_hash = sha256(chain_input)
-        receipt["chain_hash"] = chain_hash
+
+        receipt = {
+            "receipt_id": receipt_id,
+            "type": "BASELINE_RECEIPT" if not ledger else "DIFF_RECEIPT",
+            "source_url": url,
+            "timestamp": now,
+            "source_hash_sha256": source_hash,
+            "previous_hash": last_hash,
+            "chain_hash": chain_hash
+        }
 
         append_ledger(receipt)
+
         outputs.append({
             "time": now,
             "page": url,
