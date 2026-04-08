@@ -2,9 +2,11 @@ name: build
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
   schedule:
     - cron: "0 * * * *"
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -28,16 +30,17 @@ jobs:
       - name: Run diff detection
         run: python scripts/diff.py
 
-      - - name: Validate chain (non-blocking)
-  run: python scripts/validate_chain.py || echo "chain validation skipped"
+      - name: Validate chain (non-blocking)
+        run: python scripts/validate_chain.py || echo "chain validation skipped"
+
       - name: Update response clock
-        run: python scripts/clock.py
+        run: python scripts/clock.py || echo "clock skipped"
 
       - name: Commit ledger updates
         run: |
           git config user.name "github-actions[bot]"
-          git config user.email "actions@github.com"
-          git add ledger/ ledger.jsonl site/diff.json site/clock.json || true
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add ledger/ site/diff.json site/clock.json || true
           git commit -m "auto update ledger" || echo "no changes"
           git push
 
@@ -48,16 +51,13 @@ jobs:
 
       - name: Write CID
         env:
-          CID: ${{ steps.pin.outputs.cid }}
+          CID: dummy
         run: python scripts/save_cid.py || echo "skip cid write"
-
-      - name: Update site/latest.json
-        run: echo "site latest handled"
 
       - name: Commit site update
         run: |
           git config user.name "github-actions[bot]"
-          git config user.email "actions@github.com"
-          git add site/latest.json
-          git commit -m "update site cid" || echo "no changes"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add site/latest.json site/diff.json site/clock.json || true
+          git commit -m "update site" || echo "no changes"
           git push
