@@ -1,82 +1,76 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-<meta charset="utf-8">
-<title>MN AGO Entropy Ledger v1</title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<style>
-body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;max-width:900px;margin:40px auto;padding:0 20px;line-height:1.5;color:#111}
-h1{font-size:1.8rem;margin-bottom:.2rem} .sub{color:#555;margin-bottom:1.5rem}
-.card{border:1px solid #ddd;border-radius:12px;padding:16px;margin:16px 0}
-.metric{font-size:2rem;font-weight:600}
-code,pre{background:#f6f6f6;padding:2px 6px;border-radius:6px}
-table{width:100%;border-collapse:collapse;margin-top:12px}
-th,td{text-align:left;padding:8px;border-bottom:1px solid #eee;font-size:0.9rem}
-a{color:#0a58ca;text-decoration:none}
-.badge{display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600}
-.badge.changed{background:#fff3cd;color:#664d03}
-.badge.observed{background:#e7f1ff;color:#084298}
-.badge.overdue{background:#f8d7da;color:#842029}
-</style>
+  <meta charset="UTF-8">
+  <title>MN AGO Entropy Ledger</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    .card { border: 1px solid #ddd; padding: 15px; margin-bottom: 20px; border-radius: 10px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 8px; border-bottom: 1px solid #ccc; text-align: left; }
+  </style>
 </head>
 <body>
+
 <h1>MN AGO Entropy Ledger v1</h1>
-<div class="sub">Public accountability layer — timestamp, hash, compare</div>
+<p>Public accountability layer — timestamp, hash, compare</p>
 
 <div class="card">
-<div>Explainability Index</div>
-<div class="metric" id="ei">—</div>
-<div id="ei-detail">loading...</div>
+  <h2>Explainability Index</h2>
+  <div id="index">Loading...</div>
 </div>
 
 <div class="card">
-<h3>Latest IPFS CID</h3>
-<div><code id="cid">loading...</code></div>
-<div class="sub">ipfs.io gateway: <a id="cidlink" href="#">open</a></div>
+  <h2>Latest IPFS CID</h2>
+  <div id="cid">Loading...</div>
 </div>
 
 <div class="card">
-<h3>Recent Changes</h3>
-<table id="diffs">
-<tr><th>Time</th><th>Page</th><th>State</th><th>Link</th></tr>
-</table>
-</div>
-
-<div class="card">
-<h3>Red lines</h3>
-<ul>
-<li>No inference of fraud from delay</li>
-<li>No personal identifiers</li>
-<li>Measure visibility, lag, closure only</li>
-</ul>
+  <h2>Recent Changes</h2>
+  <table id="table">
+    <thead>
+      <tr><th>Time</th><th>Page</th><th>State</th><th>Link</th></tr>
+    </thead>
+    <tbody></tbody>
+  </table>
 </div>
 
 <script>
 async function load() {
-  const latest = await fetch('./latest.json').then(r=>r.json());
-  document.getElementById('cid').textContent = latest.cid;
-  document.getElementById('cidlink').href = `https://ipfs.io/ipfs/${latest.cid}`;
-  
-  const ledger = await fetch(`https://ipfs.io/ipfs/${latest.cid}`).then(r=>r.text());
-  const lines = ledger.trim().split('\n').map(JSON.parse);
-  const total = lines.length;
-  const with_state = lines.filter(x=>x.state).length;
-  document.getElementById('ei').textContent = (with_state/total).toFixed(2);
-  document.getElementById('ei-detail').textContent = `${with_state} of ${total} signals have timestamped state`;
-  
-  const diffs = lines.filter(x=>x.type==='DIFF_RECEIPT'||x.state==='changed').slice(-5).reverse();
-  const tbody = document.getElementById('diffs');
-  diffs.forEach(d=>{
-    const tr = document.createElement('tr');
-    const badge = d.state==='changed' ? 'changed' : 'observed';
-    tr.innerHTML = `<td>${d.first_seen_utc.slice(0,16)}Z</td>
-                    <td>${d.title}</td>
-                    <td><span class="badge ${badge}">${d.state}</span></td>
-                    <td><a href="${d.source_url}">source</a></td>`;
-    tbody.appendChild(tr);
-  });
+  try {
+    const diff = await fetch('./diff.json').then(r => r.json());
+    const latest = await fetch('./latest.json').then(r => r.json());
+
+    // Explainability
+    document.getElementById('index').innerText =
+      diff.length > 0 ? "1.00 (" + diff.length + " signals)" : "0.00";
+
+    // CID
+    document.getElementById('cid').innerHTML =
+      latest.cid ? `<a href="https://ipfs.io/ipfs/${latest.cid}">${latest.cid}</a>` : "None";
+
+    // Table
+    const tbody = document.querySelector('#table tbody');
+    tbody.innerHTML = "";
+
+    diff.forEach(row => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${row.time}</td>
+        <td>${row.page}</td>
+        <td>${row.state}</td>
+        <td><a href="${row.link}" target="_blank">open</a></td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+  } catch (e) {
+    console.error(e);
+  }
 }
+
 load();
 </script>
+
 </body>
 </html>
