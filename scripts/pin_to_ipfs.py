@@ -1,21 +1,36 @@
 import os
+import json
 import requests
 
-JWT = os.environ["PINATA_JWT"]
+PINATA_JWT = os.environ.get("PINATA_JWT")
 
-url = "https://api.pinata.cloud/pinning/pinFileToIPFS"
+if not PINATA_JWT:
+    raise ValueError("Missing PINATA_JWT")
 
-headers = {
-    "Authorization": f"Bearer {JWT}"
-}
+PINATA_URL = "https://api.pinata.cloud/pinning/pinFileToIPFS"
 
-with open("ledger/ledger.jsonl", "rb") as f:
-    files = {
-        "file": ("ledger.jsonl", f)
-    }
+def pin_file(path: str) -> str:
+    with open(path, "rb") as f:
+        response = requests.post(
+            PINATA_URL,
+            files={"file": (os.path.basename(path), f)},
+            headers={"Authorization": f"Bearer {PINATA_JWT}"},
+            timeout=60,
+        )
+    response.raise_for_status()
+    data = response.json()
+    cid = data.get("IpfsHash")
+    if not cid:
+        raise ValueError(f"Pinata response missing IpfsHash: {json.dumps(data)}")
+    return cid
 
-    r = requests.post(url, headers=headers, files=files)
-    r.raise_for_status()
+def main():
+    target = "ledger/ledger.jsonl"
+    if not os.path.exists(target):
+        raise FileNotFoundError(f"Missing file to pin: {target}")
 
-    data = r.json()
-    print("CID:", data["IpfsHash"])
+    cid = pin_file(target)
+    print(f"CID: {cid}")
+
+if __name__ == "__main__":
+    main()
