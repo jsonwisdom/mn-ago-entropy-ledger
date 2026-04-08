@@ -1,64 +1,70 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
   <title>MN AGO Entropy Ledger</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    .card { border: 1px solid #ddd; padding: 15px; margin-bottom: 20px; border-radius: 10px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 8px; border-bottom: 1px solid #ccc; text-align: left; }
+  </style>
 </head>
 <body>
+  <h1>MN AGO Entropy Ledger v1</h1>
+  <p>Public accountability layer — timestamp, hash, compare</p>
 
-<h1>MN AGO Entropy Ledger v1</h1>
-<p>Public accountability layer — timestamp, hash, compare</p>
+  <div class="card">
+    <h2>Explainability Index</h2>
+    <div id="score">0.00</div>
+  </div>
 
-<h2>Explainability Index</h2>
-<div id="score">0.00</div>
+  <div class="card">
+    <h2>Latest IPFS CID</h2>
+    <div id="cid">Loading...</div>
+  </div>
 
-<h2>Latest IPFS CID</h2>
-<div id="cid"></div>
+  <div class="card">
+    <h2>Recent Changes</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Time</th>
+          <th>Page</th>
+          <th>State</th>
+          <th>Link</th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
 
-<h2>Recent Changes</h2>
-<table border="1">
-  <thead>
-    <tr>
-      <th>Time</th>
-      <th>Page</th>
-      <th>State</th>
-      <th>Link</th>
-    </tr>
-  </thead>
-  <tbody id="rows"></tbody>
-</table>
+  <script>
+    async function load() {
+      const latest = await fetch("./latest.json").then(r => r.json());
+      document.getElementById("cid").innerHTML =
+        `<a href="https://ipfs.io/ipfs/${latest.cid}" target="_blank">${latest.cid}</a>`;
 
-<script>
-async function load() {
-  // load CID
-  const latest = await fetch("site/latest.json").then(r => r.json());
-  document.getElementById("cid").innerHTML =
-    `<a href="https://ipfs.io/ipfs/${latest.cid}" target="_blank">${latest.cid}</a>`;
+      const diff = await fetch("./diff.json").then(r => r.json());
+      const rows = diff.data || [];
+      document.getElementById("score").innerText = (rows.length / 4).toFixed(2);
 
-  // load diff
-  const diff = await fetch("site/diff.json").then(r => r.json());
+      const tbody = document.getElementById("rows");
+      tbody.innerHTML = "";
 
-  const rows = diff.data || [];   // 🔥 FIX
+      rows.forEach(r => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${r.time || ""}</td>
+          <td>${r.source_url}</td>
+          <td>${r.state}</td>
+          <td><a href="${r.source_url}" target="_blank">open</a></td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
 
-  const tbody = document.getElementById("rows");
-
-  rows.forEach(r => {
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td>${r.time || ""}</td>
-      <td>${r.source_url}</td>
-      <td>${r.state}</td>
-      <td><a href="${r.source_url}" target="_blank">open</a></td>
-    `;
-    tbody.appendChild(tr);
-  });
-
-  // explainability
-  const score = rows.length / 4;
-  document.getElementById("score").innerText = score.toFixed(2);
-}
-
-load();
-</script>
-
+    load();
+  </script>
 </body>
 </html>
