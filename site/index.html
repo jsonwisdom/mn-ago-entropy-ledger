@@ -1,72 +1,82 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-  <title>MN AGO Entropy Ledger</title>
+<meta charset="utf-8">
+<title>MN AGO Entropy Ledger v1</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;max-width:900px;margin:40px auto;padding:0 20px;line-height:1.5;color:#111}
+h1{font-size:1.8rem;margin-bottom:.2rem} .sub{color:#555;margin-bottom:1.5rem}
+.card{border:1px solid #ddd;border-radius:12px;padding:16px;margin:16px 0}
+.metric{font-size:2rem;font-weight:600}
+code,pre{background:#f6f6f6;padding:2px 6px;border-radius:6px}
+table{width:100%;border-collapse:collapse;margin-top:12px}
+th,td{text-align:left;padding:8px;border-bottom:1px solid #eee;font-size:0.9rem}
+a{color:#0a58ca;text-decoration:none}
+.badge{display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:600}
+.badge.changed{background:#fff3cd;color:#664d03}
+.badge.observed{background:#e7f1ff;color:#084298}
+.badge.overdue{background:#f8d7da;color:#842029}
+</style>
 </head>
 <body>
+<h1>MN AGO Entropy Ledger v1</h1>
+<div class="sub">Public accountability layer — timestamp, hash, compare</div>
 
-<h1>MN AGO Entropy Ledger</h1>
+<div class="card">
+<div>Explainability Index</div>
+<div class="metric" id="ei">—</div>
+<div id="ei-detail">loading...</div>
+</div>
 
-<p>Status: LIVE</p>
-<p>Validation: Automated via GitHub Actions</p>
+<div class="card">
+<h3>Latest IPFS CID</h3>
+<div><code id="cid">loading...</code></div>
+<div class="sub">ipfs.io gateway: <a id="cidlink" href="#">open</a></div>
+</div>
 
-<h2>Latest CID</h2>
-<div id="cid">Loading...</div>
+<div class="card">
+<h3>Recent Changes</h3>
+<table id="diffs">
+<tr><th>Time</th><th>Page</th><th>State</th><th>Link</th></tr>
+</table>
+</div>
 
-<h2>Clock (MGDPA)</h2>
-<div id="clock">Loading...</div>
-
-<h2>Ledger Data</h2>
-<div id="ledger">Loading...</div>
+<div class="card">
+<h3>Red lines</h3>
+<ul>
+<li>No inference of fraud from delay</li>
+<li>No personal identifiers</li>
+<li>Measure visibility, lag, closure only</li>
+</ul>
+</div>
 
 <script>
-// LOAD CID
-fetch('latest.json')
-  .then(r => r.json())
-  .then(d => {
-    const cid = d.cid;
-    document.getElementById('cid').innerHTML =
-      `<a href="https://ipfs.io/ipfs/${cid}" target="_blank">${cid}</a>`;
-  })
-  .catch(() => {
-    document.getElementById('cid').innerText = 'CID unavailable';
+async function load() {
+  const latest = await fetch('./latest.json').then(r=>r.json());
+  document.getElementById('cid').textContent = latest.cid;
+  document.getElementById('cidlink').href = `https://ipfs.io/ipfs/${latest.cid}`;
+  
+  const ledger = await fetch(`https://ipfs.io/ipfs/${latest.cid}`).then(r=>r.text());
+  const lines = ledger.trim().split('\n').map(JSON.parse);
+  const total = lines.length;
+  const with_state = lines.filter(x=>x.state).length;
+  document.getElementById('ei').textContent = (with_state/total).toFixed(2);
+  document.getElementById('ei-detail').textContent = `${with_state} of ${total} signals have timestamped state`;
+  
+  const diffs = lines.filter(x=>x.type==='DIFF_RECEIPT'||x.state==='changed').slice(-5).reverse();
+  const tbody = document.getElementById('diffs');
+  diffs.forEach(d=>{
+    const tr = document.createElement('tr');
+    const badge = d.state==='changed' ? 'changed' : 'observed';
+    tr.innerHTML = `<td>${d.first_seen_utc.slice(0,16)}Z</td>
+                    <td>${d.title}</td>
+                    <td><span class="badge ${badge}">${d.state}</span></td>
+                    <td><a href="${d.source_url}">source</a></td>`;
+    tbody.appendChild(tr);
   });
-
-// LOAD CLOCK
-fetch('clock.json')
-  .then(r => r.json())
-  .then(d => {
-    document.getElementById('clock').innerHTML = `
-      <b>Status:</b> ${d.status}<br/>
-      <b>Days Open:</b> ${d.days_open}<br/>
-      <b>Remaining:</b> ${d.days_remaining}<br/>
-      <b>Overdue:</b> ${d.days_overdue}
-    `;
-  })
-  .catch(() => {
-    document.getElementById('clock').innerText = 'Clock unavailable';
-  });
-
-// LOAD LEDGER
-fetch('../ledger/ledger.jsonl')
-  .then(r => r.text())
-  .then(text => {
-    const entries = text.trim().split('\n').map(JSON.parse);
-    const html = entries.map(e => `
-      <div style="border:1px solid #ccc; padding:10px; margin:10px;">
-        <b>${e.receipt_id}</b><br/>
-        Type: ${e.type}<br/>
-        URL: <a href="${e.source_url}" target="_blank">${e.source_url}</a><br/>
-        Seen: ${e.first_seen_utc}
-      </div>
-    `).join('');
-    document.getElementById('ledger').innerHTML = html;
-  })
-  .catch(() => {
-    document.getElementById('ledger').innerText = 'Ledger unavailable';
-  });
-
+}
+load();
 </script>
-
 </body>
 </html>
