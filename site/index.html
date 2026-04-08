@@ -1,61 +1,72 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
   <title>MN AGO Entropy Ledger</title>
 </head>
 <body>
-  <h1>MN AGO Entropy Ledger</h1>
-  <p>Status: LIVE</p>
-  <p>Validation: Automated via GitHub Actions</p>
 
-  <h2>Latest CID</h2>
-  <p id="cid">Loading...</p>
+<h1>MN AGO Entropy Ledger</h1>
 
-  <h2>Ledger Data</h2>
-  <div id="data">Loading...</div>
+<p>Status: LIVE</p>
+<p>Validation: Automated via GitHub Actions</p>
 
-  <script>
-    fetch('latest.json')
-      .then(r => r.json())
-      .then(d => {
-        const cid = d.cid;
-        const url = "https://ipfs.io/ipfs/" + cid;
-        document.getElementById('cid').innerHTML =
-          '<a href="' + url + '" target="_blank">' + cid + '</a>';
-      })
-      .catch(() => {
-        document.getElementById('cid').innerText = 'CID unavailable';
-      });
+<h2>Latest CID</h2>
+<div id="cid">Loading...</div>
 
-    fetch('../ledger/ledger.jsonl')
-      .then(r => r.text())
-      .then(t => {
-        const lines = t.trim().split('\n').filter(Boolean);
-        const formatted = lines.map(l => {
-          const obj = JSON.parse(l);
-          const receipt = obj.receipt_id || 'No receipt_id';
-          const type = obj.type || '';
-          const sourceUrl = obj.source_url || '';
-          const seen = obj.first_seen_utc || '';
+<h2>Clock (MGDPA)</h2>
+<div id="clock">Loading...</div>
 
-          return `
-            <div style="margin-bottom:15px;padding:10px;border:1px solid #ccc;">
-              <strong>${receipt}</strong><br>
-              Type: ${type}<br>
-              URL: <a href="${sourceUrl}" target="_blank">${sourceUrl}</a><br>
-              Seen: ${seen}
-            </div>
-          `;
-        }).join('');
+<h2>Ledger Data</h2>
+<div id="ledger">Loading...</div>
 
-        document.getElementById('data').innerHTML =
-          formatted || 'No ledger data found';
-      })
-      .catch(() => {
-        document.getElementById('data').innerText =
-          'Could not load ledger data';
-      });
-  </script>
+<script>
+// LOAD CID
+fetch('latest.json')
+  .then(r => r.json())
+  .then(d => {
+    const cid = d.cid;
+    document.getElementById('cid').innerHTML =
+      `<a href="https://ipfs.io/ipfs/${cid}" target="_blank">${cid}</a>`;
+  })
+  .catch(() => {
+    document.getElementById('cid').innerText = 'CID unavailable';
+  });
+
+// LOAD CLOCK
+fetch('clock.json')
+  .then(r => r.json())
+  .then(d => {
+    document.getElementById('clock').innerHTML = `
+      <b>Status:</b> ${d.status}<br/>
+      <b>Days Open:</b> ${d.days_open}<br/>
+      <b>Remaining:</b> ${d.days_remaining}<br/>
+      <b>Overdue:</b> ${d.days_overdue}
+    `;
+  })
+  .catch(() => {
+    document.getElementById('clock').innerText = 'Clock unavailable';
+  });
+
+// LOAD LEDGER
+fetch('../ledger/ledger.jsonl')
+  .then(r => r.text())
+  .then(text => {
+    const entries = text.trim().split('\n').map(JSON.parse);
+    const html = entries.map(e => `
+      <div style="border:1px solid #ccc; padding:10px; margin:10px;">
+        <b>${e.receipt_id}</b><br/>
+        Type: ${e.type}<br/>
+        URL: <a href="${e.source_url}" target="_blank">${e.source_url}</a><br/>
+        Seen: ${e.first_seen_utc}
+      </div>
+    `).join('');
+    document.getElementById('ledger').innerHTML = html;
+  })
+  .catch(() => {
+    document.getElementById('ledger').innerText = 'Ledger unavailable';
+  });
+
+</script>
+
 </body>
 </html>
