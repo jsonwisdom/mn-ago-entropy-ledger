@@ -7,7 +7,7 @@ on:
     - cron: "0 * * * *"
 
 permissions:
-  contents: write   # 🔥 THIS IS THE FIX
+  contents: write
 
 jobs:
   build:
@@ -23,7 +23,7 @@ jobs:
           python-version: "3.11"
 
       - name: Install deps
-        run: pip install requests
+        run: pip install requests beautifulsoup4
 
       - name: Run diff detection
         run: python scripts/diff.py
