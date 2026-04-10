@@ -11,9 +11,12 @@ jobs:
         run: |
           python3 - <<'EOF'
           import sys
+          import json
+          import hashlib
           import urllib.parse
           from urllib.request import urlopen, Request
           from html.parser import HTMLParser
+          from datetime import datetime, timezone
 
           BASE_DOMAIN = "www.ag.state.mn.us"
           SEED_URLS = [
@@ -80,6 +83,17 @@ jobs:
                   print(f"ERROR: Canonicalization failed for {url}: {e}", file=sys.stderr)
                   sys.exit(1)
 
-          for url in sorted(canonical_set):
-              print(url)
+          sorted_urls = sorted(canonical_set)
+
+          payload = {
+              "timestamp": datetime.now(timezone.utc).isoformat(),
+              "origin": "www.ag.state.mn.us",
+              "total_urls": len(sorted_urls),
+              "urls": sorted_urls,
+          }
+
+          payload_str = json.dumps(payload, separators=(",", ":"), sort_keys=True)
+          payload["hash"] = hashlib.sha256(payload_str.encode()).hexdigest()
+
+          print(json.dumps(payload, indent=2))
           EOF
