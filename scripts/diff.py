@@ -26,7 +26,7 @@ def fetch(url: str) -> str:
         r.raise_for_status()
         return r.text
     except Exception as e:
-        print(f"FAIL: fetch failed for {url}: {e}", file=sys.stderr)
+        print(f"FAIL: fetch error for {url}: {e}", file=sys.stderr)
         return None
 
 
@@ -51,7 +51,7 @@ def main():
     for t in TARGETS:
         body = fetch(t["url"])
         if body is None:
-            print(f"FAIL: aborting run due to fetch failure on {t['url']}", file=sys.stderr)
+            print(f"FAIL: aborting run — fetch failed for {t['url']}", file=sys.stderr)
             sys.exit(1)
 
         current_hash = sha256(body)
