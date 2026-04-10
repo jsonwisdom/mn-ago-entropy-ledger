@@ -1,138 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
   <title>MN AGO Entropy Ledger</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 24px;
-      background: #f5f5f5;
-      color: #111;
-    }
-    h1 {
-      margin: 0 0 12px 0;
-      font-size: 48px;
-      line-height: 1.05;
-    }
-    p {
-      margin: 0 0 20px 0;
-      font-size: 18px;
-      color: #444;
-    }
-    .card {
-      background: white;
-      border: 1px solid #ddd;
-      border-radius: 12px;
-      padding: 20px;
-      margin: 20px 0;
-    }
-    .label {
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
-    .big {
-      font-size: 48px;
-      font-weight: 700;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 16px;
-    }
-    th, td {
-      padding: 10px 8px;
-      border-bottom: 1px solid #ddd;
-      text-align: left;
-      vertical-align: top;
-    }
-    a {
-      color: #0b57d0;
-      word-break: break-all;
-    }
-    .muted {
-      color: #666;
-    }
-    .error {
-      color: #b00020;
-      font-weight: 700;
-    }
-  </style>
 </head>
 <body>
-  <h1>MN AGO Entropy Ledger v1</h1>
-  <p>Public accountability layer — timestamp, hash, compare</p>
+  <h1>MN AGO Entropy Ledger</h1>
 
-  <div class="card">
-    <div class="label">Explainability Index</div>
-    <div id="score" class="big">0.00</div>
-  </div>
+  <h2>Latest CID</h2>
+  <pre id="cid">loading...</pre>
 
-  <div class="card">
-    <div class="label">Latest IPFS CID</div>
-    <div id="cid" class="muted">Loading...</div>
-  </div>
+  <h2>Diff State</h2>
+  <pre id="diff">loading...</pre>
 
-  <div class="card">
-    <div class="label">Recent Changes</div>
-    <table>
-      <thead>
-        <tr>
-          <th>Time</th>
-          <th>Page</th>
-          <th>State</th>
-          <th>Link</th>
-        </tr>
-      </thead>
-      <tbody id="rows"></tbody>
-    </table>
-  </div>
+  <h2>Clock</h2>
+  <pre id="clock">loading...</pre>
 
   <script>
-    async function loadSite() {
-      const scoreEl = document.getElementById("score");
-      const cidEl = document.getElementById("cid");
-      const rowsEl = document.getElementById("rows");
+    async function load() {
+      try {
+        const cid = await fetch("./latest.json").then(r => r.json());
+        document.getElementById("cid").textContent = JSON.stringify(cid, null, 2);
+      } catch (e) {
+        document.getElementById("cid").textContent = "error loading CID";
+      }
 
       try {
-        const diffRes = await fetch("./diff.json", { cache: "no-store" });
-        const diffObj = await diffRes.json();
-        const rows = Array.isArray(diffObj.data) ? diffObj.data : [];
+        const diff = await fetch("./diff.json").then(r => r.json());
+        document.getElementById("diff").textContent = JSON.stringify(diff, null, 2);
+      } catch (e) {
+        document.getElementById("diff").textContent = "error loading diff";
+      }
 
-        scoreEl.textContent = (rows.length / 4).toFixed(2);
-
-        rowsEl.innerHTML = "";
-        for (const row of rows) {
-          const tr = document.createElement("tr");
-          tr.innerHTML = `
-            <td>${row.time || ""}</td>
-            <td>${row.source_url || ""}</td>
-            <td>${row.state || ""}</td>
-            <td><a href="${row.source_url || "#"}" target="_blank">open</a></td>
-          `;
-          rowsEl.appendChild(tr);
-        }
-
-        const latestRes = await fetch("./latest.json", { cache: "no-store" });
-        const latestObj = await latestRes.json();
-        const cid = latestObj.cid || "";
-
-        if (cid) {
-          cidEl.innerHTML = `<a href="https://ipfs.io/ipfs/${cid}" target="_blank">${cid}</a>`;
-        } else {
-          cidEl.textContent = "No CID found";
-        }
-      } catch (err) {
-        scoreEl.textContent = "0.00";
-        cidEl.innerHTML = `<span class="error">Failed to load site data</span>`;
-        rowsEl.innerHTML = "";
+      try {
+        const clock = await fetch("./clock.json").then(r => r.json());
+        document.getElementById("clock").textContent = JSON.stringify(clock, null, 2);
+      } catch (e) {
+        document.getElementById("clock").textContent = "error loading clock";
       }
     }
 
-    loadSite();
+    load();
   </script>
 </body>
 </html>
