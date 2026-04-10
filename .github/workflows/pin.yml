@@ -1,70 +1,30 @@
-name: build
+name: Build + Deploy Site
 
 on:
   push:
-    branches:
-      - main
   schedule:
-    - cron: "0 * * * *"
-  workflow_dispatch:
-
-permissions:
-  contents: write
+    - cron: "*/10 * * * *"
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Install deps
-        run: pip install requests beautifulsoup4
-
-      - name: Run diff detection
-        run: python scripts/diff.py
-
-      - name: Validate chain (non-blocking)
-        run: python scripts/validate_chain.py || echo "chain validation skipped"
-
-      - name: Update response clock
-        run: python scripts/clock.py || echo "clock skipped"
-
-      - name: Commit ledger updates
+      - name: Run scripts
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add ledger/ site/diff.json site/clock.json || true
-          git commit -m "auto update ledger" || echo "no changes"
-          git push
+          python3 scripts/clock.py
+          python3 scripts/diff.py
 
-      - name: Pin to IPFS
-        env:
-          PINATA_JWT: ${{ secrets.PINATA_JWT }}
+      - name: Copy site to root
         run: |
-          python scripts/pin_to_ipfs.py | tee pin_output.txt
-          CID=$(grep -o 'Qm[[:alnum:]]*' pin_output.txt | tail -1)
-          if [ -z "$CID" ]; then
-            echo "No CID found in pin output"
-            exit 1
-          fi
-          echo "CID=$CID" >> $GITHUB_ENV
+          cp -r site/* .
 
-      - name: Write CID
-        env:
-          CID: ${{ env.CID }}
-        run: python scripts/save_cid.py
-
-      - name: Commit site update
+      - name: Commit changes
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add site/latest.json site/diff.json site/clock.json || true
-          git commit -m "update site" || echo "no changes"
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add .
+          git commit -m "auto update site" || echo "no changes"
           git push
