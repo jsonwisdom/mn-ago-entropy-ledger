@@ -24,10 +24,41 @@ jobs:
       - name: Install dependencies
         run: pip install requests
 
-      - name: Run scripts
+      - name: Run core system
         run: |
           python3 scripts/clock.py
           python3 scripts/diff.py
+
+      # 🚨 RADAR DRY RUN (NO FILE WRITES)
+      - name: Radar Dry Run
+        run: |
+          echo "RADAR DRY RUN START"
+          python3 - << 'EOF'
+import requests, re
+
+URLS = [
+    "https://www.ag.state.mn.us/consumer/",
+    "https://www.ag.state.mn.us/Data-Requests/",
+    "https://www.ag.state.mn.us/consumer/scams/",
+    "https://www.ag.state.mn.us/Office/Communications.asp"
+]
+
+seen = set()
+
+for url in URLS:
+    try:
+        r = requests.get(url, timeout=10)
+        links = re.findall(r'href=[\'"]?([^\'" >]+)', r.text)
+        for link in links:
+            if link.startswith("http") and "ag.state.mn.us" in link:
+                if link not in seen:
+                    seen.add(link)
+                    print(f"DISCOVERED: {link}")
+    except Exception as e:
+        print(f"ERROR: {url} -> {e}")
+
+print("RADAR DRY RUN END")
+EOF
 
       - name: Copy site to root
         run: |
