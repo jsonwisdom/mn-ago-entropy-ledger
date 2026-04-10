@@ -1,18 +1,18 @@
-name: Build + Verify + Publish
+name: Build + Deploy Site
 
 on:
-  workflow_dispatch:
-  push:
-    branches: [main]
   schedule:
     - cron: "*/10 * * * *"
-
-concurrency:
-  group: ledger-pipeline
-  cancel-in-progress: false
+  push:
+    branches:
+      - main
 
 permissions:
   contents: write
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -20,45 +20,24 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
 
       - name: Install dependencies
+        run: pip install requests
+
+      - name: Run scripts
         run: |
-          set -euo pipefail
-          pip install requests jsonschema
+          python3 scripts/clock.py
+          python3 scripts/diff.py
 
-      - name: Run pipeline
-        env:
-          PINATA_JWT: ${{ secrets.PINATA_JWT }}
+      - name: Copy site to root
         run: |
-          set -euo pipefail
-          mkdir -p site ledger
+          cp -r site/* .
 
-          python scripts/diff.py
-          python scripts/append_receipt.py
-          python scripts/validate_chain.py
-          python scripts/validate_schema.py
-
-          CID="$(python scripts/pin_to_ipfs.py)"
-          CID="$CID" python scripts/save_cid.py
-
-          python scripts/clock.py
-
-          cp site/diff.json diff.json
-          cp site/latest.json latest.json
-          cp site/clock.json clock.json
-
-      - name: Commit generated artifacts
+      - name: Commit changes
         run: |
-          set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add diff.json latest.json clock.json site/diff.json site/latest.json site/clock.json ledger/ledger.jsonl
-          git diff --cached --quiet && exit 0
-          git commit -m "auto: ledger update $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add .
+          git diff --cached --quiet && echo "no changes" && exit 0
+          git commit -m "auto update site [skip ci]"
           git push
