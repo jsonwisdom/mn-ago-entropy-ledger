@@ -3,81 +3,44 @@
 <head>
   <meta charset="UTF-8">
   <title>MN AGO Entropy Ledger</title>
-  <style>
-    body { font-family: Arial; padding:20px; background:#f5f5f5;}
-    .card { background:#fff; padding:15px; margin:10px 0; border-radius:8px;}
-    .changed { color:orange; }
-    .unchanged { color:green; }
-    .seeded { color:gray; }
-  </style>
 </head>
 <body>
+  <h1>MN AGO Entropy Ledger</h1>
 
-<h1>MN AGO Entropy Ledger</h1>
+  <h2>Latest CID</h2>
+  <pre id="cid">loading...</pre>
 
-<div class="card">
-  <h3>Status</h3>
-  <div id="status">Loading...</div>
-</div>
+  <h2>Diff State</h2>
+  <pre id="diff">loading...</pre>
 
-<div class="card">
-  <h3>CID</h3>
-  <div id="cid"></div>
-</div>
+  <h2>Clock</h2>
+  <pre id="clock">loading...</pre>
 
-<div class="card">
-  <h3>Clock</h3>
-  <pre id="clock"></pre>
-</div>
+  <script>
+    async function load() {
+      try {
+        const cid = await fetch("./latest.json").then(r => r.json());
+        document.getElementById("cid").textContent = JSON.stringify(cid, null, 2);
+      } catch (e) {
+        document.getElementById("cid").textContent = "error loading CID";
+      }
 
-<div class="card">
-  <h3>Sources</h3>
-  <table border="1" width="100%">
-    <thead>
-      <tr>
-        <th>Time</th>
-        <th>URL</th>
-        <th>State</th>
-      </tr>
-    </thead>
-    <tbody id="rows"></tbody>
-  </table>
-</div>
+      try {
+        const diff = await fetch("./diff.json").then(r => r.json());
+        document.getElementById("diff").textContent = JSON.stringify(diff, null, 2);
+      } catch (e) {
+        document.getElementById("diff").textContent = "error loading diff";
+      }
 
-<script>
-async function load() {
-  const diff = await fetch("diff.json").then(r=>r.json());
-  const latest = await fetch("latest.json").then(r=>r.json());
-  const clock = await fetch("clock.json").then(r=>r.json());
+      try {
+        const clock = await fetch("./clock.json").then(r => r.json());
+        document.getElementById("clock").textContent = JSON.stringify(clock, null, 2);
+      } catch (e) {
+        document.getElementById("clock").textContent = "error loading clock";
+      }
+    }
 
-  document.getElementById("cid").innerText = latest.cid || "No CID";
-
-  document.getElementById("clock").innerText =
-    clock.tracking_available === false
-    ? clock.reason
-    : JSON.stringify(clock,null,2);
-
-  const rows = diff.data || [];
-
-  document.getElementById("status").innerText =
-    rows.filter(r=>r.state==="changed").length + " changed";
-
-  const tbody = document.getElementById("rows");
-  tbody.innerHTML = "";
-
-  rows.forEach(r=>{
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td>${r.time}</td>
-      <td><a href="${r.source_url}" target="_blank">${r.source_url}</a></td>
-      <td class="${r.state}">${r.state}</td>
-    `;
-    tbody.appendChild(tr);
-  });
-}
-
-load();
-</script>
-
+    load();
+  </script>
 </body>
 </html>
