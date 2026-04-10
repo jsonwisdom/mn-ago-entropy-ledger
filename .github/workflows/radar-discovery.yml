@@ -1,11 +1,85 @@
-name: Radar Discovery (Sandbox)
+name: Radar Discovery
 
 on:
   workflow_dispatch:
 
 jobs:
-  radar:
+  discover:
     runs-on: ubuntu-latest
     steps:
-      - name: Radar Placeholder
-        run: echo "Radar sandbox ready"
+      - name: Run radar discovery (canonicalized)
+        run: |
+          python3 - <<'EOF'
+          import sys
+          import urllib.parse
+          from urllib.request import urlopen, Request
+          from html.parser import HTMLParser
+
+          BASE_DOMAIN = "www.ag.state.mn.us"
+          SEED_URLS = [
+              "https://www.ag.state.mn.us/consumer/",
+              "https://www.ag.state.mn.us/Data-Requests/",
+              "https://www.ag.state.mn.us/consumer/scams/",
+              "https://www.ag.state.mn.us/Office/Communications.asp"
+          ]
+
+          class AnchorParser(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.links = set()
+
+              def handle_starttag(self, tag, attrs):
+                  if tag == "a":
+                      for attr, value in attrs:
+                          if attr == "href" and value:
+                              self.links.add(value)
+
+          def canonicalize(url_str):
+              parsed = urllib.parse.urlparse(url_str)
+              scheme = parsed.scheme.lower()
+              netloc = parsed.netloc.lower()
+              path = parsed.path.lower()
+              if path != "/" and path.endswith("/"):
+                  path = path.rstrip("/")
+              return urllib.parse.urlunparse(
+                  (scheme, netloc, path, parsed.params, parsed.query, "")
+              )
+
+          def is_same_origin(url_str):
+              parsed = urllib.parse.urlparse(url_str)
+              return parsed.scheme.lower() == "https" and parsed.netloc.lower() == BASE_DOMAIN
+
+          def fetch_and_extract(url):
+              req = Request(url, headers={"User-Agent": "Mozilla/5.0"})
+              try:
+                  with urlopen(req, timeout=30) as response:
+                      content = response.read().decode("utf-8", errors="ignore")
+              except Exception as e:
+                  print(f"ERROR: Failed to fetch seed URL {url}: {e}", file=sys.stderr)
+                  sys.exit(1)
+
+              parser = AnchorParser()
+              parser.feed(content)
+              return parser.links
+
+          discovered = set()
+
+          for seed in SEED_URLS:
+              links = fetch_and_extract(seed)
+              for link in links:
+                  absolute = urllib.parse.urljoin(seed, link)
+                  if is_same_origin(absolute):
+                      discovered.add(absolute)
+
+          canonical_set = set()
+
+          for url in discovered:
+              try:
+                  canonical_set.add(canonicalize(url))
+              except Exception as e:
+                  print(f"ERROR: Canonicalization failed for {url}: {e}", file=sys.stderr)
+                  sys.exit(1)
+
+          for url in sorted(canonical_set):
+              print(url)
+          EOF
