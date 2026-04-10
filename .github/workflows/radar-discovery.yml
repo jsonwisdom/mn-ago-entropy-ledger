@@ -1,0 +1,11 @@
+name: Radar Discovery (Sandbox)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  radar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Radar Placeholder
+        run: echo "Radar sandbox ready"
