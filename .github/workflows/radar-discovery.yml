@@ -3,75 +3,84 @@ name: Radar Discovery
 on:
   workflow_dispatch:
 
-permissions:
-  contents: read
-
 jobs:
-  radar:
+  discover:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Discover same-origin URLs from trusted seeds
+      - name: Run radar discovery (canonicalized)
         run: |
-          python3 - <<'PY'
+          python3 - <<'EOF'
+          import sys
+          import urllib.parse
+          from urllib.request import urlopen, Request
           from html.parser import HTMLParser
-          from urllib.parse import urljoin, urlparse
-          from urllib.request import Request, urlopen
-          from datetime import datetime, timezone
 
-          SEEDS = [
+          BASE_DOMAIN = "www.ag.state.mn.us"
+          SEED_URLS = [
               "https://www.ag.state.mn.us/consumer/",
               "https://www.ag.state.mn.us/Data-Requests/",
               "https://www.ag.state.mn.us/consumer/scams/",
-              "https://www.ag.state.mn.us/Office/Communications.asp",
+              "https://www.ag.state.mn.us/Office/Communications.asp"
           ]
 
-          ALLOWED_HOST = "www.ag.state.mn.us"
-
-          class LinkParser(HTMLParser):
-              def __init__(self):
+          class AnchorParser(HTMLParser):
+              def __init__(self, base_url):
                   super().__init__()
-                  self.links = []
+                  self.base_url = base_url
+                  self.links = set()
 
               def handle_starttag(self, tag, attrs):
-                  if tag.lower() != "a":
-                      return
-                  for key, value in attrs:
-                      if key.lower() == "href" and value:
-                          self.links.append(value)
+                  if tag == 'a':
+                      for attr, value in attrs:
+                          if attr == 'href':
+                              self.links.add(value)
 
-          def fetch(url: str) -> str:
-              req = Request(url, headers={"User-Agent": "Mozilla/5.0"})
-              with urlopen(req, timeout=20) as resp:
-                  return resp.read().decode("utf-8", errors="ignore")
+          def canonicalize(url_str):
+              parsed = urllib.parse.urlparse(url_str)
+              scheme = parsed.scheme.lower()
+              netloc = parsed.netloc.lower()
+              path = parsed.path.lower()
+              fragment = ''
+              if path != '/' and path.endswith('/'):
+                  path = path.rstrip('/')
+              return urllib.parse.urlunparse((scheme, netloc, path, parsed.params, parsed.query, fragment))
+
+          def is_same_origin(url_str):
+              try:
+                  parsed = urllib.parse.urlparse(url_str)
+                  return parsed.netloc.lower() == BASE_DOMAIN and parsed.scheme.lower() == 'https'
+              except:
+                  return False
+
+          def fetch_and_extract(url):
+              req = Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+              try:
+                  with urlopen(req, timeout=30) as response:
+                      content = response.read().decode('utf-8', errors='ignore')
+              except Exception as e:
+                  print(f"ERROR: Failed to fetch seed URL {url}: {e}", file=sys.stderr)
+                  sys.exit(1)
+              parser = AnchorParser(url)
+              parser.feed(content)
+              return parser.links
 
           discovered = set()
+          for seed in SEED_URLS:
+              links = fetch_and_extract(seed)
+              for link in links:
+                  absolute = urllib.parse.urljoin(seed, link)
+                  if is_same_origin(absolute):
+                      discovered.add(absolute)
 
-          print("RADAR DISCOVERY START")
-          print(f"UTC: {datetime.now(timezone.utc).isoformat()}")
+          canonical_set = set()
+          for url in discovered:
+              try:
+                  canon = canonicalize(url)
+                  canonical_set.add(canon)
+              except Exception as e:
+                  print(f"ERROR: Canonicalization failed for {url}: {e}", file=sys.stderr)
+                  sys.exit(1)
 
-          for seed in SEEDS:
-              print(f"\nSOURCE: {seed}")
-              html = fetch(seed)
-              parser = LinkParser()
-              parser.feed(html)
-
-              for raw_link in parser.links:
-                  absolute = urljoin(seed, raw_link)
-                  parsed = urlparse(absolute)
-
-                  if parsed.scheme not in ("http", "https"):
-                      continue
-                  if parsed.netloc != ALLOWED_HOST:
-                      continue
-
-                  normalized = f"{parsed.scheme}://{parsed.netloc}{parsed.path}"
-                  discovered.add(normalized)
-
-          print("\nDISCOVERED URLS")
-          for url in sorted(discovered):
+          for url in sorted(canonical_set):
               print(url)
-
-          print(f"\nTOTAL_DISCOVERED={len(discovered)}")
-          print("RADAR DISCOVERY END")
-          PY
+          EOF
