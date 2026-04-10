@@ -1,19 +1,16 @@
 import json
 import os
+from pathlib import Path
 
 CID = os.environ.get("CID", "").strip()
+SITE_PATH = Path("site/latest.json")
 
-if not CID:
-    raise ValueError("Missing CID environment variable")
+def main():
+    if not CID or CID.lower() == "dummy":
+        raise ValueError("Missing or invalid CID")
 
-if CID.lower() == "dummy":
-    raise ValueError("Refusing to write dummy CID")
+    SITE_PATH.parent.mkdir(parents=True, exist_ok=True)
+    SITE_PATH.write_text(json.dumps({"cid": CID}, indent=2), encoding="utf-8")
 
-output = {
-    "cid": CID
-}
-
-with open("site/latest.json", "w", encoding="utf-8") as f:
-    json.dump(output, f, indent=2)
-
-print(f"Wrote CID: {CID}")
+if __name__ == "__main__":
+    main()
