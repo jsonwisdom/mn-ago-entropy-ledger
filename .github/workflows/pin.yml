@@ -7,6 +7,10 @@ on:
   schedule:
     - cron: "*/10 * * * *"
 
+concurrency:
+  group: ledger-pipeline
+  cancel-in-progress: false
+
 permissions:
   contents: write
 
@@ -26,7 +30,6 @@ jobs:
       - name: Install dependencies
         run: |
           set -euo pipefail
-          python -m pip install --upgrade pip
           pip install requests jsonschema
 
       - name: Run pipeline
@@ -46,17 +49,16 @@ jobs:
 
           python scripts/clock.py
 
-          cp site/diff.json .
-          cp site/latest.json .
-          cp site/clock.json .
-          cp index.html site/index.html
+          cp site/diff.json diff.json
+          cp site/latest.json latest.json
+          cp site/clock.json clock.json
 
       - name: Commit generated artifacts
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .
+          git add diff.json latest.json clock.json site/diff.json site/latest.json site/clock.json ledger/ledger.jsonl
           git diff --cached --quiet && exit 0
-          git commit -m "auto update ledger"
+          git commit -m "auto: ledger update $(date -u +%Y-%m-%dT%H:%M:%SZ)"
           git push
