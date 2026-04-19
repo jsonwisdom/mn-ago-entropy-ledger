@@ -1,0 +1,44 @@
+name: Lapis CI (Genesis Clean)
+on: [push, pull_request]
+
+jobs:
+  verify-ledger-integrity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install System Dependencies
+        run: sudo apt-get update && sudo apt-get install -y sqlite3
+
+      - name: Install Python Dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run Decoder Tests & Fuzzer
+        run: pytest tests/ -v --hypothesis-show-statistics
+
+      - name: Execute SQLite Ingestion
+        run: python3 export_to_sqlite.py
+
+      - name: Verify Double Anchor Invariant
+        run: |
+          # The Double Anchor Gate: Ensures metadata (envelope) matches payload (data)
+          NULL_COUNT=$(sqlite3 court.db "SELECT count(*) FROM proofs WHERE contract IS NULL;")
+          TOTAL_COUNT=$(sqlite3 court.db "SELECT count(*) FROM proofs;")
+
+          echo "Total Records: $TOTAL_COUNT"
+          echo "Null Contracts: $NULL_COUNT"
+
+          if [ "$NULL_COUNT" -ne 0 ]; then
+            echo "CRITICAL FAILURE: Null contracts detected in ledger. Parser failed to extract envelope address."
+            exit 1
+          fi
+
+          if [ "$TOTAL_COUNT" -eq 0 ]; then
+            echo "FAILURE: Ingestion produced 0 records. Check raw_logs.txt formatting."
+            exit 1
+          fi
