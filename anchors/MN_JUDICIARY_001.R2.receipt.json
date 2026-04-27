@@ -1,0 +1,23 @@
+{
+  "receipt_id": "MN_JUDICIARY_001_R2",
+  "anchor_id": "MN_JUDICIARY_001",
+  "state": "EVIDENCE_ADDED_CONTEXT_ONLY",
+  "truth_level": "source_pinned_context_not_case_proof",
+  "prev_hash": "1adee418258690ab2e10a14df234d464a8b6d49430f847b5dde15922da663b27",
+  "source": {
+    "type": "news_article_url",
+    "url": "https://abcnews.com/Politics/supreme-court-weighs-geofence-warrants-cellphone-data/story?id=132358022&cid=social_twitter_wt",
+    "title": "Supreme Court weighs 'geofence warrants' for cellphone data",
+    "published": "2026-04-27",
+    "accessed": "2026-04-27",
+    "github_issue_comment": "https://github.com/jsonwisdom/mn-ago-entropy-ledger/issues/3#issuecomment-4327691281"
+  },
+  "source_text": "Source type: news_article_url\nURL: https://abcnews.com/Politics/supreme-court-weighs-geofence-warrants-cellphone-data/story?id=132358022&cid=social_twitter_wt\nTitle: \"Supreme Court weighs 'geofence warrants' for cellphone data\"\nPublished: 2026-04-27\nExcerpt: \"The Supreme Court on Monday is considering whether investigators can also use so-called 'geofence warrants' to do the reverse -- scanning cell phone data of thousands of innocent individuals in hopes of finding a suspect to apprehend. The landmark case is the first time the justices will consider whether the controversial practice of digital dragnets... violate constitutional protections against unreasonable searches.\"\nAccessed: 2026-04-27\nContext: Chatrie v. U.S., involving 4th Amendment challenge to geofence warrants. Petitioner Okello Chatrie indicted for armed robbery; authorities used Google location data under a geofence warrant. Decision expected by end of June.",
+  "source_hash_algorithm": "sha256",
+  "source_hash": "8b113e0c91a1a0eb30aaf9a9e0809614fcde083737ae4b10b0d3a62368b679b8",
+  "hash_input": "MN_JUDICIARY_001|R2|context_source_added|prev=1adee418258690ab2e10a14df234d464a8b6d49430f847b5dde15922da663b27|source_hash=8b113e0c91a1a0eb30aaf9a9e0809614fcde083737ae4b10b0d3a62368b679b8",
+  "hash_algorithm": "sha256",
+  "hash": "7ab4df65d0edafcfd7b15d1559a639c78e484f47d867f9857c6b65ef072f3d66",
+  "notes": "This R2 pins a source from Issue #3, but the source is about geofence warrants/Chatrie v. U.S. It does not verify the MN_JUDICIARY_001 passport/bail-flight claim. Case proof remains pending.",
+  "created_at": "2026-04-27T00:00:00Z"
+}
