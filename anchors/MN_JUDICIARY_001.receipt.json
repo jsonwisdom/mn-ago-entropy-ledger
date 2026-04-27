@@ -1,0 +1,10 @@
+{
+  "receipt_id": "MN_JUDICIARY_001_R0",
+  "anchor_id": "MN_JUDICIARY_001",
+  "state": "REPORTED",
+  "hash_input": "MN_JUDICIARY_001|reported|passport_retained|flight_event|unverified_sources",
+  "hash": "PENDING_COMPUTE",
+  "prev_hash": null,
+  "notes": "Initial reported-state receipt. No official documents hashed yet.",
+  "created_at": "2026-04-27T00:00:00Z"
+}
