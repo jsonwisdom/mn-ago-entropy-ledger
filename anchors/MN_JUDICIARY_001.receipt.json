@@ -3,8 +3,9 @@
   "anchor_id": "MN_JUDICIARY_001",
   "state": "REPORTED",
   "hash_input": "MN_JUDICIARY_001|reported|passport_retained|flight_event|unverified_sources",
-  "hash": "PENDING_COMPUTE",
+  "hash_algorithm": "sha256",
+  "hash": "d991da76e63430303d5a54f0f1c7bd1851a793e5e277b5fafbb08a2a9a5cce50",
   "prev_hash": null,
-  "notes": "Initial reported-state receipt. No official documents hashed yet.",
+  "notes": "Initial reported-state receipt. This hash commits to the reported signal only; no official court documents have been hashed yet.",
   "created_at": "2026-04-27T00:00:00Z"
 }
