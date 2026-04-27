@@ -1,0 +1,29 @@
+{
+  "receipt_id": "MN_JUDICIARY_001_R5_TARGET",
+  "anchor_id": "MN_JUDICIARY_001",
+  "state": "PRIMARY_RECORD_TARGET_OPEN",
+  "truth_level": "r5_waiting_for_primary_court_record",
+  "prev_hash": "2acb537b3a51bfe62f7637dba9c2d7ae41ba4ded0fa3bbb5d6bf0dc3d81ec5e9",
+  "target_records": [
+    "Hennepin County District Court docket entry for Abdirashid Ismail Said",
+    "bail order or bond conditions document",
+    "bail hearing transcript or audio transcript",
+    "investigator affidavit identifying flight risk",
+    "bond forfeiture order",
+    "bench warrant or arrest warrant entry"
+  ],
+  "known_search_terms": [
+    "Abdirashid Ismail Said",
+    "Said Abdirashid",
+    "Hennepin County District Court",
+    "Judge Juan Hoyos",
+    "Medicaid Fraud Control Unit",
+    "racketeering",
+    "aiding and abetting theft by swindle",
+    "bond forfeiture"
+  ],
+  "status": "BLOCKED_UNTIL_PRIMARY_DOCUMENT_HASH",
+  "next_valid_transition": "R5_PRIMARY_RECORD_PINNED",
+  "notes": "R4 has strong secondary-source support. R5 requires a raw court record, docket, order, affidavit, forfeiture order, warrant, or transcript hash. Do not mark primary verification from news reporting alone.",
+  "created_at": "2026-04-27T00:00:00Z"
+}
