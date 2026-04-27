@@ -1,0 +1,36 @@
+{
+  "receipt_id": "MN_JUDICIARY_001_R5",
+  "anchor_id": "MN_JUDICIARY_001",
+  "state": "PRIMARY_RECORD_LINKS_ADDED",
+  "truth_level": "primary_court_record_links_pinned_pending_pdf_byte_hash",
+  "prev_hash": "2acb537b3a51bfe62f7637dba9c2d7ae41ba4ded0fa3bbb5d6bf0dc3d81ec5e9",
+  "case_number": "27-CR-23-25929",
+  "case_caption": "State of Minnesota v. Abdirashid Ismail Said",
+  "venue": "Hennepin County District Court",
+  "primary_records": [
+    {
+      "type": "order_forfeiting_bond",
+      "url": "https://www.washingtonexaminer.com/wp-content/uploads/2026/04/Said-bond-forfeiture.pdf",
+      "reported_date": "2026-04-07",
+      "judge": "Juan Hoyos",
+      "record_status": "primary_pdf_link_pinned_pending_byte_hash"
+    },
+    {
+      "type": "investigator_affidavit_flight_risk",
+      "url": "https://www.washingtonexaminer.com/wp-content/uploads/2026/04/Said-flight-concerns.pdf",
+      "record_status": "primary_pdf_link_pinned_pending_byte_hash"
+    }
+  ],
+  "claim_alignment": {
+    "150000_bond_posted": "supported_by_forfeiture_order_link_pending_pdf_hash",
+    "failed_to_appear": "supported_by_forfeiture_order_link_pending_pdf_hash",
+    "bond_forfeited": "supported_by_forfeiture_order_link_pending_pdf_hash",
+    "flight_risk_warning": "supported_by_affidavit_link_pending_pdf_hash",
+    "passport_retention_bail_mechanics": "supported_by_secondary_reporting_pending_bail_transcript_or_order"
+  },
+  "hash_input": "MN_JUDICIARY_001|R5|primary_record_links_added|prev=2acb537b3a51bfe62f7637dba9c2d7ae41ba4ded0fa3bbb5d6bf0dc3d81ec5e9|case=27-CR-23-25929|forfeiture_url=https://www.washingtonexaminer.com/wp-content/uploads/2026/04/Said-bond-forfeiture.pdf|flight_concerns_url=https://www.washingtonexaminer.com/wp-content/uploads/2026/04/Said-flight-concerns.pdf",
+  "hash_algorithm": "sha256",
+  "hash": "9f3a0fef56e50181e090eb45c69406b869e4be861c0c42cfe4c39afb4d8746fa",
+  "notes": "R5 pins case number and primary court-record PDF URLs surfaced by the operator. This is a primary-record link lock, not a byte-level PDF hash. Next state should download/extract/hash the PDFs or pin uploaded copies for independent replay.",
+  "created_at": "2026-04-27T00:00:00Z"
+}
