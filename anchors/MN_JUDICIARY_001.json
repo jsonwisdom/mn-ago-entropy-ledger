@@ -1,0 +1,24 @@
+{
+  "anchor_id": "MN_JUDICIARY_001",
+  "lane": "JUDICIARY",
+  "title": "Passport retained after higher bail option",
+  "claim": "A defendant facing charges kept his passport by taking the higher bond option with no travel restrictions, then reportedly fled the country.",
+  "vernacular": "The system left the door open, then acted surprised when it got used.",
+  "status": "RED_REPORTED_NOT_PINNED",
+  "truth_level": "reported_signal",
+  "checks": {
+    "bail_structure_claimed": true,
+    "passport_condition_claimed": true,
+    "flight_event_claimed": true,
+    "court_record_pinned": false,
+    "source_hashes_present": false
+  },
+  "missing": [
+    "official court docket URL",
+    "court order or bail transcript",
+    "source article URL",
+    "sha256 hashes for source documents"
+  ],
+  "impact_score": 100,
+  "created_at": "2026-04-27T00:00:00Z"
+}
