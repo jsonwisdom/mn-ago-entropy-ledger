@@ -1,0 +1,38 @@
+{
+  "receipt_id": "MN_JUDICIARY_001_R7_TARGET",
+  "anchor_id": "MN_JUDICIARY_001",
+  "state": "FULL_BYTE_REPLAY_TARGET_OPEN",
+  "truth_level": "awaiting_raw_pdf_hash_and_pdftotext_replay",
+  "prev_hash": "b73d3a6ae51f908f2815c15695d53a61ec2fe651e10da45e4b36843504bd2b38",
+  "target_artifacts": [
+    {
+      "type": "order_forfeiting_bond_pdf",
+      "url": "https://www.washingtonexaminer.com/wp-content/uploads/2026/04/Said-bond-forfeiture.pdf",
+      "required_hashes": [
+        "raw_pdf_sha256",
+        "pdftotext_layout_sha256",
+        "canonical_excerpt_sha256"
+      ]
+    },
+    {
+      "type": "flight_risk_affidavit_pdf",
+      "url": "https://www.washingtonexaminer.com/wp-content/uploads/2026/04/Said-flight-concerns.pdf",
+      "required_hashes": [
+        "raw_pdf_sha256",
+        "pdftotext_layout_sha256",
+        "canonical_excerpt_sha256"
+      ]
+    }
+  ],
+  "local_replay_commands": [
+    "curl -L -o Said-bond-forfeiture.pdf 'https://www.washingtonexaminer.com/wp-content/uploads/2026/04/Said-bond-forfeiture.pdf'",
+    "curl -L -o Said-flight-concerns.pdf 'https://www.washingtonexaminer.com/wp-content/uploads/2026/04/Said-flight-concerns.pdf'",
+    "sha256sum Said-bond-forfeiture.pdf Said-flight-concerns.pdf",
+    "pdftotext -layout -nopgbrk Said-bond-forfeiture.pdf Said-bond-forfeiture.txt",
+    "pdftotext -layout -nopgbrk Said-flight-concerns.pdf Said-flight-concerns.txt",
+    "sha256sum Said-bond-forfeiture.txt Said-flight-concerns.txt"
+  ],
+  "next_valid_transition": "R7_FULL_BYTE_REPLAY_LOCKED",
+  "notes": "R6 is public-audit sufficient with primary text excerpts pinned. R7 requires raw PDF bytes and extraction output hashes for independent replay.",
+  "created_at": "2026-04-27T00:00:00Z"
+}
