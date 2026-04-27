@@ -1,0 +1,30 @@
+{
+  "receipt_id": "MN_JUDICIARY_001_R4",
+  "anchor_id": "MN_JUDICIARY_001",
+  "state": "SECONDARY_SOURCE_BODY_PINNED",
+  "truth_level": "multi_source_secondary_reporting_strong_not_primary_court_record",
+  "prev_hash": "c50f2d9b64558c8a191f5647c19247d00a8396c0e932f7d4e23112d5308ade6f",
+  "source": {
+    "type": "reported_article_excerpt",
+    "publisher": "KARE 11",
+    "reporter": "Lou Raguse",
+    "published": "2026-04-10",
+    "url": "https://www.kare11.com/article/news/local/courts-news/minnesota-fraud-suspect-flees-the-country-days-before-trial/89-3b41548b-2882-4563-82e1-6332e94e1d79"
+  },
+  "pinned_excerpt": "At a bail hearing after he was charged, prosecutors wanted bail set at $1 million. An investigator for the Attorney General's Medicaid Fraud Control Unit even filed a document expressing fear that Said would flee because his family lives in Kenya. But Judge Juan Hoyos gave Said two options: a $50 thousand bond where he gives up his passport or a $150 thousand bond with no conditions. Said opted for the higher amount and he kept his passport.",
+  "excerpt_hash_algorithm": "sha256",
+  "excerpt_hash": "c6d3aef15ca16c0c669f4ff461b52058ae79ba28de37cd313561f8288be5a8f5",
+  "claim_alignment": {
+    "prosecutors_sought_1000000_bail": true,
+    "flight_risk_warning_reported": true,
+    "passport_surrender_lower_bond_reported": true,
+    "higher_bond_no_conditions_reported": true,
+    "defendant_kept_passport_reported": true,
+    "primary_court_record_hash_present": false
+  },
+  "hash_input": "MN_JUDICIARY_001|R4|secondary_source_body_pinned|prev=c50f2d9b64558c8a191f5647c19247d00a8396c0e932f7d4e23112d5308ade6f|excerpt_hash=c6d3aef15ca16c0c669f4ff461b52058ae79ba28de37cd313561f8288be5a8f5",
+  "hash_algorithm": "sha256",
+  "hash": "2acb537b3a51bfe62f7637dba9c2d7ae41ba4ded0fa3bbb5d6bf0dc3d81ec5e9",
+  "notes": "R4 pins the supplied KARE 11 excerpt that directly supports the bail/passport condition claim. It is strong secondary-source support, not a primary court-record verification. Full lock still requires docket, order, transcript, affidavit, forfeiture order, or warrant hash.",
+  "created_at": "2026-04-27T00:00:00Z"
+}
