@@ -1,0 +1,20 @@
+[
+  {
+    "claim_id": "US_JUDICIARY_001",
+    "legacy_anchor_id": "MN_JUDICIARY_001",
+    "region": "US",
+    "subregion": "MN",
+    "jurisdiction": "Hennepin County District Court",
+    "case_number": "27-CR-23-25929",
+    "system_type": "JUDICIARY",
+    "title": "Known flight risk followed by bond outcome and failure to appear",
+    "claim_text": "A defendant with documented flight-risk indicators posted a $150,000 bond, failed to appear before trial, and had the bond forfeited; multiple reports align that the bond path allowed passport retention.",
+    "created_at": "2026-04-27T00:00:00Z",
+    "created_by": "jaywisdom.base.eth",
+    "status": "ACTIVE",
+    "tri_state": "RED",
+    "confidence": 0.91,
+    "severity": "HIGH",
+    "notes": "Primary court records support bond, failure to appear, forfeiture, and documented flight risk. Exact two-option passport mechanics remain secondary-aligned pending bail transcript or bond conditions order."
+  }
+]
