@@ -1,0 +1,47 @@
+[
+  {
+    "receipt_id": "US_JUDICIARY_001_R6_PRIMARY_FORFEITURE",
+    "claim_id": "US_JUDICIARY_001",
+    "type": "PRIMARY",
+    "source": {
+      "label": "Order Forfeiting Bond",
+      "url": "https://www.washingtonexaminer.com/wp-content/uploads/2026/04/Said-bond-forfeiture.pdf",
+      "publisher": "Hennepin County District Court"
+    },
+    "verification": {
+      "text_verified": true,
+      "byte_verified": false,
+      "source_pinned": true
+    }
+  },
+  {
+    "receipt_id": "US_JUDICIARY_001_R6_PRIMARY_AFFIDAVIT",
+    "claim_id": "US_JUDICIARY_001",
+    "type": "PRIMARY",
+    "source": {
+      "label": "Flight Risk Affidavit",
+      "url": "https://www.washingtonexaminer.com/wp-content/uploads/2026/04/Said-flight-concerns.pdf",
+      "publisher": "Hennepin County Court Filing"
+    },
+    "verification": {
+      "text_verified": true,
+      "byte_verified": false,
+      "source_pinned": true
+    }
+  },
+  {
+    "receipt_id": "US_JUDICIARY_001_R4_SECONDARY_REPORT",
+    "claim_id": "US_JUDICIARY_001",
+    "type": "SECONDARY",
+    "source": {
+      "label": "KARE 11 Reporting",
+      "url": "https://www.kare11.com/article/news/local/courts-news/minnesota-fraud-suspect-flees-the-country-days-before-trial/89-3b41548b-2882-4563-82e1-6332e94e1d79",
+      "publisher": "KARE 11"
+    },
+    "verification": {
+      "text_verified": true,
+      "byte_verified": false,
+      "source_pinned": true
+    }
+  }
+]
