@@ -1,0 +1,27 @@
+{
+  "receipt_id": "MN_JUDICIARY_001_R3",
+  "anchor_id": "MN_JUDICIARY_001",
+  "state": "CASE_SOURCE_ADDED",
+  "truth_level": "case_source_pinned_news_article",
+  "prev_hash": "7ab4df65d0edafcfd7b15d1559a639c78e484f47d867f9857c6b65ef072f3d66",
+  "source": {
+    "type": "news_article_url",
+    "url": "https://www.kare11.com/article/news/local/courts-news/minnesota-fraud-suspect-flees-the-country-days-before-trial/89-3b41548b-2882-4563-82e1-6332e94e1d79",
+    "publisher": "KARE 11",
+    "title_slug": "minnesota-fraud-suspect-flees-the-country-days-before-trial",
+    "accessed": "2026-04-27"
+  },
+  "source_hash_algorithm": "sha256",
+  "source_hash_basis": "URL string only; article body not fetched in this environment",
+  "source_hash": "9a8c2b6e1b70650759fe2caed4a97c0f76fd2acb1f0bc4c01b71232571c8c6c6",
+  "claim_alignment": {
+    "passport_retained": "supported_by_url_context_pending_article_text_hash",
+    "flight_event": "supported_by_url_context_pending_article_text_hash",
+    "bail_terms": "pending_court_record_or_article_text"
+  },
+  "hash_input": "MN_JUDICIARY_001|R3|case_source_added|prev=7ab4df65d0edafcfd7b15d1559a639c78e484f47d867f9857c6b65ef072f3d66|source_url=https://www.kare11.com/article/news/local/courts-news/minnesota-fraud-suspect-flees-the-country-days-before-trial/89-3b41548b-2882-4563-82e1-6332e94e1d79|source_hash=9a8c2b6e1b70650759fe2caed4a97c0f76fd2acb1f0bc4c01b71232571c8c6c6",
+  "hash_algorithm": "sha256",
+  "hash": "c50f2d9b64558c8a191f5647c19247d00a8396c0e932f7d4e23112d5308ade6f",
+  "notes": "R3 pins the KARE 11 URL supplied by the operator as a case-relevant news source. Full verification still requires article text hash and/or official court record hash.",
+  "created_at": "2026-04-27T00:00:00Z"
+}
