@@ -1,46 +1,110 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>MN AGO Entropy Ledger</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Global Truth OS</title>
+  <style>
+    :root {
+      --bg:#020403;
+      --panel:#07100d;
+      --line:#1b3a30;
+      --green:#00ff88;
+      --red:#ff3b5f;
+      --yellow:#ffd166;
+      --muted:#8fb8a4;
+      --text:#eafff4;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:radial-gradient(circle at top,rgba(0,255,136,.13),transparent 28rem),var(--bg);color:var(--text);font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;padding:22px}
+    .shell{max-width:1150px;margin:0 auto}
+    header{border:1px solid var(--line);background:rgba(7,16,13,.92);border-radius:18px;padding:22px;margin-bottom:16px;box-shadow:0 0 44px rgba(0,255,136,.08)}
+    h1{margin:0;font-size:clamp(32px,6vw,72px);letter-spacing:-.06em;color:var(--green)}
+    .sub{color:var(--muted);line-height:1.5;margin-top:8px;max-width:820px}
+    .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:16px 0}
+    .stat,.card{border:1px solid var(--line);background:rgba(7,16,13,.9);border-radius:16px;padding:14px}
+    .label{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.09em}
+    .value{font-size:30px;margin-top:8px;font-weight:800}
+    .red{color:var(--red)}.yellow{color:var(--yellow)}.green{color:var(--green)}
+    .controls{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}
+    select,input{background:#020705;border:1px solid var(--line);color:var(--green);border-radius:12px;padding:10px;font:inherit}
+    input{flex:1;min-width:240px}
+    .cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    .card h2{margin:0 0 8px;font-size:18px}.meta{color:var(--muted);font-size:13px;line-height:1.45}.claim{line-height:1.5;margin:10px 0}.badge{display:inline-block;border:1px solid currentColor;border-radius:999px;padding:4px 9px;font-weight:800}.bar{height:9px;background:#111;border-radius:999px;overflow:hidden;margin-top:10px}.fill{height:100%;background:currentColor}.footer{color:var(--muted);margin-top:18px;line-height:1.5;font-size:13px}
+    @media(max-width:850px){.grid,.cards{grid-template-columns:1fr}body{padding:14px}}
+  </style>
 </head>
 <body>
-  <h1>MN AGO Entropy Ledger</h1>
+  <main class="shell">
+    <header>
+      <h1>GLOBAL TRUTH OS ⚙️</h1>
+      <div class="sub">Claims enter. Receipts attach. Traces compute. Systems score. No narrative field.</div>
+    </header>
 
-  <h2>Latest CID</h2>
-  <pre id="cid">loading...</pre>
+    <section class="grid">
+      <div class="stat"><div class="label">Total Claims</div><div class="value" id="total">—</div></div>
+      <div class="stat"><div class="label">RED</div><div class="value red" id="red">—</div></div>
+      <div class="stat"><div class="label">YELLOW</div><div class="value yellow" id="yellow">—</div></div>
+      <div class="stat"><div class="label">GREEN</div><div class="value green" id="green">—</div></div>
+    </section>
 
-  <h2>Diff State</h2>
-  <pre id="diff">loading...</pre>
+    <section class="grid">
+      <div class="stat"><div class="label">SHI</div><div class="value" id="shi">—</div></div>
+      <div class="stat"><div class="label">RED Ratio</div><div class="value red" id="redRatio">—</div></div>
+      <div class="stat"><div class="label">Kernel</div><div class="value green">LIVE</div></div>
+      <div class="stat"><div class="label">Mode</div><div class="value yellow">ZERO TRUST</div></div>
+    </section>
 
-  <h2>Clock</h2>
-  <pre id="clock">loading...</pre>
+    <div class="controls">
+      <select id="region"><option value="ALL">ALL REGIONS</option></select>
+      <select id="system"><option value="ALL">ALL SYSTEMS</option></select>
+      <input id="search" placeholder="Search claim, region, system, title..." />
+    </div>
 
-  <script>
-    async function load() {
-      try {
-        const cid = await fetch("./latest.json").then(r => r.json());
-        document.getElementById("cid").textContent = JSON.stringify(cid, null, 2);
-      } catch (e) {
-        document.getElementById("cid").textContent = "error loading CID";
-      }
+    <section class="cards" id="cards"></section>
 
-      try {
-        const diff = await fetch("./diff.json").then(r => r.json());
-        document.getElementById("diff").textContent = JSON.stringify(diff, null, 2);
-      } catch (e) {
-        document.getElementById("diff").textContent = "error loading diff";
-      }
+    <div class="footer">
+      Pipeline: CLAIM → RECEIPTS → TRACE → STATE → SHI<br />
+      ⚙️ jaywisdom.base.eth
+    </div>
+  </main>
 
-      try {
-        const clock = await fetch("./clock.json").then(r => r.json());
-        document.getElementById("clock").textContent = JSON.stringify(clock, null, 2);
-      } catch (e) {
-        document.getElementById("clock").textContent = "error loading clock";
-      }
-    }
-
-    load();
-  </script>
+<script>
+let claims=[];
+const $=id=>document.getElementById(id);
+function pct(n){return Math.round(n*100)+'%'}
+function badgeClass(s){return s==='RED'?'red':s==='YELLOW'?'yellow':'green'}
+function compute(list){
+  const total=list.length;
+  const red=list.filter(c=>c.tri_state==='RED').length;
+  const yellow=list.filter(c=>c.tri_state==='YELLOW').length;
+  const green=list.filter(c=>c.tri_state==='GREEN').length;
+  $('total').textContent=total;
+  $('red').textContent=red;
+  $('yellow').textContent=yellow;
+  $('green').textContent=green;
+  $('shi').textContent=total?pct(green/total):'0%';
+  $('redRatio').textContent=total?pct(red/total):'0%';
+}
+function render(){
+  const r=$('region').value, s=$('system').value, q=$('search').value.toLowerCase();
+  const filtered=claims.filter(c=>(r==='ALL'||c.region===r)&&(s==='ALL'||c.system_type===s)&&JSON.stringify(c).toLowerCase().includes(q));
+  compute(filtered);
+  $('cards').innerHTML=filtered.map(c=>`<article class="card">
+    <h2>${c.claim_id}</h2>
+    <span class="badge ${badgeClass(c.tri_state)}">${c.tri_state}</span>
+    <div class="meta">${c.region}${c.subregion?'/'+c.subregion:''} · ${c.system_type} · confidence ${Math.round((c.confidence||0)*100)}%</div>
+    <div class="claim"><strong>${c.title}</strong><br>${c.claim_text}</div>
+    <div class="meta">${c.notes||''}</div>
+    <div class="bar ${badgeClass(c.tri_state)}"><div class="fill" style="width:${Math.round((c.confidence||0)*100)}%"></div></div>
+  </article>`).join('');
+}
+function populateFilters(){
+  [...new Set(claims.map(c=>c.region))].sort().forEach(v=>$('region').innerHTML+=`<option value="${v}">${v}</option>`);
+  [...new Set(claims.map(c=>c.system_type))].sort().forEach(v=>$('system').innerHTML+=`<option value="${v}">${v}</option>`);
+}
+fetch('../truth/claims.json',{cache:'no-store'}).then(r=>r.json()).then(data=>{claims=data;populateFilters();render();});
+['region','system','search'].forEach(id=>$(id).addEventListener('input',render));
+</script>
 </body>
 </html>
