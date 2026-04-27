@@ -16,5 +16,20 @@
     "confidence": 0.91,
     "severity": "HIGH",
     "notes": "Primary court records support bond, failure to appear, forfeiture, and documented flight risk. Exact two-option passport mechanics remain secondary-aligned pending bail transcript or bond conditions order."
+  },
+  {
+    "claim_id": "US_POLICE_001",
+    "region": "US",
+    "subregion": "National",
+    "system_type": "POLICE",
+    "title": "National use-of-force accountability data remains incomplete and non-incident-specific",
+    "claim_text": "Official FBI materials describe the National Use-of-Force Data Collection as voluntary and aggregate-focused, not a single-incident accountability system; current public data still depends on agency participation coverage.",
+    "created_at": "2026-04-27T00:00:00Z",
+    "created_by": "jaywisdom.base.eth",
+    "status": "ACTIVE",
+    "tri_state": "RED",
+    "confidence": 0.86,
+    "severity": "HIGH",
+    "notes": "RED classifies a structural accountability gap: voluntary reporting and aggregate/non-incident-specific release limits. It does not assert misconduct in any specific case."
   }
 ]
