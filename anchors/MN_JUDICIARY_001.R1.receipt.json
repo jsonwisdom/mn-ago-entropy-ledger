@@ -1,0 +1,18 @@
+{
+  "receipt_id": "MN_JUDICIARY_001_R1",
+  "anchor_id": "MN_JUDICIARY_001",
+  "state": "AWAITING_EVIDENCE",
+  "truth_level": "evidence_slot_opened",
+  "prev_hash": "d991da76e63430303d5a54f0f1c7bd1851a793e5e277b5fafbb08a2a9a5cce50",
+  "hash_input": "MN_JUDICIARY_001|R1|awaiting_evidence|prev=d991da76e63430303d5a54f0f1c7bd1851a793e5e277b5fafbb08a2a9a5cce50|court_record_hash=null|source_hash=null",
+  "hash_algorithm": "sha256",
+  "hash": "1adee418258690ab2e10a14df234d464a8b6d49430f847b5dde15922da663b27",
+  "evidence_slots": {
+    "official_court_docket_url": null,
+    "court_order_or_bail_transcript_hash": null,
+    "source_article_url": null,
+    "source_article_hash": null
+  },
+  "notes": "R1 opens the evidence layer and chains from R0. It does not verify the underlying judiciary claim until official court/source material is added and hashed.",
+  "created_at": "2026-04-27T00:00:00Z"
+}
