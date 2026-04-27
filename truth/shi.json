@@ -1,0 +1,13 @@
+{
+  "region": "US",
+  "system_type": "JUDICIARY",
+  "metrics": {
+    "total_claims": 1,
+    "green": 0,
+    "yellow": 0,
+    "red": 1
+  },
+  "shi_score": 0,
+  "red_ratio": 1.0,
+  "last_updated": "2026-04-27T00:00:00Z"
+}
