@@ -1,0 +1,36 @@
+{
+  "receipt_id": "MN_JUDICIARY_001_R6",
+  "anchor_id": "MN_JUDICIARY_001",
+  "state": "PRIMARY_TEXT_EXCERPTS_PINNED",
+  "truth_level": "primary_record_text_pinned_operator_extraction_pending_pdf_replay",
+  "prev_hash": "9f3a0fef56e50181e090eb45c69406b869e4be861c0c42cfe4c39afb4d8746fa",
+  "case_number": "27-CR-23-25929",
+  "primary_records": [
+    {
+      "type": "order_forfeiting_bond",
+      "url": "https://www.washingtonexaminer.com/wp-content/uploads/2026/04/Said-bond-forfeiture.pdf",
+      "pinned_text": "The defendant posted bond on 12/08/2023 through Bail Bonds Doctor, Inc. in the amount of $150,000.00. This bond was posted on the condition that the defendant make all court appearances. The defendant failed to appear at a hearing on [date]. IT IS HEREBY ORDERED: The bond listed above is forfeited, based on the defendant's failure to appear in court. The Court Administrator shall take all steps necessary to carry out this Order. Dated: 4/7/2026 before Judge Juan Hoyos.",
+      "text_hash_algorithm": "sha256",
+      "text_hash": "1efd2f1a5ea36abf54ae97955c858131fef66e6023e2c426b7b7f08e0f6404d2"
+    },
+    {
+      "type": "flight_risk_affidavit",
+      "url": "https://www.washingtonexaminer.com/wp-content/uploads/2026/04/Said-flight-concerns.pdf",
+      "pinned_text": "Related to SAID, in the course of my investigation, I learned that SAID has significant family ties outside of the United States. Specifically, SAID's wife and child reside in Nairobi, Kenya. SAID is currently on probation in Hennepin County District Court File Number 27-CR-21-11942 and on June 13, 2023 requested permission from the Court to leave the country. The request was denied. Given the nature and severity of the charges, and SAID's familial ties outside the jurisdiction of Minnesota, I believe there is a potential SAID may flee, hide, or otherwise prevent the execution of the warrant.",
+      "text_hash_algorithm": "sha256",
+      "text_hash": "0e38e3960be42012db3862efcefa39ba9bd48830465bac2cbb2f111f75dd5422"
+    }
+  ],
+  "claim_alignment": {
+    "150000_bond_posted": true,
+    "failed_to_appear": true,
+    "bond_forfeited": true,
+    "flight_risk_warning_due_to_kenya_family_ties": true,
+    "two_option_passport_bail_mechanic": "not_in_these_primary_excerpts; remains secondary-source supported pending bail transcript or bond conditions order"
+  },
+  "hash_input": "MN_JUDICIARY_001|R6|primary_text_excerpts_pinned|prev=9f3a0fef56e50181e090eb45c69406b869e4be861c0c42cfe4c39afb4d8746fa|forfeiture_text_hash=1efd2f1a5ea36abf54ae97955c858131fef66e6023e2c426b7b7f08e0f6404d2|flight_text_hash=0e38e3960be42012db3862efcefa39ba9bd48830465bac2cbb2f111f75dd5422",
+  "hash_algorithm": "sha256",
+  "hash": "b73d3a6ae51f908f2815c15695d53a61ec2fe651e10da45e4b36843504bd2b38",
+  "notes": "R6 pins operator-provided extracted text from primary court documents. This is stronger than link-level R5, but still not a full independent PDF byte replay by this assistant. Next hard lock: upload/download PDFs, compute raw PDF sha256, pdftotext output hash, and canonical excerpt match.",
+  "created_at": "2026-04-27T00:00:00Z"
+}
