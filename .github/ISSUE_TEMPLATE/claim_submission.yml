@@ -1,0 +1,52 @@
+name: Claim Submission
+description: Submit a verifiable claim for Global Truth OS intake
+title: "[CLAIM] <REGION_SYSTEM_ID> — <short title>"
+labels: ["submission", "needs-triage", "receipts-required"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Receipts only. Narrative-only submissions will be rejected.
+  - type: input
+    id: claim_id
+    attributes:
+      label: claim_id
+      description: Example US_POLICE_002, EU_FINANCE_002, UK_MEDIA_002
+      placeholder: US_SYSTEM_###
+    validations:
+      required: true
+  - type: input
+    id: region
+    attributes:
+      label: region / subregion / system_type
+      placeholder: US / MN / JUDICIARY
+    validations:
+      required: true
+  - type: textarea
+    id: claim_text
+    attributes:
+      label: claim_text
+      description: Verifiable state only. No intent claims unless directly sourced.
+      placeholder: Court records show...
+    validations:
+      required: true
+  - type: textarea
+    id: receipts
+    attributes:
+      label: receipts
+      description: Provide URLs and mark PRIMARY / SECONDARY / CONTEXT.
+      placeholder: |
+        - type: PRIMARY
+          label: Official source
+          url: https://...
+    validations:
+      required: true
+  - type: textarea
+    id: evidence_standard
+    attributes:
+      label: evidence_standard
+      placeholder: |
+        primary: [bond, failure_to_appear]
+        secondary: [passport_conditions]
+    validations:
+      required: true
