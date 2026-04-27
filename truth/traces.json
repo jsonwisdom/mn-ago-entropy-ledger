@@ -1,0 +1,20 @@
+[
+  {
+    "trace_id": "US_JUDICIARY_001_TRACE",
+    "claim_id": "US_JUDICIARY_001",
+    "steps": [
+      "flight_risk_documented",
+      "bond_posted",
+      "failure_to_appear",
+      "bond_forfeited"
+    ],
+    "primary_supported_steps": [
+      "flight_risk_documented",
+      "bond_posted",
+      "failure_to_appear",
+      "bond_forfeited"
+    ],
+    "completeness": 0.9,
+    "classification": "FAILURE_TRACE"
+  }
+]
