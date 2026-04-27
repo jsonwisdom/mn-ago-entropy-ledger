@@ -31,5 +31,35 @@
     "confidence": 0.86,
     "severity": "HIGH",
     "notes": "RED classifies a structural accountability gap: voluntary reporting and aggregate/non-incident-specific release limits. It does not assert misconduct in any specific case."
+  },
+  {
+    "claim_id": "UK_MEDIA_001",
+    "region": "UK",
+    "subregion": "National",
+    "system_type": "MEDIA",
+    "title": "Large-scale media analysis reports measurable framing differences",
+    "claim_text": "A published media analysis reports measurable differences in thematic framing and negative association rates across outlets; the claim remains pending direct dataset and methodology replay.",
+    "created_at": "2026-04-27T00:00:00Z",
+    "created_by": "jaywisdom.base.eth",
+    "status": "ACTIVE",
+    "tri_state": "YELLOW",
+    "confidence": 0.6,
+    "severity": "MEDIUM",
+    "notes": "Starts YELLOW because dataset, methodology, and adversarial validation are not yet fully pinned."
+  },
+  {
+    "claim_id": "EU_FINANCE_001",
+    "region": "EU",
+    "subregion": "Eurozone",
+    "system_type": "FINANCE",
+    "title": "Bank resolution framework tension between bail-in tools and state-supported interventions",
+    "claim_text": "Official EU bank resolution frameworks define bail-in tools to limit taxpayer exposure, while documented bank-stabilization cases include state-supported interventions; case-level traces remain pending.",
+    "created_at": "2026-04-27T00:00:00Z",
+    "created_by": "jaywisdom.base.eth",
+    "status": "ACTIVE",
+    "tri_state": "YELLOW",
+    "confidence": 0.7,
+    "severity": "MEDIUM",
+    "notes": "Starts YELLOW because framework and case interventions need claim-by-claim receipt chains before failure classification."
   }
 ]
