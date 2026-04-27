@@ -8,11 +8,7 @@
       "url": "https://www.washingtonexaminer.com/wp-content/uploads/2026/04/Said-bond-forfeiture.pdf",
       "publisher": "Hennepin County District Court"
     },
-    "verification": {
-      "text_verified": true,
-      "byte_verified": false,
-      "source_pinned": true
-    }
+    "verification": { "text_verified": true, "byte_verified": false, "source_pinned": true }
   },
   {
     "receipt_id": "US_JUDICIARY_001_R6_PRIMARY_AFFIDAVIT",
@@ -23,11 +19,7 @@
       "url": "https://www.washingtonexaminer.com/wp-content/uploads/2026/04/Said-flight-concerns.pdf",
       "publisher": "Hennepin County Court Filing"
     },
-    "verification": {
-      "text_verified": true,
-      "byte_verified": false,
-      "source_pinned": true
-    }
+    "verification": { "text_verified": true, "byte_verified": false, "source_pinned": true }
   },
   {
     "receipt_id": "US_JUDICIARY_001_R4_SECONDARY_REPORT",
@@ -38,10 +30,39 @@
       "url": "https://www.kare11.com/article/news/local/courts-news/minnesota-fraud-suspect-flees-the-country-days-before-trial/89-3b41548b-2882-4563-82e1-6332e94e1d79",
       "publisher": "KARE 11"
     },
-    "verification": {
-      "text_verified": true,
-      "byte_verified": false,
-      "source_pinned": true
-    }
+    "verification": { "text_verified": true, "byte_verified": false, "source_pinned": true }
+  },
+  {
+    "receipt_id": "US_POLICE_001_PRIMARY_FBI_UOF",
+    "claim_id": "US_POLICE_001",
+    "type": "PRIMARY",
+    "source": {
+      "label": "FBI National Use-of-Force Data Collection",
+      "url": "https://www.fbi.gov/how-we-can-help-you/more-fbi-services-and-information/ucr/use-of-force",
+      "publisher": "FBI"
+    },
+    "verification": { "text_verified": false, "byte_verified": false, "source_pinned": true }
+  },
+  {
+    "receipt_id": "UK_MEDIA_001_SECONDARY_CFMM",
+    "claim_id": "UK_MEDIA_001",
+    "type": "SECONDARY",
+    "source": {
+      "label": "Centre for Media Monitoring report",
+      "url": "https://cfmm.org.uk/",
+      "publisher": "Centre for Media Monitoring"
+    },
+    "verification": { "text_verified": false, "byte_verified": false, "source_pinned": true }
+  },
+  {
+    "receipt_id": "EU_FINANCE_001_PRIMARY_EU_BRRD",
+    "claim_id": "EU_FINANCE_001",
+    "type": "PRIMARY",
+    "source": {
+      "label": "EU bank recovery and resolution framework",
+      "url": "https://www.consilium.europa.eu/en/policies/banking-union/",
+      "publisher": "Council of the European Union"
+    },
+    "verification": { "text_verified": false, "byte_verified": false, "source_pinned": true }
   }
 ]
