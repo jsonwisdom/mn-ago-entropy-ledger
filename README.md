@@ -1,5 +1,22 @@
 # MN AGO Entropy Ledger
 
+> **Status: ACCOUNTABILITY RECEIPTS DATASET**
+>
+> This repository tracks receipts using a tri-state classification system across three lanes: `LAW`, `JUDICIARY`, and `AUDIT`.
+>
+> It is not:
+>
+> - an entropy source or randomness beacon
+> - a timestamping service
+> - a cryptographic proof system
+> - the canonical Anchor 001 source
+>
+> Byte verification matters: some receipts may be text-verified or source-level verified but not byte-verified.
+>
+> See `docs/LEDGER_STATUS_BOUNDARY.md` for the distinction between operational status tracking and cryptographic finality.
+>
+> See `docs/ANCHOR_001_BOUNDARY.md` for the Anchor 001 boundary.
+
 Public control plane for Minnesota accountability receipts.
 
 ## Tri-State Auditing System
