@@ -140,6 +140,8 @@
       "reason": "No ENS record, Base transaction, or EAS attestation was supplied for this target."
     }
   },
+  "registry_evidence_bound": true,
+  "registry_evidence_bound_scope": "All registry entries carry explicit evidence states, references where available, and limitations. This does not mean every entry is VERIFIED.",
   "symlink_policy": "PROHIBITED_FOR_AUTHORITY_BEARING_ARTIFACTS",
   "doctrine": [
     "A plan is not a commit.",
