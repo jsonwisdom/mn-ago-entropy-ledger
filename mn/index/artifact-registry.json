@@ -5,11 +5,7 @@
   "generated_for": "GitHub Issue #396",
   "generated_on": "2026-07-14",
   "merge_binding": "PENDING_MERGE_SHA",
-  "evidence_taxonomy": [
-    "UNBOUND",
-    "PENDING",
-    "VERIFIED"
-  ],
+  "evidence_taxonomy": ["UNBOUND", "PENDING", "VERIFIED"],
   "repositories": [
     {
       "repo": "jsonwisdom/mn-ago-entropy-ledger",
@@ -59,19 +55,31 @@
       "lane": "mn/legislature/house",
       "class": "CIVIC_OBSERVATION",
       "source_discovered": true,
-      "source_parsed": false,
-      "source_bytes_acquired": false,
-      "source_hashed": false,
-      "primary_bound": false,
+      "source_parsed": true,
+      "source_bytes_acquired": true,
+      "source_hashed": true,
+      "repository_bytes_committed": false,
+      "primary_bound": true,
       "action_authority": "NOT_COMPUTED",
       "research_authority": false,
       "evidence": {
-        "state": "PENDING",
-        "receipt_type": "OFFICIAL_URI_DISCOVERY",
-        "reference": "mn/legislature/house/MN-HOUSE-SPEAKER-20250206/source.json",
-        "reason": "Official House journal URI is recorded, but exact PDF bytes, parse receipt, offsets, excerpt map, and hashes are absent.",
-        "bytes_hash": null,
-        "uri_ref": "https://www.house.mn.gov/cco/journals/2025-26/J0206003.pdf"
+        "state": "VERIFIED",
+        "scope": "UPLOADED_EXACT_BYTES_HASH_AND_LISTED_CLAIMS",
+        "receipt_type": "BYTE_HASH_AND_CLAIM_RECEIPT",
+        "reference": "mn/legislature/house/MN-HOUSE-SPEAKER-20250206/RECEIPT.json",
+        "byte_length": 188316,
+        "sha256": "88c56b8793cf553112bc15bf36b6fb7c38605a7801099bd4607b0cdbe88f2ae8",
+        "sha3_256": "6168f5322e580b3ed2a4dacbda307baaaeae4215263595c506496ac09361c3f4",
+        "uri_ref": "https://www.house.mn.gov/cco/journals/2025-26/J0206003.pdf",
+        "limitation": "Exact uploaded bytes were independently hashed and rendered. Repository stores the receipt and claim map, not the PDF binary; independent refetch-and-hash against the official URI remains desirable."
+      },
+      "authority_factors": {
+        "J": "VERIFIED",
+        "L": "UNRESOLVED",
+        "S": "UNRESOLVED",
+        "D": "UNRESOLVED",
+        "R": "VERIFIED",
+        "P": "VERIFIED"
       }
     },
     {
