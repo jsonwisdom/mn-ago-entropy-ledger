@@ -1,0 +1,26 @@
+{
+  "schema": "JQG50_EVIDENCE_GAP_RECEIPT_V0_4_5",
+  "artifact_id": "MN_JUDICIARY_001",
+  "lane": "mn/judiciary",
+  "evidence_state": "UNBOUND",
+  "search_scope": {
+    "repository": "jsonwisdom/mn-ago-entropy-ledger",
+    "queries": [
+      "MN_JUDICIARY_001",
+      "JUDICIARY",
+      "anchors receipt ledger truth"
+    ]
+  },
+  "search_result": "NO_PATH_BOUND_ARTIFACT_OR_SIGNED_RECEIPT_LOCATED",
+  "bytes_hash": null,
+  "signed_receipt": null,
+  "authority_state": "NOT_COMPUTED",
+  "research_authority": false,
+  "reason": "Repository connector searches did not locate a path-bound MN_JUDICIARY_001 artifact, committed byte receipt, or signed authority receipt. Absence of located evidence is recorded as UNBOUND, not contradiction.",
+  "reentry_gate": [
+    "artifact_path_supplied",
+    "exact_bytes_acquired",
+    "receipt_or_hash_verified",
+    "provenance_checked"
+  ]
+}
