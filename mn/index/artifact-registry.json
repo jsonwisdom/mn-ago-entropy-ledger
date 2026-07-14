@@ -1,0 +1,84 @@
+{
+  "schema": "JQG50_MN_ARTIFACT_REGISTRY_V0_4_5",
+  "registry_status": "CANDIDATE",
+  "research_authority": false,
+  "generated_for": "GitHub Issue #396",
+  "repositories": [
+    {
+      "repo": "jsonwisdom/mn-ago-entropy-ledger",
+      "relationship": "MINNESOTA_ACCOUNTABILITY_LEDGER",
+      "evidence_state": "REPOSITORY_CONFIRMED",
+      "authority_state": "NO_GOVERNMENTAL_AUTHORITY_IMPLIED"
+    },
+    {
+      "repo": "jsonwisdom/AL",
+      "relationship": "LEGACY_OPERATIONAL_SOURCE",
+      "evidence_state": "MIGRATION_NOT_STARTED",
+      "authority_state": "NO_GOVERNMENTAL_AUTHORITY_IMPLIED"
+    },
+    {
+      "repo": "jsonwisdom/Welcome-to-JSONWISDOM",
+      "relationship": "POTENTIAL_ROOT_REFERENCE",
+      "evidence_state": "CANONICAL_STATUS_UNRESOLVED",
+      "authority_state": "NO_GOVERNMENTAL_AUTHORITY_IMPLIED"
+    }
+  ],
+  "artifacts": [
+    {
+      "artifact_id": "MN-HOUSE-SPEAKER-20250206",
+      "lane": "mn/legislature/house",
+      "class": "CIVIC_OBSERVATION",
+      "source_discovered": true,
+      "source_parsed": true,
+      "source_bytes_acquired": false,
+      "source_hashed": false,
+      "primary_bound": false,
+      "action_authority": "NOT_COMPUTED",
+      "research_authority": false
+    },
+    {
+      "artifact_id": "MN-SENATE-COMMITTEE-HEARING-20260311",
+      "lane": "mn/legislature/senate",
+      "class": "RETIRED_UNSUPPORTED_PLACEHOLDER",
+      "event_existence": "UNCONFIRMED",
+      "source_discovered": false,
+      "primary_bound": false,
+      "action_authority": "NOT_COMPUTED",
+      "research_authority": false
+    },
+    {
+      "artifact_id": "MN-GOBLIN-DOCKET-v0.0",
+      "lane": "mn/parody",
+      "class": "CIVIC_PARODY",
+      "bytes_acquired": true,
+      "source_hashed": true,
+      "render_verified": true,
+      "primary_bound": false,
+      "authority": false
+    },
+    {
+      "artifact_id": "MN_JUDICIARY_001",
+      "lane": "mn/judiciary",
+      "class": "JUDICIARY_RESEARCH_ARTIFACT",
+      "evidence_state": "EXISTING_REPOSITORY_ARTIFACT_REQUIRES_PATH_BINDING",
+      "authority_state": "NOT_COMPUTED"
+    }
+  ],
+  "namespace": {
+    "target": "stasis.mn.base.jaywisdom.eth",
+    "target_declared": true,
+    "publication_proven": false,
+    "ens_record_proven": false,
+    "base_transaction_proven": false,
+    "eas_attestation_proven": false
+  },
+  "symlink_policy": "PROHIBITED_FOR_AUTHORITY_BEARING_ARTIFACTS",
+  "doctrine": [
+    "A plan is not a commit.",
+    "A path is not a file.",
+    "A source is not a binding.",
+    "A binding is not authority.",
+    "Research is not government action.",
+    "Empty Senate is more honest than fake Senate."
+  ]
+}
