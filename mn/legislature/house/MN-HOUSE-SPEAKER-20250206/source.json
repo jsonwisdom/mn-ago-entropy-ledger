@@ -5,20 +5,21 @@
   "source_type": "OFFICIAL_HOUSE_JOURNAL_PDF",
   "official_uri": "https://www.house.mn.gov/cco/journals/2025-26/J0206003.pdf",
   "source_discovered": true,
-  "source_parsed": true,
+  "source_parsed": false,
   "source_bytes_acquired": false,
   "source_hashed": false,
   "primary_bound": false,
   "bytes_hash": null,
-  "claim_locations": [
-    "Speaker nominations and roll-call result",
-    "Declaration of the elected Speaker",
-    "Organization agreement and temporary-rules vote"
-  ],
+  "offsets_committed": false,
+  "excerpt_map_committed": false,
+  "parse_receipt_committed": false,
+  "replay_anchor_committed": false,
+  "claim_locations": [],
   "evidence": {
     "state": "PENDING",
-    "reason": "URI and parsed claims are recorded, but exact source bytes have not been committed or hashed."
+    "reason": "Official URI is recorded, but exact source bytes, offsets, excerpt map, parse receipt, and hashes are absent."
   },
   "action_authority": "NOT_COMPUTED",
-  "research_authority": false
+  "research_authority": false,
+  "last_updated": "2026-07-14T22:30:00Z"
 }

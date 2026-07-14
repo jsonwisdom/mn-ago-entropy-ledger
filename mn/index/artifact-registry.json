@@ -59,7 +59,7 @@
       "lane": "mn/legislature/house",
       "class": "CIVIC_OBSERVATION",
       "source_discovered": true,
-      "source_parsed": true,
+      "source_parsed": false,
       "source_bytes_acquired": false,
       "source_hashed": false,
       "primary_bound": false,
@@ -69,7 +69,7 @@
         "state": "PENDING",
         "receipt_type": "OFFICIAL_URI_DISCOVERY",
         "reference": "mn/legislature/house/MN-HOUSE-SPEAKER-20250206/source.json",
-        "reason": "Official House journal URI is recorded, but exact PDF bytes and hashes are absent.",
+        "reason": "Official House journal URI is recorded, but exact PDF bytes, parse receipt, offsets, excerpt map, and hashes are absent.",
         "bytes_hash": null,
         "uri_ref": "https://www.house.mn.gov/cco/journals/2025-26/J0206003.pdf"
       }

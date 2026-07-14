@@ -1,45 +1,30 @@
-# Minnesota Senate — Intentionally Empty Evidence Lane
+# MN Senate - Intentionally Empty Lane
 
-**Status:** `GAP_RECEIPT`  
-**Research authority:** `FALSE`  
-**Governmental authority:** `NOT_COMPUTED`
+**Status**: `GAP_RECEIPT`  
+**Research Authority**: `FALSE`  
+**Observed Action Authority**: `NOT_APPLICABLE`  
+**Last Updated**: `2026-07-14`  
+**Discovery Status**: `NO VERIFIED SENATE EVIDENCE LOCATED`
 
-This directory exists to record verified Minnesota Senate artifacts without inventing hearings, committee actions, votes, dockets, or authority.
+This lane remains empty pending verified Minnesota Senate committee records, hearing transcripts, journals, minutes, votes, or legislative artifacts with confirmed provenance.
 
-The previously named fixture `MN-SENATE-COMMITTEE-HEARING-20260311` is retired from active fixtures because no official Minnesota Senate source was bound to it.
+The previously labeled fixture `MN-SENATE-COMMITTEE-HEARING-20260311` is retired as `UNSUPPORTED_PLACEHOLDER`. No verified Senate action exists in this lane to evaluate under `J/L/S/D/R/P`.
 
 ## Admission requirements
 
 A Senate artifact may enter this lane only after recording:
 
-1. official source URI or citation;
-2. exact action identifier and date;
-3. source bytes or an explicit byte-acquisition gap;
-4. source hashes when bytes are possessed;
-5. exact claim location;
-6. provenance and authentication method;
-7. action-specific `J/L/S/D/R/P` evaluation;
-8. research boundary with `authority: false`.
-
-## Source-state sequence
-
-```text
-FIXTURE_INITIALIZED
-→ SOURCE_DISCOVERED
-→ SOURCE_PARSED
-→ SOURCE_BYTES_ACQUIRED
-→ SOURCE_HASHED
-→ CLAIM_REVERIFIED
-→ J/L/S/D/R/P_EVALUATED
-→ PRIMARY_BOUND | BINDING_UNRESOLVED | SOURCE_CONTRADICTION
-```
+- official source URI or citation;
+- exact action identifier and date;
+- source bytes, or an explicit byte-acquisition gap;
+- source hashes when bytes are possessed;
+- exact claim location;
+- provenance and authentication method;
+- action-specific `J/L/S/D/R/P` evaluation;
+- research boundary with `authority: false`.
 
 ## Discovery queue
 
-Search official Minnesota Senate journals, committee schedules, hearing pages, minutes, audio/video records, and legislative publications. A search result alone does not establish binding.
-
-## Locked doctrine
+Search official Minnesota Senate journals, committee schedules, hearing pages, minutes, audio/video records, and legislative publications. A search result establishes discovery only; it does not establish possession, hashing, binding, or authority.
 
 > Empty Senate is more honest than fake Senate.
-
-> A plan is not a commit. A path is not a file. A source is not a binding. A binding is not authority.
