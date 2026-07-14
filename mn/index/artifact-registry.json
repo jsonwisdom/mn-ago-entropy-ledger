@@ -40,12 +40,18 @@
       "relationship": "POTENTIAL_ROOT_REFERENCE",
       "authority_state": "NO_GOVERNMENTAL_AUTHORITY_IMPLIED",
       "evidence": {
-        "state": "UNBOUND",
-        "receipt_type": null,
-        "reference": null,
-        "reason": "Canonical-root status and signed pointer were asserted but no receipt or signature was located during this audit.",
+        "state": "PENDING",
+        "scope": "CANDIDATE_ROOT_DECLARATION_COMMIT_AND_EXACT_PAYLOAD",
+        "receipt_type": "GITHUB_COMMIT_RECORD",
+        "reference": "https://github.com/jsonwisdom/Welcome-to-JSONWISDOM/commit/323e190783d38c613ac51aec0c5f24b1dbebe427",
+        "declared_root_commit": "455aa20978cc31f67b0f4477ad6d0cc7b14da156",
+        "payload_exact_match": true,
+        "signature_status": "NOT_VERIFIED_BY_CONNECTOR",
+        "signer_identity": "NOT_VERIFIED_BY_CONNECTOR",
+        "reason": "The candidate declaration commit and exact payload are present. Promotion to VERIFIED remains blocked until GitHub signature status and the designated signer identity are independently observed.",
         "bytes_hash": null,
-        "uri_ref": "https://github.com/jsonwisdom/Welcome-to-JSONWISDOM"
+        "uri_ref": "https://github.com/jsonwisdom/Welcome-to-JSONWISDOM",
+        "limitation": "A commit record and payload match do not independently prove the green Verified badge or signer-account binding."
       }
     }
   ],
