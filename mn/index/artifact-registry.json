@@ -119,10 +119,10 @@
       "class": "JUDICIARY_RESEARCH_ARTIFACT",
       "authority_state": "NOT_COMPUTED",
       "evidence": {
-        "state": "PENDING",
-        "receipt_type": null,
-        "reference": null,
-        "reason": "Repository search did not locate a path-bound MN_JUDICIARY_001 artifact or signed receipt.",
+        "state": "UNBOUND",
+        "receipt_type": "EVIDENCE_GAP_RECEIPT",
+        "reference": "mn/judiciary/MN_JUDICIARY_001/UNBOUND_RECEIPT.json",
+        "reason": "Repository connector searches did not locate a path-bound artifact, committed byte receipt, or signed authority receipt. The unresolved gap is explicitly closed as UNBOUND, not contradiction.",
         "bytes_hash": null,
         "uri_ref": null
       }
