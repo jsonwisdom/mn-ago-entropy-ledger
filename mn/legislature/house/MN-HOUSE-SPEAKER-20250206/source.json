@@ -1,0 +1,24 @@
+{
+  "schema": "JQG50_OFFICIAL_SOURCE_POINTER_V0_4_5",
+  "fixture_id": "MN-HOUSE-SPEAKER-20250206",
+  "institution": "Minnesota House of Representatives",
+  "source_type": "OFFICIAL_HOUSE_JOURNAL_PDF",
+  "official_uri": "https://www.house.mn.gov/cco/journals/2025-26/J0206003.pdf",
+  "source_discovered": true,
+  "source_parsed": true,
+  "source_bytes_acquired": false,
+  "source_hashed": false,
+  "primary_bound": false,
+  "bytes_hash": null,
+  "claim_locations": [
+    "Speaker nominations and roll-call result",
+    "Declaration of the elected Speaker",
+    "Organization agreement and temporary-rules vote"
+  ],
+  "evidence": {
+    "state": "PENDING",
+    "reason": "URI and parsed claims are recorded, but exact source bytes have not been committed or hashed."
+  },
+  "action_authority": "NOT_COMPUTED",
+  "research_authority": false
+}
