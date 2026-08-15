@@ -2,31 +2,34 @@
 
 > **FICTIONAL EDUCATIONAL STORY ARTIFACT — NOT A REAL BOLO, INTELLIGENCE PRODUCT, MILITARY RECORD, OR LAW-ENFORCEMENT NOTICE.**
 
-This package preserves a user-supplied creative case-board image as part of the Minnesota Gray Baby story lane.
+This draft preserves the Minnesota Edition case-board image as a fictional educational story artifact.
+
+![Minnesota Gray Baby — Minnesota Edition](./MINNESOTA_GRAY_BABY_BOLO_001_MINNESOTA_EDITION.jpg)
+
+## Minnesota Edition
+
+- Setting: Minnesota woods and lakes, cabin, and North Shore framing.
+- Map: Minnesota outline with fictional regional story nodes.
+- Character framing: Story Character Dossier; no military personnel language.
+- Exhibits: field notebook, flashlight, and pinecone; no weapon exhibit.
+- Emblems: no NATO emblem, classification, clearance, or governmental seal.
+- Disclaimer: permanently embedded in the JPEG.
 
 ## Evidence boundary
 
-- Visible labels such as “NATO,” “classified,” “verified,” “colonel,” and “operational” are fictional design elements.
-- The package establishes no NATO, military, intelligence, governmental, or law-enforcement affiliation.
 - The depicted character is not a real-person target.
-- Image text is not verification, operational authority, or a factual personnel record.
-- The SHA-256 digest identifies the supplied image bytes only; it does not establish the truth of depicted claims.
+- The image is not a law-enforcement BOLO or operational notice.
+- Visible story labels are fictional design elements.
+- SHA-256 identifies the supplied image bytes; it does not establish depicted claims.
 
-## Included artifact
-
-- `MINNESOTA_GRAY_BABY_BOLO_001.jpeg`
-- Dimensions: 1086 × 1448 pixels
-- SHA-256: `02be729f2c38f509951c9284cf0bc4d254f01dc09ddcb3e927bf8c3219b53437`
-
-The preserved image bytes are stored in the matching Google Drive delivery package. The GitHub draft carries the doctrine boundary and receipt pending binary-ingestion review.
-
-## State
+## Artifact
 
 ```text
-ARTIFACT_CLASS       = FICTIONAL_EDUCATIONAL_STORY
-REAL_PERSON_TARGET   = FALSE
-LAW_ENFORCEMENT_BOLO = FALSE
-NATO_AFFILIATION     = FALSE
-MERGE_AUTHORIZED     = FALSE
-AUTHORITY_CREATED    = FALSE
+FILE         = MINNESOTA_GRAY_BABY_BOLO_001_MINNESOTA_EDITION.jpg
+FORMAT       = JPEG
+DIMENSIONS   = 1086 × 1448
+SIZE         = 852702 bytes
+SHA256       = f7f2da421a53671224cbd511284867d402c3188db4ef30cef0ffab85be3d8c69
+MERGE        = NOT_AUTHORIZED
+AUTHORITY    = NOT_CREATED
 ```

@@ -1,23 +1,37 @@
 {
-  "artifact_id": "MINNESOTA_GRAY_BABY_BOLO_001",
+  "receipt_id": "PR_7.MN.IMAGE",
+  "artifact_id": "MINNESOTA_GRAY_BABY_BOLO_001_MINNESOTA_EDITION",
   "artifact_class": "FICTIONAL_EDUCATIONAL_STORY",
+  "object_role": "BoxD Story Case File — Minnesota Edition",
   "boundary": "FICTIONAL EDUCATIONAL STORY ARTIFACT — NOT A REAL BOLO, INTELLIGENCE PRODUCT, MILITARY RECORD, OR LAW-ENFORCEMENT NOTICE.",
-  "created_at_utc": "2026-08-15T09:32:47Z",
-  "files": [
-    {
-      "name": "MINNESOTA_GRAY_BABY_BOLO_001.jpeg",
-      "media_type": "image/jpeg",
-      "width": 1086,
-      "height": 1448,
-      "sha256": "02be729f2c38f509951c9284cf0bc4d254f01dc09ddcb3e927bf8c3219b53437",
-      "github_bytes_present": false,
-      "drive_bytes_present": true
-    }
-  ],
-  "real_person_target": false,
-  "law_enforcement_bolo": false,
-  "nato_affiliation": false,
-  "github_enumeration_affected": false,
+  "updated_at_utc": "2026-08-15T10:07:56Z",
+  "file": {
+    "name": "MINNESOTA_GRAY_BABY_BOLO_001_MINNESOTA_EDITION.jpg",
+    "media_type": "image/jpeg",
+    "width": 1086,
+    "height": 1448,
+    "size_bytes": 852702,
+    "sha256": "f7f2da421a53671224cbd511284867d402c3188db4ef30cef0ffab85be3d8c69",
+    "github_bytes_present": true,
+    "drive_bytes_present": false
+  },
+  "supersedes": {
+    "artifact": "NATO_DERIVED_JPEG",
+    "sha256": "02be729f2c38f509951c9284cf0bc4d254f01dc09ddcb3e927bf8c3219b53437",
+    "status": "SUPERSEDED_NOT_DELETED"
+  },
+  "boundary_notes": {
+    "setting": "Minnesota woods and lakes, cabin, North Shore framing",
+    "map": "Minnesota outline with fictional regional story nodes",
+    "character": "Story Character Dossier; no military personnel language",
+    "exhibits": ["field notebook", "flashlight", "pinecone"],
+    "nato_emblems_present": false,
+    "classification_claims_present": false,
+    "clearance_claims_present": false
+  },
+  "pr_7_updated": true,
+  "drive_updated": false,
+  "forest_enumeration_affected": false,
   "merge_authorized": false,
   "authority_created": false
 }
