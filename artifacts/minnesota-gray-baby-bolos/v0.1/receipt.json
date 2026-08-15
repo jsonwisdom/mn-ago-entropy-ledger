@@ -1,0 +1,23 @@
+{
+  "artifact_id": "MINNESOTA_GRAY_BABY_BOLO_001",
+  "artifact_class": "FICTIONAL_EDUCATIONAL_STORY",
+  "boundary": "FICTIONAL EDUCATIONAL STORY ARTIFACT — NOT A REAL BOLO, INTELLIGENCE PRODUCT, MILITARY RECORD, OR LAW-ENFORCEMENT NOTICE.",
+  "created_at_utc": "2026-08-15T09:32:47Z",
+  "files": [
+    {
+      "name": "MINNESOTA_GRAY_BABY_BOLO_001.jpeg",
+      "media_type": "image/jpeg",
+      "width": 1086,
+      "height": 1448,
+      "sha256": "02be729f2c38f509951c9284cf0bc4d254f01dc09ddcb3e927bf8c3219b53437",
+      "github_bytes_present": false,
+      "drive_bytes_present": true
+    }
+  ],
+  "real_person_target": false,
+  "law_enforcement_bolo": false,
+  "nato_affiliation": false,
+  "github_enumeration_affected": false,
+  "merge_authorized": false,
+  "authority_created": false
+}
