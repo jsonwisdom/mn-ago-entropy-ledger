@@ -1,0 +1,15 @@
+{
+  "receipt_id": "MARVEL_VS_DC_THE_ATTESTER_DICE_SHA3_RECEIPT_v0.1",
+  "artifact": "MARVEL_VS_DC_THE_ATTESTER_DICE_v0.1.json",
+  "byte_size": 3855,
+  "sha256": "463295fa1ae39dde79db6cef73348c230b2c86c123f6ad7a821f42585a5102c7",
+  "sha3_256": "bf7e5c5ac11ff467cc6f28c49179d4a7339a72973fe7a0be2869693be0b79baa",
+  "algorithm_note": "SHA3-256 computed over exact UTF-8 artifact bytes including final newline.",
+  "authority_created": false,
+  "proof_inferred": false,
+  "binding_scope": "BYTE_IDENTITY_ONLY",
+  "base_eas_binding": "HOLD",
+  "drive_binding": "PENDING",
+  "github_binding": "PENDING",
+  "leahprime": "Receipts, darling. Not vibes."
+}
