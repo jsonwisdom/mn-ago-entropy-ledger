@@ -1,0 +1,16 @@
+{
+  "receipt_id": "PETER_TRINITY_MATRIX_SENTINEL_SHA3_RECEIPT_v0.1",
+  "artifact": "PETER_TRINITY_MATRIX_SENTINEL_v0.1.json",
+  "byte_size": 2877,
+  "sha256": "314e415c0159a701a3090a642222966199d150d9169b442bc48eba255b98993a",
+  "sha3_256": "791b853573ca8e6f3f34c113f7627a51affb37fec1a187a060bdd363f2dec434",
+  "algorithm_note": "SHA3-256 computed over exact UTF-8 artifact bytes including final newline.",
+  "github_binding": "BOUND",
+  "github_artifact_commit": "9d0f6fda792a58b333b264c49f5d6c31e074e622",
+  "drive_binding": "PENDING",
+  "base_eas_binding": "HOLD",
+  "authority_created": false,
+  "proof_inferred": false,
+  "binding_scope": "BYTE_IDENTITY_ONLY",
+  "leahprime": "Three cards. Two Peters. One SHA3. Still no authority."
+}
