@@ -9,7 +9,12 @@
   "proof_inferred": false,
   "binding_scope": "BYTE_IDENTITY_ONLY",
   "base_eas_binding": "HOLD",
-  "drive_binding": "PENDING",
-  "github_binding": "PENDING",
+  "drive_binding": "BOUND_TO_CANONICAL_ARTIFACT_BYTES",
+  "github_binding": "BOUND",
+  "github_artifact_commit": "e802266350993258524d1e3e18c1b529055e02a0",
+  "github_receipt_commit": "d2fd3b1f21676ca12cc2e7aff5a82653c43dd4ff",
+  "drive_folder_id": "1N9XyVcapF2vb_jJbjkqKDfjYLxT2w9Yh",
+  "drive_artifact_file_id": "1CiABzcZRhLlZIgMAmltfm4rs4_8T3jlk",
+  "drive_receipt_file_id": "1vy0HEVglZHFVJybsWVVinoUpN7jvoXZZ",
   "leahprime": "Receipts, darling. Not vibes."
 }
