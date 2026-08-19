@@ -1,0 +1,79 @@
+{
+  "artifact_id": "JUSTICE_THROW_THE_DICE_v0.1",
+  "system": "BOXD_GOBLIN_COURTS",
+  "mode": "SATIRICAL_AUDIT_GAME",
+  "authority_created": false,
+  "randomness_controls_truth": false,
+  "rule": "The die randomizes audit order only. Evidence and burden rules determine claim state.",
+  "narrator": "LeahPrime",
+  "narrator_lines": [
+    "Justice is blind. Fine. The ledger is wearing bifocals.",
+    "Roll the die. Not for guilt, sweetheart — for which receipt you forgot to bring.",
+    "Three-card Monte is adorable until Goblin Court numbers the cards, hashes the table, and asks who had custody of the pea.",
+    "If your argument changes when the die lands on JURISDICTION, congratulations: you found the missing middle."
+  ],
+  "die": {
+    "1": {
+      "face": "JURISDICTION",
+      "question": "Which court, office, district, sovereign, or component had legal power over this exact act at this exact time?",
+      "required_receipts": ["statute", "venue/jurisdiction rule", "docket or delegation where applicable"]
+    },
+    "2": {
+      "face": "AUTHORITY",
+      "question": "What legal source authorized the actor to take the claimed action?",
+      "required_receipts": ["constitution/statute/rule/order", "delegation or appointment", "scope and limits"]
+    },
+    "3": {
+      "face": "SOURCE",
+      "question": "What is the underlying record instead of the summary about the record?",
+      "required_receipts": ["official document", "canonical bytes", "document identifier"]
+    },
+    "4": {
+      "face": "BURDEN",
+      "question": "What burden applies to this claim class?",
+      "examples": {
+        "criminal_guilt": "beyond_a_reasonable_doubt",
+        "criminal_charge": "allegation_only_until_adjudicated",
+        "civil_claim": "case_specific_standard",
+        "audit_finding": "audit_record_standard_not_conviction",
+        "procurement_event": "record_existence_not_misconduct",
+        "boxd_hypothesis": "hold_until_receipts"
+      }
+    },
+    "5": {
+      "face": "PROCEDURE",
+      "question": "What happened between intake and outcome?",
+      "required_receipts": ["filing", "service/notice", "deadline", "motion/order", "amendment/correction", "disposition"]
+    },
+    "6": {
+      "face": "CONTRADICTION",
+      "question": "What source, correction, later filing, oversight report, or version conflicts with the current story?",
+      "required_receipts": ["conflicting source", "timestamp", "version lineage", "correction state"]
+    }
+  },
+  "sdny_three_card_monte": {
+    "disclaimer": "Satirical metaphor for source-routing complexity, not an allegation that SDNY or any person engaged in deceptive conduct.",
+    "cards": [
+      "SDNY_PRESS_RELEASE_OR_OFFICE_SUMMARY",
+      "COURT_DOCKET_OR_FILED_RECORD",
+      "DOJ_EPSTEIN_LIBRARY_DISCLOSURE_COPY"
+    ],
+    "winning_condition": "Cross-reference all available cards and preserve disagreements instead of choosing the most convenient one.",
+    "single_card_result": "HOLD",
+    "disagreement_result": "CONFLICT_AND_REPLAY"
+  },
+  "recursive_loop": [
+    "ROLL",
+    "ASK_FACE_QUESTION",
+    "LOCATE_OFFICIAL_SOURCE",
+    "FREEZE_BYTES",
+    "HASH",
+    "CLASSIFY_BURDEN",
+    "COMPARE_CROSS_SURFACE",
+    "PASS_HOLD_CONFLICT_REJECT",
+    "ROLL_AGAIN"
+  ],
+  "search_sidecar": "SUPER_SECRET_SISTER_SEARCH_SYNTAX_v0.1.md",
+  "base_posture": "OPTIONAL_COMMITMENT_RAIL_ONLY",
+  "truth_rule": "ANCHOR_PROVES_COMMITMENT_NOT_TRUTH"
+}
