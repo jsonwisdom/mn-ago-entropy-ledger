@@ -1,0 +1,29 @@
+{
+  "schema": "JQG50_UNSUPPORTED_FIXTURES_V0_4_5",
+  "lane": "MN.SENATE",
+  "research_authority": false,
+  "fixtures": [
+    {
+      "fixture_id": "MN-SENATE-COMMITTEE-HEARING-20260311",
+      "verdict": "UNSUPPORTED_PLACEHOLDER",
+      "event_existence": "UNCONFIRMED",
+      "source_discovered": false,
+      "source_bytes_acquired": false,
+      "source_hashed": false,
+      "primary_bound": false,
+      "action_authority": "NOT_APPLICABLE",
+      "research_authority": false,
+      "action": "RETIRED_FROM_ACTIVE_FIXTURES",
+      "replacement": null,
+      "reason": "No official Minnesota Senate artifact was bound to this named event during the repository audit.",
+      "contradiction": "AVAILABLE_NOT_TRIGGERED",
+      "reentry_gate": [
+        "official_senate_source_supplied",
+        "exact_action_and_date_matched",
+        "source_state_receipted",
+        "provenance_checked"
+      ]
+    }
+  ],
+  "doctrine": "Missing support preserves uncertainty; it does not establish contradiction or governmental nonexistence."
+}

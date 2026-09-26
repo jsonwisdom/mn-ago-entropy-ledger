@@ -1,0 +1,172 @@
+{
+  "schema": "JQG50_MN_ARTIFACT_REGISTRY_V0_4_5",
+  "registry_status": "CANDIDATE",
+  "research_authority": false,
+  "generated_for": "GitHub Issue #396",
+  "generated_on": "2026-07-14",
+  "merge_binding": "PENDING_MERGE_SHA",
+  "evidence_taxonomy": ["UNBOUND", "PENDING", "VERIFIED"],
+  "repositories": [
+    {
+      "repo": "jsonwisdom/mn-ago-entropy-ledger",
+      "relationship": "MINNESOTA_ACCOUNTABILITY_LEDGER",
+      "authority_state": "NO_GOVERNMENTAL_AUTHORITY_IMPLIED",
+      "evidence": {
+        "state": "VERIFIED",
+        "scope": "REPOSITORY_EXISTENCE_ONLY",
+        "receipt_type": "GITHUB_REPOSITORY_RECORD",
+        "reference": "https://github.com/jsonwisdom/mn-ago-entropy-ledger",
+        "verified_by": "GitHub connector",
+        "bytes_hash": null,
+        "uri_ref": "https://github.com/jsonwisdom/mn-ago-entropy-ledger",
+        "limitation": "Repository existence is verified; no control-surface byte receipt was located."
+      }
+    },
+    {
+      "repo": "jsonwisdom/AL",
+      "relationship": "LEGACY_OPERATIONAL_SOURCE",
+      "authority_state": "NO_GOVERNMENTAL_AUTHORITY_IMPLIED",
+      "evidence": {
+        "state": "PENDING",
+        "receipt_type": null,
+        "reference": null,
+        "reason": "Awaiting tree hashing and provenance capture before any Minnesota fiscal migration.",
+        "bytes_hash": null,
+        "uri_ref": "https://github.com/jsonwisdom/AL"
+      }
+    },
+    {
+      "repo": "jsonwisdom/Welcome-to-JSONWISDOM",
+      "relationship": "POTENTIAL_ROOT_REFERENCE",
+      "authority_state": "NO_GOVERNMENTAL_AUTHORITY_IMPLIED",
+      "evidence": {
+        "state": "PENDING",
+        "scope": "CANDIDATE_ROOT_DECLARATION_COMMIT_AND_EXACT_PAYLOAD",
+        "receipt_type": "GITHUB_COMMIT_RECORD",
+        "reference": "https://github.com/jsonwisdom/Welcome-to-JSONWISDOM/commit/323e190783d38c613ac51aec0c5f24b1dbebe427",
+        "declared_root_commit": "455aa20978cc31f67b0f4477ad6d0cc7b14da156",
+        "payload_exact_match": true,
+        "signature_status": "NOT_VERIFIED_BY_CONNECTOR",
+        "signer_identity": "NOT_VERIFIED_BY_CONNECTOR",
+        "reason": "The candidate declaration commit and exact payload are present. Promotion to VERIFIED remains blocked until GitHub signature status and the designated signer identity are independently observed.",
+        "bytes_hash": null,
+        "uri_ref": "https://github.com/jsonwisdom/Welcome-to-JSONWISDOM",
+        "limitation": "A commit record and payload match do not independently prove the green Verified badge or signer-account binding."
+      }
+    }
+  ],
+  "artifacts": [
+    {
+      "artifact_id": "MN-HOUSE-SPEAKER-20250206",
+      "lane": "mn/legislature/house",
+      "class": "CIVIC_OBSERVATION",
+      "source_discovered": true,
+      "source_parsed": true,
+      "source_bytes_acquired": true,
+      "source_hashed": true,
+      "repository_bytes_committed": false,
+      "primary_bound": true,
+      "action_authority": "NOT_COMPUTED",
+      "research_authority": false,
+      "evidence": {
+        "state": "VERIFIED",
+        "scope": "UPLOADED_EXACT_BYTES_HASH_AND_LISTED_CLAIMS",
+        "receipt_type": "BYTE_HASH_AND_CLAIM_RECEIPT",
+        "reference": "mn/legislature/house/MN-HOUSE-SPEAKER-20250206/RECEIPT.json",
+        "byte_length": 188316,
+        "sha256": "88c56b8793cf553112bc15bf36b6fb7c38605a7801099bd4607b0cdbe88f2ae8",
+        "sha3_256": "6168f5322e580b3ed2a4dacbda307baaaeae4215263595c506496ac09361c3f4",
+        "uri_ref": "https://www.house.mn.gov/cco/journals/2025-26/J0206003.pdf",
+        "limitation": "Exact uploaded bytes were independently hashed and rendered. Repository stores the receipt and claim map, not the PDF binary; independent refetch-and-hash against the official URI remains desirable."
+      },
+      "authority_factors": {
+        "J": "VERIFIED",
+        "L": "UNRESOLVED",
+        "S": "UNRESOLVED",
+        "D": "UNRESOLVED",
+        "R": "VERIFIED",
+        "P": "VERIFIED"
+      }
+    },
+    {
+      "artifact_id": "MN-SENATE-COMMITTEE-HEARING-20260311",
+      "lane": "mn/legislature/senate",
+      "class": "RETIRED_UNSUPPORTED_PLACEHOLDER",
+      "event_existence": "UNCONFIRMED",
+      "source_discovered": false,
+      "primary_bound": false,
+      "action_authority": "NOT_APPLICABLE",
+      "research_authority": false,
+      "evidence": {
+        "state": "UNBOUND",
+        "receipt_type": null,
+        "reference": "mn/legislature/senate/UNSUPPORTED_FIXTURES.json",
+        "reason": "No official Minnesota Senate artifact was bound to the named event; fixture retired as unsupported.",
+        "bytes_hash": null,
+        "uri_ref": null
+      }
+    },
+    {
+      "artifact_id": "MN-GOBLIN-DOCKET-v0.0",
+      "lane": "mn/parody",
+      "class": "CIVIC_PARODY",
+      "primary_bound": false,
+      "authority": false,
+      "evidence": {
+        "state": "UNBOUND",
+        "binding_class": "EXTERNALLY_UNBOUND",
+        "receipt_type": null,
+        "reference": null,
+        "reason": "Parody artifact properties were reported outside this repository; no committed bytes, hashes, or render receipt are present here.",
+        "bytes_hash": null,
+        "uri_ref": null,
+        "internal_claims": {
+          "bytes_acquired": "SELF_REPORTED",
+          "source_hashed": "SELF_REPORTED",
+          "render_verified": "SELF_REPORTED"
+        }
+      }
+    },
+    {
+      "artifact_id": "MN_JUDICIARY_001",
+      "lane": "mn/judiciary",
+      "class": "JUDICIARY_RESEARCH_ARTIFACT",
+      "authority_state": "NOT_COMPUTED",
+      "evidence": {
+        "state": "UNBOUND",
+        "receipt_type": "EVIDENCE_GAP_RECEIPT",
+        "reference": "mn/judiciary/MN_JUDICIARY_001/UNBOUND_RECEIPT.json",
+        "reason": "Repository connector searches did not locate a path-bound artifact, committed byte receipt, or signed authority receipt. The unresolved gap is explicitly closed as UNBOUND, not contradiction.",
+        "bytes_hash": null,
+        "uri_ref": null
+      }
+    }
+  ],
+  "namespace": {
+    "target": "stasis.mn.base.jaywisdom.eth",
+    "target_declared": true,
+    "publication_proven": false,
+    "ens_record_proven": false,
+    "base_transaction_proven": false,
+    "eas_attestation_proven": false,
+    "evidence": {
+      "state": "UNBOUND",
+      "reason": "No ENS record, Base transaction, or EAS attestation was supplied for this target."
+    }
+  },
+  "registry_evidence_bound": true,
+  "registry_evidence_bound_scope": "All registry entries carry explicit evidence states, references where available, and limitations. This does not mean every entry is VERIFIED.",
+  "symlink_policy": "PROHIBITED_FOR_AUTHORITY_BEARING_ARTIFACTS",
+  "doctrine": [
+    "A plan is not a commit.",
+    "A commit is not a merge.",
+    "A merge SHA is not authority.",
+    "A path is not a file.",
+    "A URI is not bytes.",
+    "A source is not a binding.",
+    "A binding is not authority.",
+    "VERIFIED requires evidence scoped to the exact verified claim.",
+    "Research is not government action.",
+    "Empty Senate is more honest than fake Senate."
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "JQG50_OFFICIAL_SOURCE_POINTER_V0_4_5",
+  "fixture_id": "MN-HOUSE-SPEAKER-20250206",
+  "institution": "Minnesota House of Representatives",
+  "source_type": "OFFICIAL_HOUSE_JOURNAL_PDF",
+  "official_uri": "https://www.house.mn.gov/cco/journals/2025-26/J0206003.pdf",
+  "uploaded_input_name": "J0206003.pdf",
+  "repository_bytes_committed": false,
+  "source_discovered": true,
+  "source_parsed": true,
+  "source_bytes_acquired": true,
+  "source_hashed": true,
+  "primary_bound": true,
+  "byte_length": 188316,
+  "page_count": 26,
+  "sha256": "88c56b8793cf553112bc15bf36b6fb7c38605a7801099bd4607b0cdbe88f2ae8",
+  "sha3_256": "6168f5322e580b3ed2a4dacbda307baaaeae4215263595c506496ac09361c3f4",
+  "claim_map_reference": "mn/legislature/house/MN-HOUSE-SPEAKER-20250206/CLAIM_MAP.json",
+  "receipt_reference": "mn/legislature/house/MN-HOUSE-SPEAKER-20250206/RECEIPT.json",
+  "evidence": {
+    "state": "VERIFIED",
+    "scope": "UPLOADED_EXACT_BYTES_HASH_AND_LISTED_CLAIMS",
+    "reason": "Exact uploaded PDF bytes were independently hashed, rendered, and inspected. The repository stores the receipt and claim map, not the PDF binary.",
+    "limitation": "Independent refetch-and-hash against the official URI remains desirable."
+  },
+  "action_authority": "NOT_COMPUTED",
+  "research_authority": false
+}
