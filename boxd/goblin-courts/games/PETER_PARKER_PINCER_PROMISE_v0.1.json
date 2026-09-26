@@ -1,0 +1,58 @@
+{
+  "artifact_id": "PETER_PARKER_PINCER_PROMISE_v0.1",
+  "title": "Jay's Minnesota PeterParkerPincer",
+  "alias": "PincerPromiseParker",
+  "system": "ReceiptOS / BoxD Goblin Courts",
+  "root_identity": "JSONWisdom",
+  "public_identity": "jaywisdom.base.eth",
+  "research_identity": "jaywisdom.eth",
+  "jurisdiction_root": "MINNESOTA",
+  "authority_created": false,
+  "proof_inferred": false,
+  "brand_boundary": "Peter Parker is referenced as parody/comic-book wordplay only. This artifact is not affiliated with Marvel Entertainment, Marvel Studios, or the Spider-Man franchise.",
+  "pincer": {
+    "left_prong": {
+      "name": "SOURCE",
+      "question": "Where are the exact underlying bytes?",
+      "failure": "NO_SOURCE = HOLD"
+    },
+    "center_prong": {
+      "name": "AUTHORITY",
+      "question": "Who had legal authority to act, and what proves that authority?",
+      "failure": "NO_AUTHORITY_RECEIPT = HOLD"
+    },
+    "right_prong": {
+      "name": "CONTRADICTION",
+      "question": "What later filing, order, audit, correction, mirror, or version disagrees?",
+      "failure": "UNRESOLVED_CONFLICT = CONFLICT"
+    }
+  },
+  "pincer_promise": [
+    "Never promote a claim while one prong is missing.",
+    "Never let a GitHub commit impersonate factual truth.",
+    "Never let a Base attestation impersonate legal authority.",
+    "Never let a press release silently replace the underlying docket.",
+    "Never let a search miss become DOES_NOT_EXIST.",
+    "ReverseReplay until source, authority, and contradiction state are explicit."
+  ],
+  "reverse_replay": [
+    "CLAIM",
+    "SOURCE",
+    "AUTHORITY",
+    "PROCEDURE",
+    "BURDEN",
+    "CONTRADICTION",
+    "FROZEN_BYTES",
+    "SHA3_256",
+    "RECEIPT",
+    "PASS_HOLD_CONFLICT_REJECT"
+  ],
+  "leahprime_narrator": [
+    "Sweetheart, with great receipts comes great replayability.",
+    "Peter Parker had spider-sense. Goblin Court has source-sense, authority-sense, and contradiction-sense.",
+    "If one pincer arm is missing, congratulations: you built a fork, not a proof system.",
+    "Minnesota nice ends where the missing receipt begins."
+  ],
+  "base_posture": "OPTIONAL_COMMITMENT_RAIL_ONLY",
+  "truth_rule": "ANCHOR_PROVES_COMMITMENT_NOT_TRUTH"
+}

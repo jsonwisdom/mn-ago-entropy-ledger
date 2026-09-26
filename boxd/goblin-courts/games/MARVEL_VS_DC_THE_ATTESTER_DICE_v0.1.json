@@ -1,0 +1,110 @@
+{
+  "artifact_id": "MARVEL_VS_DC_THE_ATTESTER_DICE_v0.1",
+  "title": "MARVEL vs D.C. — The Attester",
+  "subtitle": "Minnesota ReverseReceiptsReplay Dice Game",
+  "creator": "jaywisdom.eth",
+  "public_identity": "jaywisdom.base.eth",
+  "system": "ReceiptOS / BoxD Goblin Courts",
+  "mode": "SATIRICAL_AUDIT_GAME",
+  "jurisdiction_root": "MINNESOTA",
+  "local_root": "127.0.0.1",
+  "authority_created": false,
+  "proof_inferred": false,
+  "base_posture": "OPTIONAL_COMMITMENT_RAIL_ONLY",
+  "brand_boundary": "MARVEL is used here as the ordinary verb 'to wonder'; D.C. means District of Columbia. This artifact is not affiliated with Marvel Entertainment or DC Comics.",
+  "premise": {
+    "marvel_lane": "Wonder at the claim, headline, contradiction, or institutional magic trick.",
+    "dc_lane": "Reverse-replay the claim toward the exact authority, docket, source bytes, burden, and correction trail.",
+    "attester_rule": "The Attester may witness and bind receipts. The Attester may not create legal authority or decide guilt.",
+    "truth_rule": "ANCHOR_PROVES_COMMITMENT_NOT_TRUTH"
+  },
+  "reverse_receipts_replay": [
+    "OUTCOME_OR_PUBLIC_CLAIM",
+    "DISPOSITION_OR_VERSION",
+    "PROCEDURE",
+    "BURDEN",
+    "AUTHORITY",
+    "UNDERLYING_SOURCE",
+    "FROZEN_BYTES",
+    "SHA3_256",
+    "RECEIPT",
+    "CROSS_SURFACE_COMPARE",
+    "PASS_HOLD_CONFLICT_REJECT",
+    "OPTIONAL_BASE_ATTESTATION"
+  ],
+  "dice": {
+    "1": {
+      "face": "SOURCE",
+      "question": "Where are the underlying bytes?",
+      "failure_state": "SUMMARY_WITHOUT_SOURCE = HOLD"
+    },
+    "2": {
+      "face": "AUTHORITY",
+      "question": "Who had legal power to do the thing, at that time, in that jurisdiction?",
+      "failure_state": "ACTOR_WITHOUT_AUTHORITY_RECEIPT = HOLD"
+    },
+    "3": {
+      "face": "BURDEN",
+      "question": "What burden actually applies to this claim class?",
+      "failure_state": "BURDEN_DRIFT = CONFLICT"
+    },
+    "4": {
+      "face": "PROCEDURE",
+      "question": "What happened between intake and outcome?",
+      "failure_state": "MISSING_MIDDLE = HOLD"
+    },
+    "5": {
+      "face": "CONTRADICTION",
+      "question": "What later filing, correction, audit, order, or mirror disagrees?",
+      "failure_state": "UNRESOLVED_DISAGREEMENT = CONFLICT"
+    },
+    "6": {
+      "face": "ATTESTATION",
+      "question": "What exactly was committed, by whom, where, and with which bytes?",
+      "failure_state": "ANCHOR_WITHOUT_BYTE_BIND = HOLD"
+    }
+  },
+  "minnesota_board": [
+    "LOCAL_RECORD",
+    "MN_GOV",
+    "MN_AG",
+    "MN_SUPREME_COURT",
+    "DISTRICT_COURT",
+    "FEDERAL_DISTRICT_OF_MINNESOTA",
+    "DOJ_OIG",
+    "JUSTICE_GOV",
+    "CONGRESS_GOV",
+    "DC_RELAY"
+  ],
+  "leahprime_narrator": [
+    "Welcome to MARVEL versus D.C., where one side says 'wow' and the other side asks for the docket number.",
+    "The Attester does not swing a hammer, sweetheart. The Attester asks who authorized the hammer.",
+    "If the receipt disappears when we roll BURDEN, that was not justice math. That was decorative arithmetic.",
+    "Minnesota gets the snow. D.C. gets the paperwork. Goblin Court gets both.",
+    "Reverse the receipt until the story either finds its source or runs out of road."
+  ],
+  "game_loop": [
+    "DRAW_CLAIM",
+    "ROLL_D6",
+    "ASK_FACE_QUESTION",
+    "LOCATE_OFFICIAL_SOURCE",
+    "FREEZE_BYTES",
+    "COMPUTE_SHA3_256",
+    "CLASSIFY_BURDEN",
+    "REVERSE_REPLAY",
+    "COMPARE_MIRRORS",
+    "PASS_HOLD_CONFLICT_REJECT",
+    "ROLL_AGAIN"
+  ],
+  "receiptos_rules": [
+    "SEARCH_RESULT != PROOF",
+    "PRESS_RELEASE != UNDERLYING_DOCKET",
+    "CHARGE != GUILT",
+    "AUDIT_FINDING != CONVICTION",
+    "COURT_HOLDING != UNRELATED_FACT_PROOF",
+    "PROCUREMENT_RECORD != MISCONDUCT",
+    "GITHUB_COMMIT != FACTUAL_TRUTH",
+    "DRIVE_MIRROR != AUTHORITY",
+    "BASE_ATTESTATION != TRUTH"
+  ]
+}

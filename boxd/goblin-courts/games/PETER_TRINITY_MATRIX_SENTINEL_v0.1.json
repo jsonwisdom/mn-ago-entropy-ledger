@@ -1,0 +1,69 @@
+{
+  "artifact_id": "PETER_TRINITY_MATRIX_SENTINEL_v0.1",
+  "title": "Peter Trinity / Three-Card Monte Sentinel / D.C.",
+  "system": "ReceiptOS / BoxD Goblin Courts",
+  "creator": "jaywisdom.eth",
+  "public_identity": "jaywisdom.base.eth",
+  "root_identity": "JSONWisdom",
+  "jurisdiction_root": "MINNESOTA",
+  "authority_created": false,
+  "proof_inferred": false,
+  "brand_boundary": "Comic-book and Matrix terminology is parody/system metaphor only; no affiliation or endorsement is claimed.",
+  "boxd_inner_trinity": {
+    "peter_left": {
+      "role": "SOURCE_WITNESS",
+      "question": "What exact record or bytes support the claim?",
+      "failure_state": "NO_SOURCE = HOLD"
+    },
+    "sentinel_center": {
+      "role": "THREE_CARD_MONTE_SENTINEL",
+      "jurisdiction": "D.C. / federal routing lens",
+      "cards": [
+        "PUBLIC_SUMMARY_OR_PRESS_RELEASE",
+        "UNDERLYING_COURT_OR_AGENCY_RECORD",
+        "DISCLOSURE_OR_OVERSIGHT_COPY"
+      ],
+      "rule": "One card is HOLD. Disagreement is CONFLICT. Alignment permits claim-specific promotion only.",
+      "failure_state": "ROUTING_MISMATCH = REPLAY"
+    },
+    "peter_right": {
+      "role": "AUTHORITY_AND_CONTRADICTION_WITNESS",
+      "question": "Who had authority, and what later source contradicts or corrects the story?",
+      "failure_state": "AUTHORITY_OR_CONTRADICTION_GAP = HOLD_OR_CONFLICT"
+    }
+  },
+  "peter_promise": {
+    "left_to_right": "SOURCE -> SENTINEL -> AUTHORITY/CONTRADICTION",
+    "right_to_left": "OUTCOME -> CONTRADICTION -> AUTHORITY -> SENTINEL -> SOURCE",
+    "promise": "Both directions must resolve to the same claim state or the result stays HOLD/CONFLICT."
+  },
+  "outside_boxd": {
+    "epoch": "TRINITY_EPOCH_001",
+    "matrix_role": "OUTER_REPLAY_ENVIRONMENT",
+    "inside_boxd": false,
+    "authority": false,
+    "purpose": "Replay the entire BoxD state from outside its narrative frame and test whether the same receipts, burdens, and authority edges reconstruct.",
+    "rule": "The outer epoch may detect drift; it may not rewrite inner receipts."
+  },
+  "reverse_receipts_replay": [
+    "CLAIM_OR_OUTCOME",
+    "PETER_RIGHT_AUTHORITY_CONTRADICTION",
+    "SENTINEL_THREE_CARD_COMPARE",
+    "PETER_LEFT_SOURCE_BYTES",
+    "SHA3_256",
+    "REPLAY_FROM_TRINITY_EPOCH",
+    "PASS_HOLD_CONFLICT_REJECT"
+  ],
+  "leahprime_narrator": [
+    "Three cards, two Peters, one Sentinel. Cute. Now show me the source bytes.",
+    "D.C. gets the cards. Minnesota gets the receipts. Trinity gets the replay.",
+    "The Matrix is outside the Box, sweetheart. That is how you catch the Box lying to itself.",
+    "SHA3 remembers the bytes. It does not remember the truth for you."
+  ],
+  "crypto_posture": {
+    "hash_algorithm": "SHA3-256",
+    "binding_scope": "BYTE_IDENTITY_ONLY",
+    "base_eas_binding": "HOLD",
+    "truth_rule": "ANCHOR_PROVES_COMMITMENT_NOT_TRUTH"
+  }
+}

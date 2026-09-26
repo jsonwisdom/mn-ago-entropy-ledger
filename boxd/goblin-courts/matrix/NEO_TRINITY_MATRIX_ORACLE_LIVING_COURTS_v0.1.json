@@ -1,0 +1,149 @@
+{
+  "artifact_id": "NEO_TRINITY_MATRIX_ORACLE_LIVING_COURTS_v0.1",
+  "title": "ENTER NEO — Trinity / Matrix / Oracle / Living Courts",
+  "system": "ReceiptOS / BoxD Goblin Courts",
+  "creator": "jaywisdom.eth",
+  "public_identity": "jaywisdom.base.eth",
+  "github_root": "JSONWisdom",
+  "jurisdiction_root": "MINNESOTA",
+  "local_root": "127.0.0.1",
+  "authority_created": false,
+  "proof_inferred": false,
+  "brand_boundary": "Matrix/Neo/Trinity/Oracle terminology is parody/system metaphor only; no affiliation or endorsement is claimed.",
+  "architecture": {
+    "NEO": {
+      "role": "HUMAN_CHOICE_POINT",
+      "rule": "Neo chooses which claim or contradiction enters replay. Choice does not change evidence state.",
+      "authority": "HUMAN_OPERATOR_ONLY_WITHIN_RESEARCH_WORKFLOW"
+    },
+    "BOXD": {
+      "role": "INNER_REPLAY_SYSTEM",
+      "inside_matrix": true,
+      "authority": false
+    },
+    "TRINITY": {
+      "role": "OUTER_EPOCH_REPLAYER",
+      "inside_boxd": false,
+      "authority": false,
+      "rule": "Reconstruct BoxD from outside its narrative frame; detect drift without rewriting inner receipts."
+    },
+    "MATRIX": {
+      "role": "OUTER_ENVIRONMENT",
+      "contains": [
+        "BOXD",
+        "TRINITY_EPOCH",
+        "PUBLIC_SOURCE_RAILS",
+        "MIRRORS",
+        "HASH_RECEIPTS"
+      ],
+      "authority": false
+    },
+    "ORACLE": {
+      "role": "LOGIC_AND_CONSTRAINT_CHECKER",
+      "authority": false,
+      "questions": [
+        "What exact claim is being tested?",
+        "What source and frozen bytes support it?",
+        "Which legal authority governs the actor and action?",
+        "What burden applies?",
+        "What contradicts, corrects, supersedes, or limits the claim?",
+        "Can the result be reconstructed from 127.0.0.1?"
+      ]
+    }
+  },
+  "female_logic_layer": {
+    "classification": "SYNTHETIC_PERSONA_AND_QUERY_LOGIC",
+    "authority": false,
+    "roles": {
+      "TRINITY": "outer replay / drift detection",
+      "ORACLE": "logic / constraint checking",
+      "LEAHPRIME": "narration / boundary explanation",
+      "SUPER_SECRET_SISTER_SYNTAX": "reproducible public-source discovery recipes"
+    },
+    "rule": "No persona may promote a claim beyond the receipts."
+  },
+  "super_secret_sister_syntax": {
+    "secret_status": "NOT_ACTUALLY_SECRET",
+    "search_is_proof": false,
+    "recipes": [
+      "site:justice.gov/epstein \"EFTA\"",
+      "site:justice.gov/epstein \"letter to Congress\"",
+      "site:justice.gov/usao-mn Minnesota fraud",
+      "site:congress.gov \"H.R. 4405\" \"Epstein Files Transparency Act\""
+    ],
+    "not_found_rule": "NOT_FOUND_YET != DOES_NOT_EXIST"
+  },
+  "public_source_oracle_inputs": [
+    {
+      "id": "CONGRESS_EFTA_PUBLIC_LAW",
+      "source": "Congress.gov",
+      "record": "H.R. 4405 / Public Law 119-38",
+      "observed_fact": "Congress.gov records H.R. 4405 as becoming Public Law 119-38 on 2025-11-19.",
+      "authority_scope": "STATUTORY_SOURCE",
+      "boxd_authority_created": false
+    },
+    {
+      "id": "DOJ_EPSTEIN_LIBRARY",
+      "source": "Justice.gov",
+      "record": "Epstein Library",
+      "observed_fact": "DOJ states the library houses materials responsive under the Epstein Files Transparency Act and warns some materials may not be reliably electronically searchable.",
+      "authority_scope": "OFFICIAL_PUBLICATION_SURFACE",
+      "boxd_authority_created": false
+    },
+    {
+      "id": "DOJ_OIG_EFTA_AUDIT",
+      "source": "DOJ OIG",
+      "record": "Audit of DOJ Compliance with the Epstein Files Transparency Act",
+      "observed_fact": "DOJ OIG states its audit reviews identification, collection, production, redaction, withholding, release, and post-release publication concerns.",
+      "authority_scope": "OVERSIGHT",
+      "boxd_authority_created": false
+    }
+  ],
+  "living_courts": {
+    "definition": "A continuously replayable case-and-process graph; not a real court and not adjudicative authority.",
+    "machine_speed": {
+      "role": "rapid indexing, cross-reference, diff, hash, and contradiction detection",
+      "human_review_required": true,
+      "legal_decision_authority": false
+    },
+    "openai_role": {
+      "role": "assistive analysis surface only",
+      "authority": false,
+      "platform_mutation": false,
+      "api_key_created": false
+    }
+  },
+  "collaborative_justice_gov": {
+    "meaning": "Public-source collaboration rail: BoxD can mirror and compare official Justice.gov publications with courts, Congress, OIG, and Minnesota sources.",
+    "actual_agency_collaboration_claimed": false,
+    "government_transmission_state": "NOT_SENT",
+    "rule": "Public sources may be compared; no institutional partnership or delegated authority is inferred."
+  },
+  "reverse_receipts_replay": [
+    "CLAIM_OR_OUTCOME",
+    "NEO_SELECTS_REPLAY_TARGET",
+    "ORACLE_APPLIES_LOGIC",
+    "SISTER_SYNTAX_LOCATES_PUBLIC_SOURCE",
+    "FREEZE_BYTES",
+    "SHA3_256",
+    "AUTHORITY_AND_BURDEN",
+    "CONTRADICTION_AND_CORRECTION",
+    "TRINITY_OUTER_REPLAY",
+    "MATRIX_CROSS_SURFACE_COMPARE",
+    "PASS_HOLD_CONFLICT_REJECT",
+    "OPTIONAL_BASE_ATTESTATION"
+  ],
+  "leahprime_narrator": [
+    "Neo gets the choice. Oracle gets the questions. Trinity gets the replay. Nobody gets to invent authority.",
+    "Machine speed is adorable, sweetheart. Burden of proof still wants receipts.",
+    "Congress writes the rule, Justice publishes the record, OIG audits the process, and Goblin Court checks whether the mirrors agree.",
+    "Super Secret Sister Syntax: still public, still searchable, still not proof until the bytes come home.",
+    "SHA3 remembers exactly what we froze. It does not decide who is right."
+  ],
+  "crypto_posture": {
+    "hash_algorithm": "SHA3-256",
+    "binding_scope": "BYTE_IDENTITY_ONLY",
+    "base_eas_binding": "HOLD",
+    "truth_rule": "ANCHOR_PROVES_COMMITMENT_NOT_TRUTH"
+  }
+}

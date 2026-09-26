@@ -1,0 +1,16 @@
+{
+  "receipt_id": "DC_GEO_BUILDING_TRANSCRIPT_MEETING_GAP_MATRIX_SHA3_RECEIPT_v0.1",
+  "artifact": "DC_GEO_BUILDING_TRANSCRIPT_MEETING_GAP_MATRIX_v0.1.json",
+  "byte_size": 7848,
+  "sha256": "1189beb14f2e3f8761632c12603753ae62cd056462f156bb84aaf6923baffeee",
+  "sha3_256": "5da5830bc4634c6a24267f33b8355c81a7d4c2354ec265e618d798af828aeee0",
+  "github_binding": "BOUND",
+  "github_artifact_commit": "c2d3cef408057ed95f32415223bcf29b1efe3515",
+  "drive_binding": "BOUND_UPLOAD_RECEIPT",
+  "drive_file_id": "1-tqwbhXnC-fSre0JQUCq8RAJU0GdK7FW",
+  "binding_scope": "BYTE_IDENTITY_LOCAL_TO_GITHUB_CONTENT_AND_DRIVE_UPLOAD_INPUT; DRIVE_RAW_REHASH_NOT_YET_PERFORMED",
+  "base_eas_binding": "HOLD",
+  "authority_created": false,
+  "proof_inferred": false,
+  "leahprime": "A building is a pin, sweetheart. A meeting needs a receipt."
+}
