@@ -1,0 +1,102 @@
+{
+  "artifact_id": "DC_GEO_BUILDING_TRANSCRIPT_MEETING_GAP_MATRIX_v0.1",
+  "system": "BOXD_GOBLIN_COURTS / REVERSE_RECEIPTS_REPLAY",
+  "scope": "EPSTEIN_FILES_DC_LIVE_GEO_TRANSCRIPT_MEETING_OVERLAY",
+  "created_utc": "2026-08-19T22:17:00Z",
+  "operator": "jaywisdom.base.eth",
+  "github_root": "JSONWisdom",
+  "authority_created": false,
+  "proof_inferred": false,
+  "geo_rule": "A building address is an organizational/location receipt only. It does not prove a person was physically present unless an event-specific source says so.",
+  "meeting_rule": "Transcript time and participant identity do not establish the physical room unless the transcript or another official source states the location.",
+  "nodes": [
+    {
+      "id": "MAXWELL_PROFFER_DAY_1",
+      "date": "2025-07-24",
+      "time_window": "10:12-15:34 local time as stated in transcript",
+      "meeting": "Recorded proffer interview of Ghislaine Maxwell",
+      "participants_from_transcript": ["Todd Blanche, Deputy Attorney General","Diego Pestana, Acting Associate Deputy Attorney General","Spencer Horn, FBI","Mark Beard, U.S. Marshals Service","Ghislaine Maxwell","David Markus","Leah Saffian","Melissa Madrigal"],
+      "transcript_source": "https://www.justice.gov/maxwell-interview",
+      "custody_context": "Senate oversight source states Maxwell was then held at a low-security facility in Tallahassee, Florida, before transfer to FPC Bryan.",
+      "candidate_building": "FCI Tallahassee, 501 Capital Circle NE, Tallahassee, FL 32301",
+      "geo_state": "CONTEXT_ONLY_NOT_EVENT_LOCATION_PROVEN",
+      "gap": "The DOJ transcript does not state the interview building or room. Need event-specific facility log, visitor/professional-visit log, travel record, room reservation, marshal log, or other official location receipt."
+    },
+    {
+      "id": "MAXWELL_PROFFER_DAY_2",
+      "date": "2025-07-25",
+      "time_window": "09:24-12:05 local time as stated in transcript",
+      "meeting": "Continuation of recorded proffer interview; transcript states same group as prior day",
+      "transcript_source": "https://www.justice.gov/maxwell-interview",
+      "candidate_building": "FCI Tallahassee, 501 Capital Circle NE, Tallahassee, FL 32301",
+      "geo_state": "CONTEXT_ONLY_NOT_EVENT_LOCATION_PROVEN",
+      "gap": "Same location gap as Day 1. Exact interview room/building is not stated in the transcript."
+    },
+    {
+      "id": "MAXWELL_TRANSFER",
+      "date_window": "roughly one week after 2025-07-24/25 interviews per Senate oversight source",
+      "event": "Transfer from FCI Tallahassee to FPC Bryan",
+      "origin_building": "FCI Tallahassee, 501 Capital Circle NE, Tallahassee, FL 32301",
+      "destination_building": "FPC Bryan, 1100 Ursuline Avenue, Bryan, TX 77803",
+      "source": "https://www.whitehouse.senate.gov/news/release/whitehouse-demands-documents-on-transfer-of-ghislaine-maxwell-to-minimum-security-bureau-of-prisons-facility/",
+      "geo_state": "FACILITY_ENDPOINTS_BOUND_EVENT_TIME_PARTIAL",
+      "gap": "Public oversight source gives sequence but not full transfer execution log: exact approval timestamp, deciding official, waiver/management-variable record, transport timestamps, and chain of custody remain the missing middle."
+    },
+    {
+      "id": "WILES_ACCESS_QUESTIONS",
+      "date": "2025-12-22",
+      "event": "Whitehouse/Durbin letter asks Susie Wiles when, where, why, and under what authority she accessed Epstein-file material and what role she had in review/redaction/withholding/release.",
+      "organizational_addressee": "Executive Office of the President, Washington, DC 20500",
+      "candidate_building": "The White House, 1600 Pennsylvania Avenue NW, Washington, DC 20500",
+      "source": "https://www.whitehouse.senate.gov/news/release/whitehouse-and-durbin-ask-trumps-chief-of-staff-how-she-received-access-to-epstein-files/",
+      "geo_state": "MAILING_ORGANIZATIONAL_GEO_ONLY",
+      "gap": "The public letter itself is a request for the missing location/schedule/authority facts. No official public response closing those fields was located in this pass."
+    },
+    {
+      "id": "DOJ_EFTA_RELEASE",
+      "date": "2026-01-30",
+      "event": "DOJ announced publication bringing total production to nearly 3.5 million pages, plus videos and images.",
+      "organizational_building": "Robert F. Kennedy Main Justice Building, 950 Pennsylvania Avenue NW, Washington, DC 20530",
+      "source": "https://www.justice.gov/opa/pr/department-justice-publishes-35-million-responsive-pages-compliance-epstein-files",
+      "geo_state": "ORGANIZATIONAL_GEO_NOT_EVENT_ROOM",
+      "gap": "Press release says WASHINGTON but does not identify a physical review room, command center, reviewer locations, or document-custody movement. Need reviewer assignment logs, collection manifests, and location-aware custody records to turn organizational GEO into process GEO."
+    },
+    {
+      "id": "DOJ_OIG_EFTA_AUDIT",
+      "date": "2026-04-23",
+      "event": "DOJ OIG announced audit of DOJ EFTA identification, collection, production, redaction, withholding, release, and post-release concerns.",
+      "organizational_building": "DOJ OIG, 950 Pennsylvania Avenue NW, Washington, DC 20530",
+      "source": "https://oig.justice.gov/ongoing-work/audit-department-justices-compliance-epstein-files-transparency-act",
+      "geo_state": "ORGANIZATIONAL_GEO",
+      "gap": "Audit is ongoing; no final public report yet. Current public record does not close the underlying process-location or authority gaps."
+    },
+    {
+      "id": "WHITEHOUSE_OVERSIGHT_HUB",
+      "date": "2026-07-13",
+      "event": "Whitehouse publicly listed outstanding unanswered DOJ oversight requests, including Epstein/Maxwell matters.",
+      "organizational_building": "Hart Senate Office Building, Room 530, Washington, DC 20510",
+      "source": "https://www.whitehouse.senate.gov/news/release/whitehouse-releases-outstanding-doj-oversight-requests-ahead-of-nomination-hearing-of-todd-blanche/",
+      "geo_state": "SENATE_OFFICE_GEO",
+      "gap": "Oversight requests remained unanswered according to the Senator's office; the response/document-production edge is missing."
+    },
+    {
+      "id": "BOP_CENTRAL_OFFICE",
+      "event": "BOP headquarters / transfer-oversight target",
+      "building": "Federal Bureau of Prisons Central Office, 320 First Street NW, Washington, DC 20534",
+      "source": "https://www.bop.gov/locations/central_office/",
+      "geo_state": "AGENCY_HQ_BOUND",
+      "gap": "HQ location is known, but a building address does not identify where Maxwell transfer decisions were actually made. Need decision memorandum, routing metadata, approval timestamps, and responsible office."
+    }
+  ],
+  "dc_gap_summary": [
+    "Wiles access: exact date/time/location/schedule and legal authority for access remain unclosed in the official public record located in this pass.",
+    "White House-DOJ handoff: no event-level public receipt located that maps specific White House access to a specific DOJ review/redaction action.",
+    "Maxwell interviews: exact transcript times and participants are public; the transcript does not state the physical room/building.",
+    "Maxwell transfer: origin/destination facilities and sequence are public; exact approval, waiver, decision, and transport timestamps remain incomplete.",
+    "DOJ 3.5M-page production: organizational publication is public; reviewer-by-reviewer location, custody path, and collection manifest are not supplied by the press release.",
+    "OIG audit: process is under audit, but the final report has not yet closed the gaps."
+  ],
+  "status": "GAPS_IDENTIFIED / NO_CAUSAL_INFERENCE",
+  "base_eas_binding": "HOLD",
+  "openai_platform_mutation": false
+}

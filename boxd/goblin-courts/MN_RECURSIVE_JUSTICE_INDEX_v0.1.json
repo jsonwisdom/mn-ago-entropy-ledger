@@ -1,0 +1,183 @@
+{
+  "artifact_id": "MN_RECURSIVE_JUSTICE_INDEX_v0.1",
+  "system": "BOXD_GOBLIN_COURTS",
+  "scope": "MINNESOTA_RECURSIVE_JUSTICE",
+  "created_utc": "2026-08-19T22:02:00Z",
+  "operator": "jaywisdom.base.eth",
+  "research_anchor": "jaywisdom.eth",
+  "github_identity": "JSONWisdom",
+  "local_root": "127.0.0.1",
+  "authority_created": false,
+  "proof_inferred": false,
+  "base_posture": "OPTIONAL_COMMITMENT_RAIL_ONLY",
+  "alms_gate": {
+    "source_url_not_frozen_artifact": true,
+    "current_pass": "INTAKE_AND_SOURCE_REGISTRY",
+    "global_status": "INDETERMINATE_PENDING_FROZEN_SOURCE_BYTES",
+    "passes_required": [
+      "intake_pass",
+      "source_freeze_pass",
+      "hash_pass",
+      "replay_pass",
+      "state_root_pass",
+      "public_explanation_pass",
+      "national_root_pass",
+      "external_anchor_pass"
+    ]
+  },
+  "burden_math": {
+    "published_research_claim": "publisher must bind the claim to the source actually supporting it",
+    "federal_criminal_charge": "charge_only; indictment is not evidence of guilt; guilt requires proof beyond a reasonable doubt",
+    "guilty_plea_or_sentence": "adjudicated as to the defendant and count(s) resolved; no scheme-wide promotion beyond the record",
+    "civil_settlement": "use settlement language; do not convert allegations into adjudicated wrongdoing when the source disclaims such a determination",
+    "official_audit_finding": "audit/oversight finding; not a criminal conviction",
+    "published_supreme_court_opinion": "authoritative legal holding within jurisdiction; not factual proof for unrelated claims",
+    "procurement_record": "proves a public procurement event or record state; does not imply fraud",
+    "blockchain_anchor": "proves commitment/attestation state only; never underlying truth or legal authority"
+  },
+  "lanes": [
+    {
+      "id": "FED-EFTA-001",
+      "layer": "FEDERAL_RECORD",
+      "title": "DOJ Epstein Library",
+      "source": "https://www.justice.gov/epstein",
+      "observed_state": "DOJ states the library houses materials responsive under the Epstein Files Transparency Act, warns that some materials are not reliably electronically searchable, and lists July 17, 2026 as the last update.",
+      "evidence_class": "OFFICIAL_PUBLICATION_SURFACE",
+      "alms_status": "INDETERMINATE_HTTP_ONLY",
+      "claim_boundary": "publication or inclusion in the library does not prove the truth of every statement contained in released material"
+    },
+    {
+      "id": "FED-EFTA-002",
+      "layer": "FEDERAL_RECORD",
+      "title": "DOJ EFTA Disclosures",
+      "source": "https://www.justice.gov/epstein/doj-disclosures",
+      "observed_state": "DOJ currently exposes Data Sets 1 through 12 plus court-record, FOIA, prior-DOJ-disclosure, protocol, and congressional-letter materials.",
+      "evidence_class": "OFFICIAL_DISCLOSURE_INDEX",
+      "alms_status": "INDETERMINATE_HTTP_ONLY"
+    },
+    {
+      "id": "FED-EFTA-OIG-001",
+      "layer": "FEDERAL_OVERSIGHT",
+      "title": "DOJ OIG Audit of EFTA Compliance",
+      "source": "https://oig.justice.gov/ongoing-work/audit-department-justices-compliance-epstein-files-transparency-act",
+      "observed_state": "DOJ OIG states it is auditing DOJ processes for identifying, collecting, redacting, withholding, releasing, and addressing post-release publication concerns.",
+      "evidence_class": "ACTIVE_OFFICIAL_OVERSIGHT",
+      "alms_status": "INDETERMINATE_HTTP_ONLY",
+      "claim_boundary": "active audit means compliance is under independent review; it is not itself a finding of noncompliance"
+    },
+    {
+      "id": "MN-FED-FOF-BOCK-001",
+      "layer": "FEDERAL_ADJUDICATION",
+      "title": "Feeding Our Future - Aimee Bock sentencing",
+      "source": "https://www.justice.gov/usao-mn/pr/feeding-our-future-ringleader-sentenced-500-months",
+      "observed_state": "DOJ reports Bock was sentenced to 500 months on May 22, 2026 after trial findings in the Feeding Our Future case.",
+      "evidence_class": "SENTENCING_RECORD_SUMMARY",
+      "alms_status": "INDETERMINATE_HTTP_ONLY",
+      "promotion_rule": "freeze underlying judgment/verdict/order before byte-level promotion"
+    },
+    {
+      "id": "MN-FED-FOF-DOOL-001",
+      "layer": "FEDERAL_ADJUDICATION",
+      "title": "Feeding Our Future - Abdirashid Bixi Dool guilty plea",
+      "source": "https://www.justice.gov/usao-mn/pr/pelican-rapids-man-68th-defendant-plead-guilty-feeding-our-future-fraud-scheme",
+      "observed_state": "DOJ reports Dool pleaded guilty to one count of wire fraud; the release was corrected July 24, 2026 to identify him as the 68th convicted defendant.",
+      "evidence_class": "GUILTY_PLEA_SUMMARY",
+      "alms_status": "INDETERMINATE_HTTP_ONLY"
+    },
+    {
+      "id": "MN-FED-HSS-AI-001",
+      "layer": "FEDERAL_ADJUDICATION",
+      "title": "Minnesota HSS - four guilty pleas / AI-fabricated records",
+      "source": "https://www.justice.gov/opa/pr/four-men-plead-guilty-2m-minnesota-medicaid-fraud",
+      "observed_state": "DOJ reports four Minnesota men pleaded guilty to wire fraud in an approximately $2.2 million HSS scheme and used ChatGPT to fabricate supporting records when questioned.",
+      "evidence_class": "GUILTY_PLEA_SUMMARY",
+      "alms_status": "INDETERMINATE_HTTP_ONLY",
+      "research_question": "preserve generated-record provenance, insurer requests, produced records, plea agreements, and claim-by-claim billing data"
+    },
+    {
+      "id": "MN-FED-AUTISM-HSS-ICS-001",
+      "layer": "FEDERAL_INVESTIGATION",
+      "title": "Autism / HSS / ICS multi-program fraud investigations",
+      "source": "https://www.justice.gov/usao-mn/pr/six-additional-defendants-charged-one-defendant-pleads-guilty-ongoing-fraud-schemes",
+      "observed_state": "DOJ announced additional Autism and HSS charges, a guilty plea, and an ICS search-warrant investigation in December 2025.",
+      "evidence_class": "MIXED_CHARGE_PLEA_SEARCH_WARRANT_SUMMARY",
+      "alms_status": "INDETERMINATE_HTTP_ONLY",
+      "claim_boundary": "charges and search-warrant allegations remain allegation-level unless separately adjudicated"
+    },
+    {
+      "id": "MN-STATE-OLA-EIDBI-001",
+      "layer": "STATE_OVERSIGHT",
+      "title": "OLA review - DHS authority to investigate EIDBI kickbacks",
+      "source": "https://www.auditor.leg.state.mn.us/sreview/2026/dhs-oig-kickbacks.htm",
+      "observed_state": "Minnesota OLA reported March 17, 2026 that DHS had long possessed legal authority to address kickback allegations, contrary to prior DHS assertions, and identified a decades-old administrative-rule error affecting payment suspension authority.",
+      "evidence_class": "OFFICIAL_AUDIT_FINDING",
+      "alms_status": "INDETERMINATE_HTTP_ONLY",
+      "research_question": "bind exact statutory/rule text, DHS historical interpretations, investigations, suspension decisions, and correction timeline"
+    },
+    {
+      "id": "MN-SC-OSLUND-001",
+      "layer": "STATE_JUDICIARY",
+      "title": "Oslund v. Paint Genie / DEED",
+      "source": "https://mncourts.gov/supremecourt/recentopinions/minnesota-supreme-court-opinion",
+      "observed_state": "Minnesota Supreme Court's August 5, 2026 opinion list states that an untimely unemployment-benefits appeal must be dismissed and the unemployment law judge lacks discretion to consider the explanation for lateness.",
+      "evidence_class": "PUBLISHED_SUPREME_COURT_HOLDING",
+      "alms_status": "INDETERMINATE_HTTP_ONLY",
+      "research_question": "process-friction node: deadline, notice, appeal route, discretion, and burden allocation"
+    },
+    {
+      "id": "MN-SC-PUBLIC-ACCESS-001",
+      "layer": "STATE_JUDICIARY",
+      "title": "Minnesota judicial public-access rules",
+      "source": "https://mncourts.gov/supremecourt/court-rules",
+      "observed_state": "Minnesota Judicial Branch publishes current Rules of Public Access to Records and effective criminal/general-practice rules.",
+      "evidence_class": "OFFICIAL_RULE_SURFACE",
+      "alms_status": "INDETERMINATE_HTTP_ONLY"
+    },
+    {
+      "id": "MN-LOCAL-MPLS-RFP-001",
+      "layer": "LOCAL_PROCUREMENT",
+      "title": "Minneapolis current RFP pipeline",
+      "source": "https://www.minneapolismn.gov/business-services/doing-business-with-the-city/bids-rfps/future-opportunties/",
+      "observed_state": "As of the city's August 10, 2026 update, Minneapolis listed August RFPs including auditing services, curb-management technology, in-home health employee services, medical bill review, and Project SAFE.",
+      "evidence_class": "PUBLIC_PROCUREMENT_PIPELINE",
+      "alms_status": "INDETERMINATE_HTTP_ONLY",
+      "claim_boundary": "listing an RFP is not evidence of procurement misconduct"
+    },
+    {
+      "id": "MN-LOCAL-WAITEPARK-BID-001",
+      "layer": "LOCAL_PROCUREMENT",
+      "title": "Waite Park 2026 bid postings",
+      "source": "https://www.ci.waitepark.mn.us/Bids.aspx",
+      "observed_state": "Waite Park's bid surface currently reports no open bids; archived 2026 postings include public infrastructure procurement with statutory bidder-compliance requirements.",
+      "evidence_class": "PUBLIC_PROCUREMENT_RECORD",
+      "alms_status": "INDETERMINATE_HTTP_ONLY",
+      "claim_boundary": "procurement existence and requirements do not imply fraud or irregularity"
+    },
+    {
+      "id": "MN-FED-TAX-WILSON-001",
+      "layer": "FEDERAL_CHARGE",
+      "title": "Caesar Munir Wilson tax-fraud indictment",
+      "source": "https://www.justice.gov/usao-mn/pr/minnesota-man-indicted-filing-and-conspiring-file-false-tax-returns-requesting-hundreds",
+      "observed_state": "DOJ reports a February 2026 indictment alleging false refund claims totaling more than $350 million and more than $19 million in Treasury payments.",
+      "evidence_class": "INDICTMENT_SUMMARY",
+      "alms_status": "INDETERMINATE_HTTP_ONLY",
+      "claim_boundary": "indictment only; presumed innocent unless and until guilt is proven"
+    }
+  ],
+  "recursive_edges": [
+    "LOCAL_RECORD -> STATE_LAW -> STATE_JUDICIARY",
+    "STATE_PROGRAM -> FEDERAL_FUNDING -> FEDERAL_INVESTIGATION",
+    "FEDERAL_RELEASE -> OIG_OVERSIGHT -> CONGRESSIONAL_REVIEW",
+    "PROCUREMENT_EVENT -> BID_TAB -> CONTRACT -> PAYMENT -> AUDIT -> CASE_IF_ANY",
+    "CLAIM -> SOURCE -> FROZEN_BYTES -> HASH -> RECEIPT -> REPLAY -> STATE_ROOT -> OPTIONAL_BASE_ANCHOR"
+  ],
+  "next_freeze_queue": [
+    "DOJ_EFTA_INDEX_AND_RELATED_DOCUMENTATION",
+    "DOJ_OIG_EFTA_AUDIT_PAGE",
+    "MN_OLA_EIDBI_FULL_REPORT_PDF",
+    "MN_SUPREME_COURT_OSLUND_OPINION_PDF",
+    "MINNEAPOLIS_AUDITING_SERVICES_RFP_AND_EVENT_RECORDS",
+    "WAITE_PARK_2026_BID_DOCUMENT_METADATA",
+    "FEDERAL_PLEA_JUDGMENT_AND_SENTENCING_DOCUMENTS_FOR_SELECTED_MN_CASES"
+  ]
+}

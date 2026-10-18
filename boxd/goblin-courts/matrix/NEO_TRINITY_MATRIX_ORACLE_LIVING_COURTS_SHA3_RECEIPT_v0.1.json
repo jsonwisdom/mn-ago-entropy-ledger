@@ -1,0 +1,17 @@
+{
+  "receipt_id": "NEO_TRINITY_MATRIX_ORACLE_LIVING_COURTS_SHA3_RECEIPT_v0.1",
+  "artifact": "NEO_TRINITY_MATRIX_ORACLE_LIVING_COURTS_v0.1.json",
+  "byte_size": 5895,
+  "sha256": "db90a2642a8acdb645ae5002be2182cd2b1f5f6627283d8f8ca34d07fc314e78",
+  "sha3_256": "25247443af3e66ece2e4a7c628c4f408b5913f773a182c7d677064352a4be3b8",
+  "algorithm_note": "SHA3-256 computed over exact UTF-8 artifact bytes including final newline.",
+  "authority_created": false,
+  "proof_inferred": false,
+  "binding_scope": "BYTE_IDENTITY_ONLY",
+  "github_binding": "BOUND",
+  "drive_binding": "PENDING",
+  "base_eas_binding": "HOLD",
+  "openai_platform_mutation": false,
+  "leahprime": "Machine speed does not get a robe.",
+  "github_artifact_commit": "077d9b2a6b6dab28afb218f0810196469f87248f"
+}
