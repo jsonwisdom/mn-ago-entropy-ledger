@@ -1,0 +1,12 @@
+{
+  "schema": "JQG50_CLAIM_MAP_V0_4_5",
+  "fixture_id": "MN-HOUSE-SPEAKER-20250206",
+  "uploaded_input_name": "J0206003.pdf",
+  "repository_bytes_committed": false,
+  "claims": [
+    {"claim": "A quorum was present.", "page": 1},
+    {"claim": "Lisa Demuth received 67 votes; Melissa Hortman received 65 votes; Demuth was declared duly elected Speaker.", "page": 2},
+    {"claim": "The Agreement for House Organization and Temporary Rules were introduced for ratification.", "page": 3},
+    {"claim": "The temporary-rules and organization resolution was adopted 130 yeas to 2 nays.", "page": 8}
+  ]
+}

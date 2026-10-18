@@ -1,0 +1,17 @@
+{
+  "schema": "JQG50_EMPTY_LANE_AUTHORITY_V0_4_5",
+  "lane": "MN.SENATE",
+  "fixture_id": "MN-SENATE-COMMITTEE-HEARING-20260311",
+  "fixture_status": "RETIRED_UNSUPPORTED_PLACEHOLDER",
+  "research_authority": false,
+  "observed_action_authority": "NOT_APPLICABLE",
+  "reason": "No verified Senate evidence was discovered; the lane is intentionally empty.",
+  "last_updated": "2026-07-14T22:30:00Z",
+  "event_existence": "UNCONFIRMED",
+  "source_discovered": false,
+  "primary_bound": false,
+  "evidence": {
+    "state": "UNBOUND",
+    "reference": "mn/legislature/senate/UNSUPPORTED_FIXTURES.json"
+  }
+}
